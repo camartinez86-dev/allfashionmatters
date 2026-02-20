@@ -225,6 +225,40 @@
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+// Initialize with sample data if empty
+        if (!localStorage.getItem('mc-logs')) {
+            const sampleLogs = [
+                { id: 1, time: 'Just now', category: 'System', message: 'Welcome to Mission Control!', type: 'info' },
+                { id: 2, time: 'Today', category: 'Website', message: 'Dark theme applied to homepage', type: 'success' },
+                { id: 3, time: 'Today', category: 'Website', message: 'Fixed designer archive links', type: 'success' },
+                { id: 4, time: 'Today', category: 'Website', message: 'Added Hot Drops section', type: 'success' },
+                { id: 5, time: 'Today', category: 'Business', message: 'eBay store products cataloged', type: 'info' }
+            ];
+            localStorage.setItem('mc-logs', JSON.stringify(sampleLogs));
+        }
+        
+        if (!localStorage.getItem('mc-tasks')) {
+            const sampleTasks = [
+                { id: 1, text: 'Fix remaining blog post images', done: false },
+                { id: 2, text: 'Verify all brand links are correct', done: false },
+                { id: 3, text: 'Add more products to Hot Drops', done: true }
+            ];
+            localStorage.setItem('mc-tasks', JSON.stringify(sampleTasks));
+        }
+        
+        if (!localStorage.getItem('mc-memories')) {
+            const sampleMemories = [
+                { id: 1, text: 'Brand images must be from official sources', date: 'Today' },
+                { id: 2, text: 'Link protocol: brand articles → official brand sites', date: 'Today' },
+                { id: 3, text: 'eBay links only for seller products', date: 'Today' }
+            ];
+            localStorage.setItem('mc-memories', JSON.stringify(sampleMemories));
+        }
+        
+        if (!localStorage.getItem('mc-usage')) {
+            const sampleUsage = { messages: 247, tokens: 15420, cost: 0.00 };
+            localStorage.setItem('mc-usage', JSON.stringify(sampleUsage));
+        }
 
         // Colors for categories
         const categoryColors = {
@@ -343,6 +377,40 @@
                 </div>
             `).join('');
             lucide.createIcons();
+// Initialize with sample data if empty
+        if (!localStorage.getItem('mc-logs')) {
+            const sampleLogs = [
+                { id: 1, time: 'Just now', category: 'System', message: 'Welcome to Mission Control!', type: 'info' },
+                { id: 2, time: 'Today', category: 'Website', message: 'Dark theme applied to homepage', type: 'success' },
+                { id: 3, time: 'Today', category: 'Website', message: 'Fixed designer archive links', type: 'success' },
+                { id: 4, time: 'Today', category: 'Website', message: 'Added Hot Drops section', type: 'success' },
+                { id: 5, time: 'Today', category: 'Business', message: 'eBay store products cataloged', type: 'info' }
+            ];
+            localStorage.setItem('mc-logs', JSON.stringify(sampleLogs));
+        }
+        
+        if (!localStorage.getItem('mc-tasks')) {
+            const sampleTasks = [
+                { id: 1, text: 'Fix remaining blog post images', done: false },
+                { id: 2, text: 'Verify all brand links are correct', done: false },
+                { id: 3, text: 'Add more products to Hot Drops', done: true }
+            ];
+            localStorage.setItem('mc-tasks', JSON.stringify(sampleTasks));
+        }
+        
+        if (!localStorage.getItem('mc-memories')) {
+            const sampleMemories = [
+                { id: 1, text: 'Brand images must be from official sources', date: 'Today' },
+                { id: 2, text: 'Link protocol: brand articles → official brand sites', date: 'Today' },
+                { id: 3, text: 'eBay links only for seller products', date: 'Today' }
+            ];
+            localStorage.setItem('mc-memories', JSON.stringify(sampleMemories));
+        }
+        
+        if (!localStorage.getItem('mc-usage')) {
+            const sampleUsage = { messages: 247, tokens: 15420, cost: 0.00 };
+            localStorage.setItem('mc-usage', JSON.stringify(sampleUsage));
+        }
         }
 
         // Memories
