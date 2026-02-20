@@ -132,8 +132,8 @@ function renderDesignerSpotlights() {
                     </div>
                 </div>
                 <div class="mt-auto flex flex-col gap-2">
-                    <a href="${designer.ebayLink}" target="_blank" class="inline-flex items-center justify-between gap-2 px-4 py-3 bg-brand-turquoise text-brand-black font-semibold uppercase tracking-[0.3em] text-xs rounded-full hover:bg-white">
-                        ${designer.ebayLabel}
+                    <a href="${designer.officialLink}" target="_blank" class="inline-flex items-center justify-between gap-2 px-4 py-3 bg-brand-turquoise text-brand-black font-semibold uppercase tracking-[0.3em] text-xs rounded-full hover:bg-white">
+                        ${designer.officialLabel}
                         <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                     </a>
                     <p class="text-[11px] text-white/50">${designer.imageCredit}</p>
@@ -178,8 +178,8 @@ function renderDesignerArchive() {
                         </div>
                     </div>
                     <div class="text-xs text-gray-400">${designer.imageCredit}</div>
-                    <a href="${designer.ebayLink}" target="_blank" class="inline-flex items-center gap-2 mt-auto px-5 py-3 border border-gray-900 text-gray-900 uppercase tracking-[0.4em] text-[11px] rounded-full hover:bg-gray-900 hover:text-white transition">
-                        ${designer.ebayLabel}
+                    <a href="${designer.officialLink}" target="_blank" class="inline-flex items-center gap-2 mt-auto px-5 py-3 border border-gray-900 text-gray-900 uppercase tracking-[0.4em] text-[11px] rounded-full hover:bg-gray-900 hover:text-white transition">
+                        ${designer.officialLabel}
                         <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                     </a>
                 </div>
