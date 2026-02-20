@@ -78,7 +78,7 @@ export const designerSpotlights = [
         name: 'Loro Piana',
         discipline: 'Heritage Textile House',
         quote: '"Quiet luxury built in cashmere and vicuña."',
-        image: 'https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg',
+        image: 'https://image-cdn.hypebeast.com/hypebeast/2025/09/loro-piana-spring-summer-2026-lookbook-release-info-1.jpg',
         imageCredit: 'Photo: Loro Piana Official',
         culturalContext: 'Italy's Loro Piana sets the benchmark for stealth wealth. Ultra-soft cashmere ball caps, Storm System outerwear, and Summer Walk loafers anchor modern "quiet luxury" uniforms.',
         officialLink: 'https://www.loropiana.com/',
