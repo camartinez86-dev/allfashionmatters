@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFM Designer Archive | AllFashionMatters</title>
+    <meta name="description" content="Dive deeper into the AFM designer and artist archive — milestones, cultural context, and live eBay edits." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-brand-lightGray text-gray-900 antialiased">
+    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="font-serif text-2xl font-bold tracking-tighter text-white">AFM<span class="text-brand-turquoise">.</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html#featured" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Featured</a>
+                    <a href="index.html#blog" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Stories</a>
+                    <a href="#profiles" class="text-sm uppercase tracking-widest text-white hover:text-brand-turquoise transition-colors">Designers</a>
+                    <a href="index.html#edits" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Shop</a>
+                    <a href="index.html#trending" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Trending</a>
+                    <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="px-4 py-2 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">Shop eBay</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-turquoise focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-brand-black/98 backdrop-blur-xl flex flex-col justify-center items-center">
+            <div class="flex flex-col space-y-6 text-center">
+                <a href="index.html#featured" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Featured</a>
+                <a href="index.html#blog" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Stories</a>
+                <a href="#profiles" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Designers</a>
+                <a href="index.html#edits" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Shop</a>
+                <a href="index.html#trending" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Trending</a>
+                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="text-brand-turquoise font-bold uppercase tracking-widest text-lg mt-8">Visit Store →</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24">
+        <section class="py-20 bg-brand-black text-white">
+            <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+                <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/70 text-xs uppercase tracking-[0.4em]">Designer Index</p>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold">The AFM Designer & Artist Archive</h1>
+                <p class="text-white/70 leading-relaxed">A living dossier inspired by Hypebeast deep dives, Complex cover stories, and Highsnobiety cultural essays. Track the creatives fueling eBay conversions, skim their milestone timelines, then jump straight into AFM-curated listings.</p>
+            </div>
+        </section>
+
+        <section id="profiles" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+                    <div>
+                        <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">Profiles</span>
+                        <h2 class="font-serif text-3xl font-bold mt-2">Culture shifters we stock</h2>
+                    </div>
+                    <p class="text-gray-600 max-w-2xl text-sm">Each card bundles cultural context, authentic imagery, and direct eBay CTAs so shoppers can flow from inspiration to purchase without leaving AFM.</p>
+                </div>
+                <div id="designer-archive-grid" class="grid gap-8 md:grid-cols-2"></div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-brand-black text-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+                    <div>
+                        <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">Timeline</span>
+                        <h2 class="font-serif text-3xl font-bold mt-2">Milestones that move the market</h2>
+                    </div>
+                    <p class="text-white/70 text-sm max-w-xl">Use this rolling log to tie resale spikes to cultural moments — album drops, runway debuts, capsule launches, and museum shows.</p>
+                </div>
+                <div id="designer-archive-timeline" class="space-y-4"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-brand-dark text-white/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">AFM<span class="text-brand-turquoise">.</span></h3>
+                    <p class="text-sm max-w-sm">Curated fashion since 2011. Streetwear culture, vintage finds, and timeless pieces.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-widest text-sm mb-4">Navigate</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html#featured" class="hover:text-brand-turquoise transition-colors">Featured</a></li>
+                        <li><a href="index.html#blog" class="hover:text-brand-turquoise transition-colors">Stories</a></li>
+                        <li><a href="index.html#spotlights" class="hover:text-brand-turquoise transition-colors">Designers</a></li>
+                        <li><a href="index.html#edits" class="hover:text-brand-turquoise transition-colors">Shop</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-widest text-sm mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="https://x.com/ALLFSHNMATTERS" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="x" class="w-5 h-5"></i></a>
+                        <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="shopping-bag" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2026 AllFashionMatters. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-turquoise transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-brand-turquoise transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="data.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

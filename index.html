@@ -66,6 +66,7 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#featured" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Featured</a>
                     <a href="#blog" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Stories</a>
+                    <a href="#spotlights" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Designers</a>
                     <a href="#edits" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Shop</a>
                     <a href="#trending" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Trending</a>
                     <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="px-4 py-2 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">Shop eBay</a>
@@ -81,6 +82,7 @@
             <div class="flex flex-col space-y-6 text-center">
                 <a href="#featured" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Featured</a>
                 <a href="#blog" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Stories</a>
+                <a href="#spotlights" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Designers</a>
                 <a href="#edits" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Shop</a>
                 <a href="#trending" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Trending</a>
                 <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="text-brand-turquoise font-bold uppercase tracking-widest text-lg mt-8">Visit Store →</a>
@@ -241,12 +243,49 @@
                         </span>
                     </div>
                 </article>
+
+                <!-- Inline Newsletter Capture -->
+                <article class="bg-gradient-to-br from-brand-brown to-brand-turquoise/80 text-white rounded-2xl shadow-xl p-8 flex flex-col gap-6 md:col-span-2 lg:col-span-3">
+                    <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em] text-white/70">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Inside Access
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="font-serif text-3xl">AFM Dispatch: Weekly trend intel + live eBay alerts</h3>
+                        <p class="text-white/80 text-sm leading-relaxed">Join 500+ readers who get culture shifts, designer spotlights, and “add-to-cart” alerts before they disappear from the store.</p>
+                        <ul class="text-sm text-white/80 space-y-1">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Drop calendar with resale comps</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> First dibs on designer archive edits</li>
+                        </ul>
+                    </div>
+                    <form class="flex flex-col gap-3 sm:flex-row" onsubmit="event.preventDefault(); document.getElementById('inline-newsletter-success').classList.remove('hidden');">
+                        <input type="email" required placeholder="Email for weekly drops" class="flex-1 px-4 py-3 rounded-md text-gray-900 placeholder-gray-600">
+                        <button type="submit" class="px-6 py-3 bg-white text-brand-brown font-bold uppercase tracking-widest rounded-md shadow-lg hover:translate-y-0.5 transition">Get the brief</button>
+                    </form>
+                    <p id="inline-newsletter-success" class="text-xs text-white/70 hidden">Check your inbox for the confirmation link — no spam, just signal.</p>
+                </article>
             </div>
             
             <div class="text-center mt-10 md:hidden">
                 <a href="blog/index.html" class="inline-flex items-center gap-2 text-brand-brown font-bold uppercase tracking-widest text-sm hover:text-brand-turquoise transition-colors">
                     View All Stories <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Designer / Artist Spotlights -->
+    <section id="spotlights" class="py-20 bg-brand-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+                <div>
+                    <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">Culture Keeps Score</span>
+                    <h2 class="font-serif text-4xl font-bold mt-3">Designer & Artist Spotlights</h2>
+                </div>
+                <p class="text-white/70 max-w-2xl">Inspired by Hypebeast signature interviews and Highsnobiety long-form profiles, this grid pulls the creators driving today&#39;s resale heat. Tap into their cultural context, study the milestones, then shop AFM&#39;s authenticated listings on eBay.</p>
+            </div>
+            <div id="designer-spotlight-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-12"></div>
+            <div class="text-center mt-12">
+                <a href="designer-archive.html" class="inline-flex items-center gap-2 px-8 py-4 border border-white/20 rounded-full uppercase tracking-[0.3em] text-xs font-semibold hover:bg-white hover:text-brand-black transition">Explore the full archive <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
             </div>
         </div>
     </section>
