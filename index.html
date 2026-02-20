@@ -337,15 +337,31 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="py-16 bg-brand-black text-white">
-        <div class="max-w-2xl mx-auto px-4 text-center">
-            <i data-lucide="mail" class="w-10 h-10 text-brand-turquoise mx-auto mb-4"></i>
-            <h2 class="font-serif text-3xl font-bold mb-3">Stay in the Loop</h2>
-            <p class="text-white/60 mb-6">Get weekly fashion insights, trend forecasts, and exclusive deals delivered.</p>
-            <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-                <input type="email" placeholder="Your email" required class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-brand-turquoise rounded-sm">
-                <button type="submit" class="px-6 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">Subscribe</button>
+    <section class="py-20 bg-brand-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-turquoise/5 via-transparent to-brand-turquoise/5"></div>
+        <div class="max-w-2xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-brand-turquoise/20 text-brand-turquoise px-4 py-2 rounded-full mb-6">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                <span class="text-sm font-bold uppercase tracking-widest">Join 500+ Fashion Enthusiasts</span>
+            </div>
+            <h2 class="font-serif text-4xl font-bold mb-4">Never Miss a Drop</h2>
+            <p class="text-white/70 text-lg mb-8 max-w-lg mx-auto">Get weekly fashion insights, trend forecasts, and exclusive eBay deals delivered straight to your inbox.</p>
+            
+            <!-- Benefits List -->
+            <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm text-white/60">
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-turquoise"></i> Weekly Trends</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-turquoise"></i> Exclusive Drops</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-turquoise"></i> Member Deals</span>
+            </div>
+            
+            <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Thanks for subscribing! Check your email to confirm.');">
+                <input type="email" placeholder="Enter your email" required class="flex-1 px-4 py-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-turquoise rounded-sm">
+                <button type="submit" class="px-8 py-4 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-all hover:shadow-lg hover:shadow-brand-turquoise/30 rounded-sm">
+                    Subscribe Free
+                </button>
             </form>
+            
+            <p class="text-xs text-white/40 mt-4">No spam. Unsubscribe anytime. <a href="#" class="text-brand-turquoise hover:underline">Privacy Policy</a></p>
         </div>
     </section>
 
