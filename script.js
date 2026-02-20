@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHotProducts();
     renderDesignerSpotlights();
     renderDesignerArchive();
+    renderEbaySpotlight();
+    renderShopFeed();
     initContactForm();
+    initNewsletterForm();
+    initStylePoll();
     lucide.createIcons();
 });
 
@@ -83,9 +87,10 @@ function renderHotProducts() {
                 <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 ${product.badge ? `<span class="absolute top-2 left-2 bg-brand-turquoise text-black text-xs font-bold px-2 py-1 rounded">${product.badge}</span>` : ''}
             </div>
-            <div class="p-3">
+            <div class="p-4 space-y-1">
                 <h3 class="font-bold text-white text-sm truncate">${product.title}</h3>
-                <p class="text-brand-turquoise font-bold mt-1">${product.price}</p>
+                <p class="text-brand-turquoise font-bold">${product.price}</p>
+                ${product.watchers ? `<p class="text-[11px] uppercase tracking-[0.3em] text-white/50">${product.watchers}</p>` : ''}
             </div>
         </a>
     `).join('');
@@ -114,11 +119,15 @@ function renderProducts() {
             <div class="p-6 relative bg-white flex flex-col flex-grow z-10">
                 <p class="text-xs text-brand-turquoise font-bold uppercase tracking-widest mb-1">${product.category}</p>
                 <h3 class="font-serif text-lg font-bold text-gray-900 mb-2 group-hover:text-brand-brown transition-colors line-clamp-1">${product.title}</h3>
-                <div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-50">
-                    <span class="text-lg font-medium text-gray-900">${product.price}</span>
-                    <a href="${product.link}" target="_blank" class="md:hidden text-brand-brown hover:text-brand-turquoise p-2">
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
+                <div class="mt-auto pt-4 border-t border-gray-50 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-medium text-gray-900">${product.price}</span>
+                        <a href="${product.link}" target="_blank" class="md:hidden text-brand-brown hover:text-brand-turquoise p-2">
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    ${product.ship ? `<p class="text-xs text-gray-400">${product.ship}</p>` : ''}
+                    ${product.watchers ? `<p class="text-xs text-gray-400">${product.watchers}</p>` : ''}
                 </div>
             </div>
         </article>
@@ -163,6 +172,60 @@ function renderDesignerSpotlights() {
                     </a>
                     <p class="text-[11px] text-white/50">${designer.imageCredit}</p>
                 </div>
+            </div>
+        </article>
+    `)
+        .join('');
+
+    setTimeout(() => lucide.createIcons(), 0);
+}
+
+function renderEbaySpotlight() {
+    const spotlight = document.getElementById('ebay-spotlight');
+    if (!spotlight) return;
+
+    const picks = products.slice(0, 2);
+    spotlight.innerHTML = picks
+        .map(product => `
+        <article class="bg-white rounded-2xl overflow-hidden flex flex-col shadow-xl">
+            <div class="relative h-64 overflow-hidden">
+                <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover">
+                <span class="absolute top-3 left-3 bg-brand-brown text-white text-xs font-bold tracking-[0.3em] px-3 py-1 rounded-full">Live on eBay</span>
+            </div>
+            <div class="p-5 flex flex-col gap-2 flex-1">
+                <p class="text-xs text-brand-brown uppercase tracking-[0.4em]">${product.category}</p>
+                <h3 class="font-serif text-xl font-bold text-gray-900">${product.title}</h3>
+                <p class="text-2xl font-semibold text-brand-brown">${product.price}</p>
+                <div class="text-xs text-gray-500 flex flex-col gap-1">
+                    ${product.watchers ? `<span>${product.watchers}</span>` : ''}
+                    ${product.ship ? `<span>${product.ship}</span>` : ''}
+                </div>
+                <a href="${product.link}" target="_blank" class="mt-auto inline-flex items-center justify-between px-4 py-3 bg-brand-black text-white text-xs font-bold uppercase tracking-[0.4em] rounded-lg hover:bg-brand-turquoise transition-colors">
+                    View Listing <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </article>
+    `)
+        .join('');
+}
+
+function renderShopFeed() {
+    const feed = document.getElementById('shop-feed');
+    if (!feed) return;
+
+    const items = products.slice(2, 6);
+    feed.innerHTML = items
+        .map(product => `
+        <article class="bg-white rounded-xl overflow-hidden shadow-md flex flex-col">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover">
+            <div class="p-4 space-y-2 flex-1 flex flex-col">
+                <p class="text-xs uppercase tracking-[0.4em] text-brand-brown">${product.category}</p>
+                <h4 class="font-semibold text-gray-900">${product.title}</h4>
+                <p class="text-brand-brown font-bold">${product.price}</p>
+                ${product.watchers ? `<p class="text-xs text-gray-500">${product.watchers}</p>` : ''}
+                <a href="${product.link}" target="_blank" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-brand-brown hover:text-brand-turquoise">
+                    Shop on eBay <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
         </article>
     `)
@@ -235,6 +298,52 @@ function renderDesignerArchive() {
 
         setTimeout(() => lucide.createIcons(), 0);
     }
+}
+
+function initNewsletterForm() {
+    const form = document.getElementById('inline-newsletter');
+    const success = document.getElementById('newsletter-success');
+    if (!form || !success) return;
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        const emailInput = form.querySelector('input[type="email"]');
+        if (!emailInput || !emailInput.value.trim()) {
+            success.textContent = 'Drop an email and we'll send the next drop.';
+            success.classList.remove('hidden');
+            success.classList.add('text-red-400');
+            return;
+        }
+        success.textContent = 'Welcome aboard! New drops hit every week.';
+        success.classList.remove('hidden', 'text-red-400');
+        success.classList.add('text-brand-turquoise');
+        emailInput.value = '';
+        setTimeout(() => success.classList.add('hidden'), 4000);
+    });
+}
+
+function initStylePoll() {
+    const poll = document.getElementById('style-poll');
+    const success = document.getElementById('poll-success');
+    if (!poll || !success) return;
+
+    poll.addEventListener('submit', event => {
+        event.preventDefault();
+        const choice = poll.querySelector('input[name="style-poll-option"]:checked');
+        if (!choice) {
+            success.textContent = 'Pick a vibe to cast your vote.';
+            success.classList.remove('hidden');
+            success.classList.remove('text-brand-turquoise');
+            success.classList.add('text-red-400');
+            return;
+        }
+        const label = choice.parentElement?.textContent?.trim() || 'your pick';
+        success.textContent = `Vote saved! ${label} is gaining heat.`;
+        success.classList.remove('hidden', 'text-red-400');
+        success.classList.add('text-brand-turquoise');
+        poll.reset();
+        setTimeout(() => success.classList.add('hidden'), 4000);
+    });
 }
 
 function initContactForm() {

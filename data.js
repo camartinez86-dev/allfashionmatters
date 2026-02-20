@@ -1,4 +1,93 @@
-export const products = [    {        id: 1,        title: "Nike Air Force 1 High '07",        category: "Urban Motion",        price: "$99.00",        image: "https://r2.flowith.net/files/jpeg/JUN4E-ebay_nike_af1_product_showcase_index_4@1024x1024.jpeg",        link: "https://www.ebay.com/itm/187179724410",        badge: "Best Seller"    },    {        id: 2,        title: "Travis Scott x McDonald's Tee",        category: "Urban Motion",        price: "$75.00",        image: "https://r2.flowith.net/files/jpeg/A0DJE-travis_scott_sneaker_showcase_index_6@1024x1024.jpeg",        link: "https://www.ebay.com/itm/185546295262",        badge: "Rare Find"    },    {        id: 3,        title: "Nike Air More Uptempo Kids",        category: "Urban Motion",        price: "$59.00",        image: "https://r2.flowith.net/files/jpeg/IQYM7-ebay_nike_uptempo_showcase_index_5@1024x1024.jpeg",        link: "https://www.ebay.com/itm/187572282406",        badge: "Trending"    },    {        id: 4,        title: "Sorel Harlow Lace Cozy Boots",        category: "Winter Luxe",        price: "$57.00",        image: "https://i.ebayimg.com/images/g/XPQAAOSwLIlmkWoJ/s-l500.webp",         link: "https://www.ebay.com/itm/186218294477",        badge: "Cozy"    },    {        id: 5,        title: "Original Grain Alterra Chrono",        category: "Timeless Details",        price: "$249.00",        image: "https://i.ebayimg.com/images/g/3ZkAAOSwmVJnI7F2/s-l500.webp",        link: "https://www.ebay.com/itm/186756468193",        badge: "Luxury"    },    {        id: 6,        title: "Sorel Kinetic RNEGD Sport",        category: "Winter Luxe",        price: "$50.00",        image: "https://i.ebayimg.com/images/g/EaUAAOSwPM9mlYjj/s-l500.webp",        link: "https://www.ebay.com/itm/187830336334",        badge: "Sale"    },    {        id: 7,        title: "Vintage Seiko Gold Watch",        category: "Timeless Details",        price: "$8,785.00",        image: "https://i.ebayimg.com/images/g/J~sAAOSw~xJnV~l~/s-l500.webp",        link: "https://www.ebay.com/itm/187290753948",        badge: "Vintage"    },    {        id: 8,        title: "Coach Carley Leather Flats",        category: "Timeless Details",        price: "$75.50",        image: "https://i.ebayimg.com/images/g/6~kAAOSw~xJnV~l~/s-l500.webp",        link: "https://www.ebay.com/itm/187572049937",        badge: "Classic"    }];
+export const products = [
+    {
+        id: 1,
+        title: "Nike Air Force 1 High '07",
+        category: "Urban Motion",
+        price: "$99.00",
+        image: "https://i.ebayimg.com/images/g/dLIAAOSwStZoD7aE/s-l960.jpg",
+        link: "https://www.ebay.com/itm/187179724410",
+        badge: "Best Seller",
+        watchers: "18 watching",
+        ship: "Ships from Milwaukee, WI"
+    },
+    {
+        id: 2,
+        title: "Nike Air More Uptempo Kids",
+        category: "Urban Motion",
+        price: "$59.00",
+        image: "https://i.ebayimg.com/images/g/iOUAAeSwYdJoyMBn/s-l960.jpg",
+        link: "https://www.ebay.com/itm/187572282406",
+        badge: "Trending",
+        watchers: "11 watching",
+        ship: "Ships from Milwaukee, WI"
+    },
+    {
+        id: 3,
+        title: "Sorel Harlow Lace Cozy Boots",
+        category: "Winter Luxe",
+        price: "$57.00",
+        image: "https://i.ebayimg.com/images/g/XPQAAOSwLIlmkWoJ/s-l800.jpg",
+        link: "https://www.ebay.com/itm/186218294477",
+        badge: "Cozy",
+        watchers: "6 watching",
+        ship: "Ready to ship next day"
+    },
+    {
+        id: 4,
+        title: "Vintage Seiko Gold Watch",
+        category: "Timeless Details",
+        price: "$8,785.00",
+        image: "https://i.ebayimg.com/images/g/J~sAAOSw~xJnV~l~/s-l800.jpg",
+        link: "https://www.ebay.com/itm/187290753948",
+        badge: "Vintage",
+        watchers: "3 collectors",
+        ship: "Insured shipping included"
+    },
+    {
+        id: 5,
+        title: "Coach Carley Leather Flats",
+        category: "Timeless Details",
+        price: "$75.50",
+        image: "https://i.ebayimg.com/images/g/6~kAAOSw~xJnV~l~/s-l800.jpg",
+        link: "https://www.ebay.com/itm/187572049937",
+        badge: "Classic",
+        watchers: "9 watching",
+        ship: "Ships from Madison, WI"
+    },
+    {
+        id: 6,
+        title: "Original Grain Alterra Chrono",
+        category: "Timeless Details",
+        price: "$249.00",
+        image: "https://i.ebayimg.com/images/g/3ZkAAOSwmVJnI7F2/s-l800.jpg",
+        link: "https://www.ebay.com/itm/186756468193",
+        badge: "Luxury",
+        watchers: "4 watching",
+        ship: "Ships in original box"
+    },
+    {
+        id: 7,
+        title: "Sorel Kinetic RNEGD Sport",
+        category: "Winter Luxe",
+        price: "$50.00",
+        image: "https://i.ebayimg.com/images/g/EaUAAOSwPM9mlYjj/s-l800.jpg",
+        link: "https://www.ebay.com/itm/187830336334",
+        badge: "Sale",
+        watchers: "5 watching",
+        ship: "Ships same day"
+    },
+    {
+        id: 8,
+        title: "Archive Nike Graphic Hoodie",
+        category: "Urban Motion",
+        price: "$68.00",
+        image: "https://i.ebayimg.com/images/g/G6sAAeSwdC9pRaMD/s-l800.jpg",
+        link: "https://www.ebay.com/itm/187858833389",
+        badge: "New",
+        watchers: "2 watching",
+        ship: "Ships from Milwaukee, WI"
+    }
+];
 
 export const designerSpotlights = [
     {
