@@ -1,36 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiet Luxury in 2026 | All Fashion Matters</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <meta name="description" content="Discover the quiet luxury trend in 2026. Learn about Loro Piana, the anti-brand brand that's redefining Italian heritage and extreme quality.">
+    <meta name="keywords" content="Quiet Luxury, Loro Piana, Italian Heritage, Cashmere, Vicuña, Luxury Fashion 2026">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Quiet Luxury in 2026 | All Fashion Matters">
+    <meta property="og:description" content="Forget the loud logos. The biggest trend in 2026 isn't about being seen—it's about knowing.">
+    <meta property="og:image" content="https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg">
+    <meta property="og:url" content="https://allfashionmatters.github.io/blog/quiet-luxury.html">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { theme: { extend: { colors: { brand: { turquoise: '#40E0D0', brown: '#8B4513' } }, fontFamily: { sans: ['Inter'], serif: ['Playfair Display'] } } } }</script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            white: '#FFFFFF',
+                            black: '#000000',
+                            turquoise: '#40E0D0',
+                            darkTurquoise: '#00CED1',
+                            brown: '#8B4513',
+                            chocolate: '#D2691E',
+                            lightGray: '#F9FAFB'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-gray-50">
-    <nav class="bg-brand-brown text-white py-4">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between"><a href="../index.html" class="font-serif text-2xl font-bold">AFM<span class="text-brand-turquoise">.</span></a><a href="index.html" class="text-sm">← Back</a></div>
+<body class="bg-brand-black text-gray-100 antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index.html" class="font-serif text-3xl font-bold tracking-tighter text-white hover:text-brand-turquoise transition-colors">
+                        AFM<span class="text-brand-turquoise">.</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index.html" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">Home</a>
+                    <a href="../index.html#about" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">About</a>
+                    <a href="../index.html#edits" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">Shop</a>
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest text-brand-turquoise font-bold">Blog</a>
+                    <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="btn-primary-outline px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full">
+                        Shop eBay
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <a href="../index.html" class="text-white hover:text-brand-turquoise">
+                        <i data-lucide="home" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
-    <header class="bg-brand-brown text-white pt-20 pb-12 text-center">
-        <span class="bg-brand-turquoise text-xs px-3 py-1 rounded-full">LUXURY TREND</span>
-        <h1 class="font-serif text-4xl font-bold mt-4">Quiet Luxury in 2026</h1>
-        <p class="text-white/70 mt-2">February 20, 2026</p>
+
+    <!-- Blog Hero -->
+    <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-black/60 via-brand-black/40 to-brand-black"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto pt-20">
+            <span class="inline-block bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">Luxury Trend</span>
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+                Quiet Luxury in 2026
+            </h1>
+            <div class="flex items-center justify-center gap-4 text-sm text-gray-300">
+                <span>February 20, 2026</span>
+                <span>•</span>
+                <span>3 min read</span>
+            </div>
+        </div>
     </header>
-    <article class="max-w-3xl mx-auto px-4 py-12 bg-white">
-        <img src="https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg" alt="Loro Piana" class="w-full rounded-xl mb-8">
-        <p class="text-xl text-gray-700 mb-6">Forget the loud logos. The biggest trend in 2026 isn't about being seen—it's about knowing. Welcome to the whisper economy.</p>
-        <h2 class="text-2xl font-bold text-brand-brown mt-8 mb-4">The Anti-Brand Brand</h2>
-        <ul class="list-disc pl-6 text-gray-600 mb-6 space-y-2">
-            <li><strong>No visible logos</strong> — unless you know, you don't know</li>
-            <li><strong>Italian heritage</strong> — since 1924</li>
-            <li><strong>Extreme quality</strong> — the finest cashmere, vicuña</li>
-        </ul>
-        <h2 class="text-2xl font-bold text-brand-brown mt-8 mb-4">Investment Value</h2>
-        <p class="text-gray-600 mb-6">Loro Piana pieces retain 70-85% resale value. Some vintage pieces appreciate significantly.</p>
-        <h2 class="text-2xl font-bold text-brand-brown mt-8 mb-4">Where to Buy</h2>
-        <a href="https://www.loropiana.com" target="_blank" class="text-brand-turquoise hover:underline">Loro Piana Official →</a>
+
+    <!-- Blog Content -->
+    <article class="max-w-3xl mx-auto px-4 py-16">
+        <!-- Author -->
+        <div class="flex items-center gap-4 mb-8 pb-8 border-b border-gray-800">
+            <div class="w-12 h-12 bg-brand-brown rounded-full flex items-center justify-center text-white font-serif text-xl font-bold">AFM</div>
+            <div>
+                <p class="font-bold text-white">All Fashion Matters</p>
+                <p class="text-sm text-gray-400">Curating style since 2011</p>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-lg prose-invert max-w-none">
+            <p class="text-xl leading-relaxed text-gray-300 mb-8 font-light">
+                Forget the loud logos. The biggest trend in 2026 isn't about being seen—it's about knowing. Welcome to the whisper economy.
+            </p>
+
+            <h2 class="font-serif text-3xl font-bold text-brand-brown mt-12 mb-6">The Anti-Brand Brand</h2>
+            <ul class="list-disc pl-6 mb-8 space-y-3 text-gray-400">
+                <li><strong class="text-white">No visible logos</strong> — unless you know, you don't know</li>
+                <li><strong class="text-white">Italian heritage</strong> — since 1924</li>
+                <li><strong class="text-white">Extreme quality</strong> — the finest cashmere, vicuña</li>
+            </ul>
+
+            <h2 class="font-serif text-3xl font-bold text-brand-brown mt-12 mb-6">Investment Value</h2>
+            <p class="text-gray-400 leading-loose mb-6">
+                Loro Piana pieces retain 70-85% resale value. Some vintage pieces appreciate significantly.
+            </p>
+
+            <!-- Product Card -->
+            <div class="bg-brand-lightGray/5 rounded-2xl p-8 my-12 border border-gray-800">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <img src="https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg" alt="Loro Piana" class="w-48 h-48 object-cover rounded-xl shadow-lg">
+                    <div class="flex-1 text-center md:text-left">
+                        <span class="inline-block bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Heritage Luxury</span>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-2">Loro Piana</h3>
+                        <p class="text-gray-400 mb-4">Italian Excellence Since 1924 • Cashmere & Vicuña</p>
+                        <a href="https://www.loropiana.com" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-brand-brown text-white font-bold uppercase tracking-widest hover:bg-brand-turquoise transition-colors rounded-sm">
+                            Explore Loro Piana
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="font-serif text-3xl font-bold text-brand-brown mt-12 mb-6">The Quiet Luxury Aesthetic</h2>
+            <p class="text-gray-400 leading-loose mb-6">
+                In a world of loud branding and logomania, quiet luxury speaks to a refined sensibility. It's about fabric quality, craftsmanship, and timeless design over flashy labels.
+            </p>
+            <p class="text-gray-400 leading-loose mb-8">
+                As we move through 2026, this trend continues to grow—proving that sometimes, the most powerful statement is a whisper.
+            </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-3 mt-12 pt-8 border-t border-gray-800">
+            <span class="text-sm text-gray-500">Tags:</span>
+            <a href="#" class="text-sm text-brand-turquoise hover:text-brand-darkTurquoise">#QuietLuxury</a>
+            <a href="#" class="text-sm text-brand-turquoise hover:text-brand-darkTurquoise">#LoroPiana</a>
+            <a href="#" class="text-sm text-brand-turquoise hover:text-brand-darkTurquoise">#ItalianHeritage</a>
+            <a href="#" class="text-sm text-brand-turquoise hover:text-brand-darkTurquoise">#Investment</a>
+            <a href="#" class="text-sm text-brand-turquoise hover:text-brand-darkTurquoise">#AllFashionMatters</a>
+        </div>
+
+        <!-- Share & Back -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mt-8">
+            <a href="index.html" class="inline-flex items-center text-gray-400 hover:text-brand-turquoise transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                Back to Blog
+            </a>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-gray-500">Share:</span>
+                <a href="https://instagram.com/allfashionmatters_" target="_blank" class="p-2 bg-gray-800 rounded-full hover:bg-brand-turquoise hover:text-white transition-colors">
+                    <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
     </article>
-    <footer class="bg-brand-brown text-white py-8 text-center"><p>&copy; 2026 AllFashionMatters</p></footer>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="font-serif text-2xl font-bold mb-4">AFM.</h3>
+            <p class="text-brand-turquoise uppercase tracking-widest text-xs mb-6">All Fashion Matters</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" class="hover:text-brand-turquoise transition-colors">Instagram</a>
+                <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" class="hover:text-brand-turquoise transition-colors">Facebook</a>
+                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="hover:text-brand-turquoise transition-colors">eBay Store</a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2026 AllFashionMatters. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    </script>
 </body>
 </html>
