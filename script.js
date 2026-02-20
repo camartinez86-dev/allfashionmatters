@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollAnimations();
     renderProducts();
+    renderHotProducts();
     renderDesignerSpotlights();
     renderDesignerArchive();
     initContactForm();
@@ -66,6 +67,30 @@ function initScrollAnimations() {
 
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 }
+
+
+// Render Hot Drops products
+function renderHotProducts() {
+    const grid = document.getElementById('hot-products-grid');
+    if (!grid) return;
+    
+    // Get first 4 products for hot drops
+    const hotProducts = products.slice(0, 4);
+    
+    grid.innerHTML = hotProducts.map(product => `
+        <a href="${product.link}" target="_blank" class="group block bg-brand-dark rounded-xl overflow-hidden hover:shadow-lg hover:shadow-brand-turquoise/20 transition-all duration-300 hover:-translate-y-1">
+            <div class="relative aspect-square overflow-hidden">
+                <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                ${product.badge ? `<span class="absolute top-2 left-2 bg-brand-turquoise text-black text-xs font-bold px-2 py-1 rounded">${product.badge}</span>` : ''}
+            </div>
+            <div class="p-3">
+                <h3 class="font-bold text-white text-sm truncate">${product.title}</h3>
+                <p class="text-brand-turquoise font-bold mt-1">${product.price}</p>
+            </div>
+        </a>
+    `).join('');
+}
+
 
 function renderProducts() {
     const grid = document.getElementById('product-grid');
