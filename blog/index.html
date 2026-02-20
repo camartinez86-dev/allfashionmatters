@@ -1,297 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | All Fashion Matters</title>
-    <meta name="description" content="Stay ahead of the trends with All Fashion Matters. Daily blog posts on streetwear, fashion culture, and styling tips.">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            white: '#FFFFFF',
-                            black: '#000000',
-                            turquoise: '#40E0D0',
-                            darkTurquoise: '#00CED1',
-                            brown: '#8B4513',
-                            chocolate: '#D2691E',
-                            lightGray: '#F9FAFB'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="../styles.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>All Fashion Matters Blog</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #fafafa; }
+        header { text-align: center; padding: 40px 0; border-bottom: 3px solid #000; margin-bottom: 40px; }
+        h1 { font-size: 3em; letter-spacing: -2px; margin: 0; }
+        .subtitle { color: #666; font-size: 1.2em; }
+        .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .post-card { background: #fff; border: 1px solid #e0e0e0; transition: transform 0.2s; }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .post-image { width: 100%; height: 200px; object-fit: cover; }
+        .post-content { padding: 20px; }
+        .post-title { font-size: 1.4em; margin: 0 0 10px; }
+        .post-title a { color: #000; text-decoration: none; }
+        .post-excerpt { color: #666; line-height: 1.6; }
+        .post-meta { font-size: 0.85em; color: #999; margin-top: 15px; }
+    </style>
 </head>
-<body class="bg-brand-black text-gray-100 antialiased overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="../index.html" class="font-serif text-3xl font-bold tracking-tighter text-white hover:text-brand-turquoise transition-colors">
-                        AFM<span class="text-brand-turquoise">.</span>
-                    </a>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="../index.html" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">Home</a>
-                    <a href="../index.html#about" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">About</a>
-                    <a href="../index.html#edits" class="nav-link text-sm uppercase tracking-widest hover:text-brand-turquoise transition-colors">Shop</a>
-                    <a href="#" class="nav-link text-sm uppercase tracking-widest text-brand-turquoise font-bold">Blog</a>
-                    <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="btn-primary-outline px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full">
-                        Shop eBay
-                    </a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <a href="../index.html" class="text-white hover:text-brand-turquoise">
-                        <i data-lucide="home" class="w-6 h-6"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <header class="relative py-32 bg-brand-black">
-        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp');"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-black via-transparent to-brand-black"></div>
-        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <span class="text-brand-turquoise font-bold tracking-widest uppercase text-sm mb-4 block">Our Blog</span>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6">Style & Culture</h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
-                Daily insights on streetwear, fashion trends, and cultural moments. Stay ahead of the curve.
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#posts" class="px-8 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">
-                    Read Latest Posts
-                </a>
-            </div>
-        </div>
+<body>
+    <header>
+        <h1>ALL FASHION MATTERS</h1>
+        <p class="subtitle">Streetwear Culture • Designer Spotlights • Fashion Trends</p>
     </header>
-
-    <!-- Featured Post -->
-    <section id="posts" class="py-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="mb-12">
-                <h2 class="font-serif text-3xl font-bold text-white">Latest Posts</h2>
-                <div class="w-20 h-1 bg-brand-turquoise mt-4"></div>
+    
+    <main class="post-grid">
+        <!-- Post 1: Pharrell -->
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=800" alt="Louis Vuitton Fashion" class="post-image">
+            <div class="post-content">
+                <h2 class="post-title"><a href="pharrell-louis-vuitton-ss26-blooming-monogram.html">Pharrell's Louis Vuitton SS26: The Blooming of a New Era</a></h2>
+                <p class="post-excerpt">Pharrell Williams presents Louis Vuitton Men's Spring 2026 capsule with Blooming Monogram and LV Flower X-Ray. A hybrid wardrobe bridging tailoring and sportswear.</p>
+                <p class="post-meta">February 20, 2026 • 4 min read</p>
             </div>
-
-            <!-- Post Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Post 1: Supreme -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 hover:border-brand-turquoise">
-                    <div class="relative aspect-[4/3] overflow-hidden">
-                        <img src="https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp" alt="Supreme 2026" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm">
-                            Streetwear
-                        </span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
-                            <span>Feb 20, 2026</span>
-                            <span>•</span>
-                            <span>5 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-white mb-3 group-hover:text-brand-turquoise transition-colors">
-                            <a href="supreme-2026.html">Why Supreme Still Matters in 2026</a>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                            As Supreme drops its SS26 collection, we explore why the iconic brand remains the gold standard in streetwear culture.
-                        </p>
-                        <a href="supreme-2026.html" class="inline-flex items-center text-brand-turquoise font-bold uppercase tracking-widest text-xs hover:text-brand-darkTurquoise transition-colors">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 2: Telfar -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 hover:border-brand-turquoise">
-                    <div class="relative aspect-[4/3] overflow-hidden">
-                        <img src="https://cdn.shopify.com/s/files/1/0880/7204/files/TELFAR-DUFFLE-LARGE-OXBLOOD-HERO.jpg?v=1685653861&width=800&height=800&crop=center" alt="Telfar" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-brand-brown text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm">
-                            Designer
-                        </span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
-                            <span>Feb 20, 2026</span>
-                            <span>•</span>
-                            <span>4 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-white mb-3 group-hover:text-brand-turquoise transition-colors">
-                            <a href="telfar-clemens.html">Telfar Clemens: Democracy of Luxury</a>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                            The Brooklyn-born designer created a movement, not just bags. Discover the Equality Logo revolution.
-                        </p>
-                        <a href="telfar-clemens.html" class="inline-flex items-center text-brand-turquoise font-bold uppercase tracking-widest text-xs hover:text-brand-darkTurquoise transition-colors">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 3: Quiet Luxury -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 hover:border-brand-turquoise">
-                    <div class="relative aspect-[4/3] overflow-hidden">
-                        <img src="https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg" alt="Quiet Luxury" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm">
-                            Trend
-                        </span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
-                            <span>Feb 20, 2026</span>
-                            <span>•</span>
-                            <span>3 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-white mb-3 group-hover:text-brand-turquoise transition-colors">
-                            <a href="quiet-luxury.html">Quiet Luxury in 2026</a>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                            Forget the loud logos. The biggest trend in 2026 isn't about being seen—it's about knowing.
-                        </p>
-                        <a href="quiet-luxury.html" class="inline-flex items-center text-brand-turquoise font-bold uppercase tracking-widest text-xs hover:text-brand-darkTurquoise transition-colors">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 4: Kid Super -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 hover:border-brand-turquoise">
-                    <div class="relative aspect-[4/3] overflow-hidden">
-                        <img src="https://imageio.forbes.com/specials-images/imageserve/67f4aa469e2d3e41ad5c8998/bape-by-kidsuper-lookbook-7---colm/0x0.jpg?format=jpg&crop=2400,1916,x0,y55,safe&width=960" alt="Kid Super" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-brand-brown text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm">
-                            NYFW
-                        </span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
-                            <span>Feb 20, 2026</span>
-                            <span>•</span>
-                            <span>4 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-white mb-3 group-hover:text-brand-turquoise transition-colors">
-                            <a href="kid-super.html">Kid Super & The People's Runway</a>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                            Colm Dillane's vision for inclusive fashion. The People's Runway revolution at NYFW 2026.
-                        </p>
-                        <a href="kid-super.html" class="inline-flex items-center text-brand-turquoise font-bold uppercase tracking-widest text-xs hover:text-brand-darkTurquoise transition-colors">
-                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 5 (Coming Soon) -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 opacity-60">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-800">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-gray-500 font-serif text-2xl">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                            <span>Feb 22, 2026</span>
-                            <span>•</span>
-                            <span>6 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-gray-400 mb-3">
-                            Nike Air Force 1 — The Eternal Classic
-                        </h3>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                            Why the AF1 remains the most iconic sneaker of all time, and how to style it in 2026.
-                        </p>
-                        <span class="inline-flex items-center text-gray-500 font-bold uppercase tracking-widest text-xs">
-                            Draft <i data-lucide="lock" class="w-4 h-4 ml-1"></i>
-                        </span>
-                    </div>
-                </article>
-
-                <!-- Post 6 (Coming Soon) -->
-                <article class="group bg-brand-lightGray/5 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-800 opacity-60">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-800">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-gray-500 font-serif text-2xl">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                            <span>Feb 27, 2026</span>
-                            <span>•</span>
-                            <span>7 min read</span>
-                        </div>
-                        <h3 class="font-serif text-xl font-bold text-gray-400 mb-3">
-                            Vintage Watches — Investment Pieces
-                        </h3>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                            From Seiko to Omega, discover which vintage timepieces are worth investing in this year.
-                        </p>
-                        <span class="inline-flex items-center text-gray-500 font-bold uppercase tracking-widest text-xs">
-                            Draft <i data-lucide="lock" class="w-4 h-4 ml-1"></i>
-                        </span>
-                    </div>
-                </article>
+        </article>
+        
+        <!-- Post 2: Virgil Abloh -->
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800" alt="Virgil Abloh Archive" class="post-image">
+            <div class="post-content">
+                <h2 class="post-title"><a href="virgil-abloh-archive-air-jordan-alaska-2026.html">Virgil Abloh Archive x Air Jordan 1 "Alaska": The Legend Returns</a></h2>
+                <p class="post-excerpt">The Virgil Abloh Archive x Air Jordan 1 "Alaska" is finally dropping March 28, 2026. Here's everything we know about the most anticipated sneaker of the year.</p>
+                <p class="post-meta">February 20, 2026 • 4 min read</p>
             </div>
-
-            <!-- Designer Archive Link -->
-            <div class="mt-12 text-center">
-                <a href="../designer-archive.html" class="inline-flex items-center space-x-2 text-white hover:text-brand-turquoise transition-colors font-bold tracking-widest uppercase border-b-2 border-brand-brown hover:border-brand-turquoise pb-1">
-                    <span>View Designer Archive</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
+        </article>
+        
+        <!-- Post 3: Quiet Luxury -->
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800" alt="Quiet Luxury Fashion" class="post-image">
+            <div class="post-content">
+                <h2 class="post-title"><a href="quiet-luxury-2026-loro-piana.html">Quiet Luxury in 2026: Why Loro Piana Is Winning</a></h2>
+                <p class="post-excerpt">The whisper economy is taking over. Here's why Loro Piana, The Row, and quiet luxury are defining 2026 fashion.</p>
+                <p class="post-meta">February 20, 2026 • 4 min read</p>
             </div>
-
-            <!-- Newsletter -->
-            <div class="mt-16 bg-brand-lightGray/5 rounded-2xl p-8 md:p-12 text-center border border-gray-800">
-                <h3 class="font-serif text-3xl font-bold text-white mb-4">Never Miss a Drop</h3>
-                <p class="text-gray-400 max-w-xl mx-auto mb-8">
-                    Get weekly fashion insights, trend forecasts, and exclusive eBay deals delivered to your inbox.
-                </p>
-                <form class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
-                    <input type="email" placeholder="Your email" class="flex-1 px-6 py-3 rounded-sm bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-turquoise">
-                    <button type="submit" class="px-8 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">
-                        Subscribe
-                    </button>
-                </form>
+        </article>
+        
+        <!-- Post 4: KidSuper -->
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="KidSuper NYFW" class="post-image">
+            <div class="post-content">
+                <h2 class="post-title"><a href="kid-super-peoples-runway-nyfw-2026.html">KidSuper and The People's Runway: How Colm Dillane Is Redefining NYFW</a></h2>
+                <p class="post-excerpt">Instead of showcasing his own collection at New York Fashion Week, streetwear icon Colm Dillane gave his runway time to five emerging Brooklyn designers.</p>
+                <p class="post-meta">February 20, 2026 • 5 min read</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-brand-black text-white py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h3 class="font-serif text-2xl font-bold mb-4">AFM.</h3>
-            <p class="text-brand-turquoise uppercase tracking-widest text-xs mb-6">All Fashion Matters</p>
-            <div class="flex justify-center gap-6 mb-8">
-                <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" class="hover:text-brand-turquoise transition-colors">Instagram</a>
-                <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" class="hover:text-brand-turquoise transition-colors">Facebook</a>
-                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="hover:text-brand-turquoise transition-colors">eBay Store</a>
-            </div>
-            <p class="text-gray-500 text-sm">&copy; 2026 AllFashionMatters. All rights reserved.</p>
-        </div>
+        </article>
+    </main>
+    
+    <footer style="text-align: center; padding: 40px 0; margin-top: 60px; border-top: 1px solid #e0e0e0;">
+        <p>© 2026 All Fashion Matters. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-    </script>
 </body>
 </html>
