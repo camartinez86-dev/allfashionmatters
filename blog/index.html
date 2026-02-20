@@ -3,53 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Fashion Matters Blog</title>
-    <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #fafafa; }
-        header { text-align: center; padding: 40px 0; border-bottom: 3px solid #000; margin-bottom: 40px; }
-        h1 { font-size: 3em; letter-spacing: -2px; margin: 0; }
-        .subtitle { color: #666; font-size: 1.2em; }
-        .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-        .post-card { background: #fff; border: 1px solid #e0e0e0; transition: transform 0.2s; }
-        .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .post-image { width: 100%; height: 200px; object-fit: cover; }
-        .post-content { padding: 20px; }
-        .post-title { font-size: 1.4em; margin: 0 0 10px; }
-        .post-title a { color: #000; text-decoration: none; }
-        .post-excerpt { color: #666; line-height: 1.6; }
-        .post-meta { font-size: 0.85em; color: #999; margin-top: 15px; }
-    </style>
+    <title>Blog | All Fashion Matters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { brand: { turquoise: '#40E0D0', brown: '#8B4513', lightGray: '#F9FAFB' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <header>
-        <h1>ALL FASHION MATTERS</h1>
-        <p class="subtitle">Streetwear Culture • Designer Spotlights • Fashion Trends</p>
+<body class="bg-brand-lightGray text-gray-800">
+    <nav class="fixed w-full z-50 bg-brand-brown text-white py-4">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <a href="../index.html" class="font-serif text-2xl font-bold">AFM<span class="text-brand-turquoise">.</span></a>
+            <a href="../index.html" class="text-sm uppercase tracking-widest hover:text-brand-turquoise">← Back to Home</a>
+        </div>
+    </nav>
+
+    <header class="pt-24 pb-12 bg-brand-brown text-white text-center">
+        <h1 class="font-serif text-5xl font-bold mt-8">Blog</h1>
+        <p class="text-white/70 mt-4">Latest stories on streetwear, fashion, and culture</p>
     </header>
-    
-    <main class="post-grid">
-        <!-- Post 1: Quiet Luxury -->
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800" alt="Quiet Luxury Fashion" class="post-image">
-            <div class="post-content">
-                <h2 class="post-title"><a href="quiet-luxury-2026-loro-piana.html">Quiet Luxury in 2026: Why Loro Piana Is Winning</a></h2>
-                <p class="post-excerpt">The whisper economy is taking over. Here's why Loro Piana, The Row, and quiet luxury are defining 2026 fashion.</p>
-                <p class="post-meta">February 20, 2026 • 4 min read</p>
-            </div>
-        </article>
-        
-        <!-- Post 2: KidSuper -->
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="KidSuper NYFW" class="post-image">
-            <div class="post-content">
-                <h2 class="post-title"><a href="kid-super-peoples-runway-nyfw-2026.html">KidSuper and The People's Runway: How Colm Dillane Is Redefining NYFW</a></h2>
-                <p class="post-excerpt">Instead of showcasing his own collection at New York Fashion Week, streetwear icon Colm Dillane gave his runway time to five emerging Brooklyn designers. Here's why it matters.</p>
-                <p class="post-meta">February 20, 2026 • 5 min read</p>
-            </div>
-        </article>
-    </main>
-    
-    <footer style="text-align: center; padding: 40px 0; margin-top: 60px; border-top: 1px solid #e0e0e0;">
-        <p>© 2026 All Fashion Matters. All rights reserved.</p>
+
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Telfar -->
+            <article class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <img src="https://telfarglobal.com/cdn/shop/files/Telfar_SS25_Campaign_01.jpg" alt="Telfar" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-brand-turquoise text-xs font-bold uppercase">Designer Spotlight</span>
+                    <h3 class="font-serif text-xl font-bold mt-2 mb-2">Telfar Clemens: The Democracy of Luxury</h3>
+                    <p class="text-gray-600 text-sm mb-4">From the iconic Shopping Bag to global domination...</p>
+                    <a href="telfar-clemens.html" class="text-brand-turquoise font-bold uppercase text-xs">Read More →</a>
+                </div>
+            </article>
+
+            <!-- Loro Piana -->
+            <article class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <img src="https://www.loropiana.com/assets/logo-og.jpg" alt="Loro Piana" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-brand-turquoise text-xs font-bold uppercase">Luxury Trend</span>
+                    <h3 class="font-serif text-xl font-bold mt-2 mb-2">Quiet Luxury in 2026</h3>
+                    <p class="text-gray-600 text-sm mb-4">Why Loro Piana dominates the whisper economy...</p>
+                    <a href="quiet-luxury.html" class="text-brand-turquoise font-bold uppercase text-xs">Read More →</a>
+                </div>
+            </article>
+
+            <!-- Kid Super -->
+            <article class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" alt="Kid Super" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-brand-turquoise text-xs font-bold uppercase">Designer Spotlight</span>
+                    <h3 class="font-serif text-xl font-bold mt-2 mb-2">Kid Super & The People's Runway</h3>
+                    <p class="text-gray-600 text-sm mb-4">How Colm Dillane is redefining NYFW...</p>
+                    <a href="kid-super.html" class="text-brand-turquoise font-bold uppercase text-xs">Read More →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="bg-brand-brown text-white py-8 text-center">
+        <p>&copy; 2026 AllFashionMatters</p>
     </footer>
+    <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
 </html>
