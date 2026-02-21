@@ -20,9 +20,13 @@
         .tag-default { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
         .schedule-item { border-left: 2px solid #3b3b3b; }
         .schedule-item:last-child { border-left-color: transparent; }
+        .log-entry { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
         ::-webkit-scrollbar-thumb { background: #3b3b3b; border-radius: 3px; }
+        .folder-item { border-left: 2px solid transparent; }
+        .folder-item:hover { border-left-color: #ec4899; background: rgba(236, 72, 153, 0.1); }
     </style>
 </head>
 <body class="text-white h-screen flex overflow-hidden">
@@ -33,7 +37,7 @@
             <p class="text-xs text-gray-500">AllFashionMatters</p>
         </div>
         
-        <nav class="flex-1 space-y-1">
+        <nav class="flex-1 space-y-1 overflow-auto">
             <button onclick="showView('dashboard')" id="nav-dashboard" class="sidebar-item active w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3">
                 <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                 DASHBOARD
@@ -46,9 +50,17 @@
                 <i data-lucide="check-square" class="w-4 h-4"></i>
                 TASKS
             </button>
-            <button onclick="showView('notes')" id="nav-notes" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
-                <i data-lucide="sticky-note" class="w-4 h-4"></i>
-                NOTES
+            <button onclick="showView('logs')" id="nav-logs" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="activity" class="w-4 h-4"></i>
+                ACTIVITY
+            </button>
+            <button onclick="showView('usage')" id="nav-usage" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+                MONITORING
+            </button>
+            <button onclick="showView('folders')" id="nav-folders" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="folder" class="w-4 h-4"></i>
+                FOLDERS
             </button>
         </nav>
         
@@ -61,14 +73,13 @@
     <main class="flex-1 overflow-auto p-8">
         <!-- DASHBOARD VIEW -->
         <div id="view-dashboard" class="view">
-            <!-- Header -->
             <div class="mb-8">
                 <h2 class="text-2xl font-semibold">Dashboard</h2>
-                <p class="text-gray-500 text-sm mt-1">Welcome back! Here's your overview.</p>
+                <p class="text-gray-500 text-sm mt-1">Welcome back!</p>
             </div>
             
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-3 gap-4 mb-8">
+            <!-- Stats -->
+            <div class="grid grid-cols-4 gap-4 mb-8">
                 <div class="bg-white/5 rounded-xl p-5">
                     <p class="text-gray-400 text-sm">Total Tasks</p>
                     <p class="text-3xl font-semibold mt-2" id="total-tasks">0</p>
@@ -78,29 +89,25 @@
                     <p class="text-3xl font-semibold mt-2 text-green-400" id="completed-tasks">0</p>
                 </div>
                 <div class="bg-white/5 rounded-xl p-5">
-                    <p class="text-gray-400 text-sm">Upcoming Events</p>
+                    <p class="text-gray-400 text-sm">Events</p>
                     <p class="text-3xl font-semibold mt-2 text-pink-400" id="upcoming-events">0</p>
                 </div>
-            </div>
-            
-            <!-- Schedule Section -->
-            <div class="bg-white/5 rounded-xl p-6">
-                <h3 class="text-lg font-semibold mb-4">Schedule</h3>
-                <div id="schedule-list" class="space-y-0">
-                    <!-- Events will be rendered here -->
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Tokens Today</p>
+                    <p class="text-3xl font-semibold mt-2 text-purple-400" id="tokens-today">0</p>
                 </div>
             </div>
             
-            <!-- Quick Add -->
-            <div class="mt-6 flex gap-3">
-                <input type="text" id="quick-add-input" placeholder="Add a task..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')quickAdd()">
-                <select id="quick-add-type" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
-                    <option value="task">Task</option>
-                    <option value="social">Social</option>
-                    <option value="email">Email</option>
-                </select>
-                <input type="date" id="quick-add-date" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
-                <button onclick="quickAdd()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Add</button>
+            <!-- Schedule -->
+            <div class="bg-white/5 rounded-xl p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">Schedule</h3>
+                <div id="schedule-list"></div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="bg-white/5 rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+                <div id="recent-logs"></div>
             </div>
         </div>
 
@@ -115,7 +122,6 @@
                 <button onclick="goToToday()" class="text-sm text-gray-400 hover:text-white">Today</button>
             </div>
             
-            <!-- Calendar Grid -->
             <div class="grid grid-cols-7 gap-1 mb-2">
                 <div class="text-center text-xs text-gray-500 py-2">Sun</div>
                 <div class="text-center text-xs text-gray-500 py-2">Mon</div>
@@ -126,19 +132,151 @@
                 <div class="text-center text-xs text-gray-500 py-2">Sat</div>
             </div>
             <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+            
+            <!-- Add Event -->
+            <div class="mt-6 bg-white/5 rounded-xl p-4">
+                <h3 class="text-sm font-semibold mb-3">Add Event</h3>
+                <div class="flex gap-2">
+                    <input type="text" id="event-title" placeholder="Event title" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <input type="date" id="event-date" class="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <select id="event-type" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
+                        <option value="task">Task</option>
+                        <option value="social">Social</option>
+                        <option value="default">Default</option>
+                    </select>
+                    <button onclick="addEvent()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Add</button>
+                </div>
+            </div>
         </div>
 
         <!-- TASKS VIEW -->
         <div id="view-tasks" class="view hidden">
             <h2 class="text-2xl font-semibold mb-6">Tasks</h2>
+            <div class="flex gap-3 mb-6">
+                <input type="text" id="task-input" placeholder="Add a task..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')addTask()">
+                <button onclick="addTask()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Add</button>
+            </div>
             <div id="tasks-list" class="space-y-2"></div>
         </div>
 
-        <!-- NOTES VIEW -->
-        <div id="view-notes" class="view hidden">
-            <h2 class="text-2xl font-semibold mb-6">Notes</h2>
-            <textarea id="notes-area" class="w-full h-96 bg-white/5 border border-white/10 rounded-xl p-4 text-sm resize-none" placeholder="Write your notes here..."></textarea>
-            <button onclick="saveNotes()" class="mt-4 px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Save Notes</button>
+        <!-- LOGS/ACTIVITY VIEW -->
+        <div id="view-logs" class="view hidden">
+            <h2 class="text-2xl font-semibold mb-6">Activity Log</h2>
+            <div class="flex gap-3 mb-6">
+                <input type="text" id="log-input" placeholder="Add a log entry..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')addLog()">
+                <select id="log-category" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
+                    <option value="task">Task</option>
+                    <option value="system">System</option>
+                    <option value="content">Content</option>
+                    <option value="social">Social</option>
+                </select>
+                <button onclick="addLog()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Add</button>
+            </div>
+            <div id="logs-list" class="space-y-2 max-h-[70vh] overflow-y-auto"></div>
+        </div>
+
+        <!-- MONITORING VIEW -->
+        <div id="view-usage" class="view hidden">
+            <h2 class="text-2xl font-semibold mb-6">Monitoring</h2>
+            
+            <!-- Token Usage -->
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Messages Today</p>
+                    <p class="text-3xl font-semibold mt-2 text-pink-400" id="msg-count">0</p>
+                </div>
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Tokens Today</p>
+                    <p class="text-3xl font-semibold mt-2 text-purple-400" id="token-count">0</p>
+                </div>
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Est. Cost</p>
+                    <p class="text-3xl font-semibold mt-2 text-green-400" id="cost-count">$0</p>
+                </div>
+            </div>
+            
+            <!-- Cron Status -->
+            <div class="bg-white/5 rounded-xl p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">Cron Jobs</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>Morning Report</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Daily 7 AM</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>Content Researcher</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Daily 9 AM</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>Social Generator</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Every 4 hours</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>Quality Checker</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Every 6 hours</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Log Usage -->
+            <div class="bg-white/5 rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Log Usage</h3>
+                <div class="flex gap-3">
+                    <input type="number" id="usage-msg" placeholder="Messages" class="w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <input type="number" id="usage-token" placeholder="Tokens" class="w-40 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <input type="number" id="usage-cost" placeholder="Cost ($)" step="0.01" class="w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <button onclick="logUsage()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Log</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOLDERS VIEW -->
+        <div id="view-folders" class="view hidden">
+            <h2 class="text-2xl font-semibold mb-6">Folders</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="folder" class="w-8 h-8 text-pink-400 mb-3"></i>
+                    <h3 class="font-semibold">Blog Posts</h3>
+                    <p class="text-xs text-gray-500 mt-1">8 posts</p>
+                </div>
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="image" class="w-8 h-8 text-purple-400 mb-3"></i>
+                    <h3 class="font-semibold">Images</h3>
+                    <p class="text-xs text-gray-500 mt-1">Media assets</p>
+                </div>
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="file-text" class="w-8 h-8 text-blue-400 mb-3"></i>
+                    <h3 class="font-semibold">Reports</h3>
+                    <p class="text-xs text-gray-500 mt-1">Analytics docs</p>
+                </div>
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="megaphone" class="w-8 h-8 text-green-400 mb-3"></i>
+                    <h3 class="font-semibold">Social Posts</h3>
+                    <p class="text-xs text-gray-500 mt-1">Generated content</p>
+                </div>
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="git-branch" class="w-8 h-8 text-yellow-400 mb-3"></i>
+                    <h3 class="font-semibold">Website</h3>
+                    <p class="text-xs text-gray-500 mt-1">allfashionmatters</p>
+                </div>
+                <div class="folder-item bg-white/5 rounded-xl p-6 cursor-pointer hover:bg-white/10">
+                    <i data-lucide="sticky-note" class="w-8 h-8 text-orange-400 mb-3"></i>
+                    <h3 class="font-semibold">Notes</h3>
+                    <p class="text-xs text-gray-500 mt-1">Saved notes</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -148,18 +286,17 @@
         // Data
         let events = JSON.parse(localStorage.getItem('mc-events')) || [];
         let tasks = JSON.parse(localStorage.getItem('mc-tasks')) || [];
-        let notes = localStorage.getItem('mc-notes') || '';
+        let logs = JSON.parse(localStorage.getItem('mc-logs')) || [];
+        let usage = JSON.parse(localStorage.getItem('mc-usage')) || { messages: 0, tokens: 0, cost: 0 };
         
         // Initialize with sample data
         if (events.length === 0) {
             events = [
-                { id: 1, title: 'Post to socials', date: '2026-02-20', type: 'social' },
-                { id: 2, title: 'Finish blog post', date: '2026-02-21', type: 'task' },
-                { id: 3, title: 'Email', date: '2026-02-22', type: 'email' },
-                { id: 4, title: 'Post to socials', date: '2026-02-24', type: 'social' },
-                { id: 5, title: 'Post to socials', date: '2026-02-25', type: 'social' },
-                { id: 6, title: 'Finish blog post', date: '2026-02-26', type: 'task' },
-                { id: 7, title: 'Post to socials', date: '2026-02-28', type: 'social' }
+                { id: 1, title: 'Morning Report', date: '2026-02-21', type: 'default' },
+                { id: 2, title: 'Content Researcher', date: '2026-02-21', type: 'default' },
+                { id: 3, title: 'Social Post', date: '2026-02-21', type: 'social' },
+                { id: 4, title: 'Quality Check', date: '2026-02-21', type: 'task' },
+                { id: 5, title: 'Social Post', date: '2026-02-21', type: 'social' }
             ];
             localStorage.setItem('mc-events', JSON.stringify(events));
         }
@@ -167,15 +304,19 @@
         if (tasks.length === 0) {
             tasks = [
                 { id: 1, text: 'Post to Instagram', done: false },
-                { id: 2, text: 'Check analytics', done: false },
-                { id: 3, text: 'Write blog post', done: true }
+                { id: 2, text: 'Check analytics', done: false }
             ];
             localStorage.setItem('mc-tasks', JSON.stringify(tasks));
         }
         
-        document.getElementById('notes-area').value = notes;
+        if (logs.length === 0) {
+            logs = [
+                { id: 1, time: new Date().toLocaleTimeString(), category: 'system', message: 'Dashboard loaded' }
+            ];
+            localStorage.setItem('mc-logs', JSON.stringify(logs));
+        }
 
-        let currentDate = new Date(2026, 1, 1); // February 2026
+        let currentDate = new Date(2026, 1, 1);
 
         // Navigation
         function showView(view) {
@@ -208,12 +349,10 @@
             
             let html = '';
             
-            // Empty cells
             for (let i = 0; i < firstDay; i++) {
                 html += '<div class="h-24"></div>';
             }
             
-            // Days
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dayEvents = events.filter(e => e.date === dateStr);
@@ -247,7 +386,112 @@
             renderCalendar();
         }
 
-        // Schedule
+        // Events
+        function addEvent() {
+            const title = document.getElementById('event-title').value;
+            const date = document.getElementById('event-date').value;
+            const type = document.getElementById('event-type').value;
+            
+            if (title && date) {
+                events.push({ id: Date.now(), title, date, type });
+                localStorage.setItem('mc-events', JSON.stringify(events));
+                document.getElementById('event-title').value = '';
+                addLogEntry('task', `Event added: ${title}`);
+                renderAll();
+            }
+        }
+
+        function addEventOnDate(dateStr) {
+            const title = prompt('Event title:');
+            if (title) {
+                events.push({ id: Date.now(), title, date: dateStr, type: 'task' });
+                localStorage.setItem('mc-events', JSON.stringify(events));
+                renderAll();
+            }
+        }
+
+        // Tasks
+        function addTask() {
+            const input = document.getElementById('task-input');
+            if (input.value.trim()) {
+                tasks.push({ id: Date.now(), text: input.value.trim(), done: false });
+                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                input.value = '';
+                addLogEntry('task', `Task added: ${input.value}`);
+                renderAll();
+            }
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.done = !task.done;
+                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                renderAll();
+            }
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+            renderAll();
+        }
+
+        // Logs
+        function addLog() {
+            const input = document.getElementById('log-input');
+            const category = document.getElementById('log-category').value;
+            if (input.value.trim()) {
+                addLogEntry(category, input.value.trim());
+                input.value = '';
+            }
+        }
+
+        function addLogEntry(category, message) {
+            logs.unshift({ id: Date.now(), time: new Date().toLocaleTimeString(), category, message });
+            if (logs.length > 50) logs.pop();
+            localStorage.setItem('mc-logs', JSON.stringify(logs));
+            renderAll();
+        }
+
+        // Usage
+        function logUsage() {
+            const msg = parseInt(document.getElementById('usage-msg').value) || 0;
+            const token = parseInt(document.getElementById('usage-token').value) || 0;
+            const cost = parseFloat(document.getElementById('usage-cost').value) || 0;
+            
+            usage.messages += msg;
+            usage.tokens += token;
+            usage.cost += cost;
+            localStorage.setItem('mc-usage', JSON.stringify(usage));
+            
+            document.getElementById('usage-msg').value = '';
+            document.getElementById('usage-token').value = '';
+            document.getElementById('usage-cost').value = '';
+            
+            addLogEntry('system', `Usage logged: ${msg} msgs, ${token} tokens, $${cost}`);
+            renderAll();
+        }
+
+        // Render functions
+        function renderAll() {
+            renderCalendar();
+            renderSchedule();
+            renderTasks();
+            renderLogs();
+            renderUsage();
+            
+            // Stats
+            document.getElementById('total-tasks').textContent = tasks.length;
+            document.getElementById('completed-tasks').textContent = tasks.filter(t => t.done).length;
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('upcoming-events').textContent = events.filter(e => e.date >= today).length;
+            document.getElementById('tokens-today').textContent = usage.tokens.toLocaleString();
+            
+            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+            lucide.createIcons();
+        }
+
         function renderSchedule() {
             const list = document.getElementById('schedule-list');
             const sortedEvents = [...events].sort((a, b) => a.date.localeCompare(b.date));
@@ -269,19 +513,6 @@
             `).join('');
         }
 
-        function formatDate(dateStr) {
-            const date = new Date(dateStr + 'T00:00:00');
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            
-            if (dateStr === today.toISOString().split('T')[0]) return 'Today';
-            if (dateStr === tomorrow.toISOString().split('T')[0]) return 'Tomorrow';
-            
-            return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-        }
-
-        // Tasks
         function renderTasks() {
             const list = document.getElementById('tasks-list');
             list.innerHTML = tasks.map(t => `
@@ -296,68 +527,35 @@
             lucide.createIcons();
         }
 
-        // Quick add
-        function quickAdd() {
-            const input = document.getElementById('quick-add-input');
-            const type = document.getElementById('quick-add-type').value;
-            const date = document.getElementById('quick-add-date').value;
+        function renderLogs() {
+            const list = document.getElementById('logs-list');
+            const categoryColors = { task: 'text-blue-400', system: 'text-purple-400', content: 'text-green-400', social: 'text-pink-400' };
             
-            if (input.value.trim()) {
-                if (date) {
-                    events.push({ id: Date.now(), title: input.value, date, type });
-                    localStorage.setItem('mc-events', JSON.stringify(events));
-                } else {
-                    tasks.push({ id: Date.now(), text: input.value, done: false });
-                    localStorage.setItem('mc-tasks', JSON.stringify(tasks));
-                }
-                input.value = '';
-                renderAll();
-            }
+            list.innerHTML = logs.map(l => `
+                <div class="log-entry flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                    <span class="text-xs text-gray-500 whitespace-nowrap">${l.time}</span>
+                    <span class="text-xs font-bold ${categoryColors[l.category] || 'text-gray-400'}">${l.category.toUpperCase()}</span>
+                    <span class="text-sm">${l.message}</span>
+                </div>
+            `).join('');
         }
 
-        function addEventOnDate(dateStr) {
-            const title = prompt('Event title:');
-            if (title) {
-                const type = prompt('Type (task/social/email):') || 'task';
-                events.push({ id: Date.now(), title, date: dateStr, type });
-                localStorage.setItem('mc-events', JSON.stringify(events));
-                renderAll();
-            }
+        function renderUsage() {
+            document.getElementById('msg-count').textContent = usage.messages.toLocaleString();
+            document.getElementById('token-count').textContent = usage.tokens.toLocaleString();
+            document.getElementById('cost-count').textContent = '$' + usage.cost.toFixed(2);
         }
 
-        function toggleTask(id) {
-            const task = tasks.find(t => t.id === id);
-            if (task) {
-                task.done = !task.done;
-                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
-                renderAll();
-            }
-        }
-
-        function deleteTask(id) {
-            tasks = tasks.filter(t => t.id !== id);
-            localStorage.setItem('mc-tasks', JSON.stringify(tasks));
-            renderAll();
-        }
-
-        function saveNotes() {
-            localStorage.setItem('mc-notes', document.getElementById('notes-area').value);
-            alert('Notes saved!');
-        }
-
-        function renderAll() {
-            renderCalendar();
-            renderSchedule();
-            renderTasks();
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
             
-            // Stats
-            document.getElementById('total-tasks').textContent = tasks.length;
-            document.getElementById('completed-tasks').textContent = tasks.filter(t => t.done).length;
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('upcoming-events').textContent = events.filter(e => e.date >= today).length;
+            if (dateStr === today.toISOString().split('T')[0]) return 'Today';
+            if (dateStr === tomorrow.toISOString().split('T')[0]) return 'Tomorrow';
             
-            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
-            lucide.createIcons();
+            return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }
 
         // Initialize
