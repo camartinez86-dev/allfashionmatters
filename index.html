@@ -1,57 +1,397 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>AllFashionMatters | Curated Style & eBay Finds</title>    <meta name="description" content="AllFashionMatters - A curated fashion blog and eBay store featuring Winter Luxe, Urban Motion streetwear, and Timeless Accessories. Shop sustainable style since 2011.">    <meta name="keywords" content="Fashion Blog, eBay Store, Vintage Fashion, Streetwear, Nike, Sorel, Sustainable Fashion, AllFashionMatters">    <meta name="author" content="AllFashionMatters">        <!-- Open Graph / Social Media -->    <meta property="og:title" content="AllFashionMatters | Style & Substance">    <meta property="og:description" content="Discover curated edits of rare streetwear, luxury timepieces, and cozy winter essentials.">    <meta property="og:image" content="https://r2.flowith.net/files/jpeg/HP0W1-fashion_blog_hero_banner_2025_index_0@1024x1024.jpeg">    <meta property="og:url" content="https://allfashionmatters.github.io/">    <meta property="og:type" content="website">    <!-- Fonts -->    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">        <!-- Tailwind CSS -->    <script src="https://cdn.tailwindcss.com"></script>    <script>        tailwind.config = {            theme: {                extend: {                    colors: {                        brand: {                            black: '#0A0A0A',
-                            dark: '#1A1A1A',
-                            white: '#FFFFFF',                            turquoise: '#40E0D0',                            darkTurquoise: '#00CED1',                            brown: '#8B4513',                            chocolate: '#D2691E',                            lightGray: '#F9FAFB'                        }                    },                    fontFamily: {                        sans: ['Inter', 'sans-serif'],                        serif: ['Playfair Display', 'serif'],                    },                    backgroundImage: {                        'hero-pattern': "url('https://r2.flowith.net/files/jpeg/HP0W1-fashion_blog_hero_banner_2025_index_0@1024x1024.jpeg')",                        'divider-pattern': "url('https://r2.flowith.net/files/jpeg/5ARK2-fashion_blog_divider_background_index_3@1024x1024.jpeg')"                    }                }            }        }    </script>    <!-- Custom CSS -->    <link rel="stylesheet" href="styles.css">        <!-- Icons -->    <script src="https://unpkg.com/lucide@latest"></script>    <!-- Structured Data -->    <script type="application/ld+json">    {      "@context": "https://schema.org",      "@type": "OnlineStore",      "name": "AllFashionMatters",      "url": "https://www.ebay.com/usr/allfashionmatters",      "sameAs": [        "https://www.instagram.com/allfashionmatters_/",        "https://www.facebook.com/AllFashionMattersStore"      ],      "description": "Curated fashion store featuring streetwear, vintage watches, and winter apparel.",      "foundingDate": "2011"    }    </script></head><body class="bg-brand-white text-gray-800 antialiased overflow-x-hidden selection:bg-brand-turquoise selection:text-white">    <!-- Navigation -->    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10" id="navbar">        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            <div class="flex justify-between items-center h-20">                <!-- Logo -->                <div class="flex-shrink-0 flex items-center">                    <a href="#" class="font-serif text-3xl font-bold tracking-tighter text-white hover:text-brand-turquoise transition-colors relative z-50">                        AFM<span class="text-brand-turquoise">.</span>                    </a>                </div>                                <!-- Desktop Menu -->                <div class="hidden md:flex space-x-12 items-center">                    <a href="#hero" class="nav-link text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors" href="#hero">Home</a>                    <a href="#about" class="nav-link text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors" href="#about">About</a>                    <a href="#edits" class="nav-link text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors" href="#edits">Shop</a>
-                    <a href="blog/index.html" class="nav-link text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors" href="#blog">Stories</a>                    <a href="#contact" class="nav-link text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors" href="#contact">Contact</a>                                        <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="btn-primary-outline px-6 py-2 text-xs font-bold uppercase tracking-widest rounded-full">                        Shop eBay                    </a>                </div>                <!-- Mobile Button -->                <div class="md:hidden flex items-center relative z-50">                    <button id="mobile-menu-btn" class="text-white hover:text-brand-turquoise focus:outline-none p-2" aria-label="Menu">                        <i data-lucide="menu" class="w-8 h-8"></i>                    </button>                </div>            </div>        </div>        <!-- Mobile Menu -->        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-brand-black/95 backdrop-blur-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300">            <div class="flex flex-col space-y-8 text-center">                <a href="#hero" class="mobile-link text-3xl font-serif text-white hover:text-brand-turquoise transition-colors">Home</a>                <a href="#about" class="mobile-link text-3xl font-serif text-white hover:text-brand-turquoise transition-colors">About</a>                <a href="#edits" class="mobile-link text-3xl font-serif text-white hover:text-brand-turquoise transition-colors">Curated Edits</a>
-                <a href="blog/index.html" class="mobile-link text-3xl font-serif text-white hover:text-brand-turquoise transition-colors">Blog</a>                <a href="#contact" class="mobile-link text-3xl font-serif text-white hover:text-brand-turquoise transition-colors">Contact</a>                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="text-brand-turquoise font-bold uppercase tracking-widest text-lg mt-8 border-b-2 border-brand-turquoise pb-1 inline-block mx-auto">Visit Store</a>            </div>        </div>    </nav>    <!-- Hero Section -->    <header id="hero" class="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-brand-black">        <!-- Background Image -->        <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat parallax-bg transform scale-105"></div>        <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/90"></div>                <!-- Content -->        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">            <p class="text-brand-brown font-medium tracking-[0.3em] uppercase mb-4 animate-fade-in-up">Est. 2011</p>            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-tight mb-8 animate-fade-in-up delay-100">                WALK <span class="text-brand-turquoise italic font-light">&</span><br />BOLD.            </h1>            <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 font-light leading-relaxed animate-fade-in-up delay-200 glass-text-bg p-4 rounded-xl">                Curated fashion that speaks volumes. Sustainable, stylish, and accessible.                Discover our exclusive eBay collection.            </p>            <div class="animate-fade-in-up delay-300">                <a href="#edits" class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-brand-dark font-sans uppercase tracking-widest hover:bg-brand-turquoise shadow-lg hover:shadow-brand-turquoise/40 rounded-sm overflow-hidden">                    <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-brand-lightGray rounded-full group-hover:w-72 group-hover:h-72 opacity-10"></span>                    <span class="relative">Explore The Collection</span>                </a>            </div>        </div>        <!-- Scroll Indicator -->        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">            <a href="#about" aria-label="Scroll Down">                <i data-lucide="arrow-down" class="text-brand-brown w-8 h-8 opacity-70"></i>            </a>        </div>    </header>    <!-- About Section -->    <section id="about" class="py-24 relative bg-brand-black text-white overflow-hidden">        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">                <!-- Text Content -->                <div class="order-2 lg:order-1 reveal-on-scroll">                    <span class="text-brand-turquoise font-bold tracking-widest uppercase text-sm mb-2 block">Our Philosophy</span>                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-brown mb-6">Fashion Matters.</h2>                    <div class="w-20 h-1 bg-brand-turquoise mb-8"></div>                    <p class="text-white/70 leading-loose text-lg mb-6">                        At <span class="font-bold text-brand-brown">AllFashionMatters</span>, we believe style is a dialogue. Since 2011, we have curated a collection where high-end design meets everyday accessibility.                    </p>                    <p class="text-white/70 leading-loose text-lg mb-8">                        From rugged winter wear to rare vintage timepieces, our selection is driven by quality and character. With over <span class="text-brand-turquoise font-bold">1.1K items sold</span> and <span class="text-brand-turquoise font-bold">100% positive feedback</span>, we are your trusted source for sustainable style.                    </p>                                        <div class="flex space-x-6 mt-8">                        <div class="text-center">                            <span class="block font-serif text-3xl font-bold text-brand-brown">10+</span>                            <span class="text-xs uppercase tracking-wide text-gray-500">Years Active</span>                        </div>                        <div class="w-px bg-gray-200 h-12"></div>                        <div class="text-center">                            <span class="block font-serif text-3xl font-bold text-brand-brown">1.1K+</span>                            <span class="text-xs uppercase tracking-wide text-gray-500">Sold</span>                        </div>                        <div class="w-px bg-gray-200 h-12"></div>                        <div class="text-center">                            <span class="block font-serif text-3xl font-bold text-brand-turquoise">100%</span>                            <span class="text-xs uppercase tracking-wide text-gray-500">Feedback</span>                        </div>                    </div>                </div>                <!-- Visual -->                <div class="order-1 lg:order-2 relative reveal-on-scroll delay-200">                    <div class="absolute -top-10 -right-10 w-64 h-64 bg-brand-turquoise/10 rounded-full blur-3xl"></div>                    <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-brand-dark/10 rounded-full blur-3xl"></div>                    <div class="relative rounded-2xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 ease-out">                        <img src="https://r2.flowith.net/files/jpeg/5ARK2-fashion_blog_divider_background_index_3@1024x1024.jpeg" alt="Fashion Aesthetic" loading="lazy" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">                        <!-- Glass Overlay Card -->                        <div class="absolute bottom-6 left-6 right-6 glass-card p-6 rounded-xl">                            <p class="font-serif italic text-brand-brown text-lg">"Style is a way to say who you are without having to speak."</p>                        </div>                    </div>                </div>            </div>        </div>    </section>
-    <!-- Latest Blog Posts -->
-    <section id="blog" class="py-24 bg-brand-black text-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-brand-turquoise font-bold tracking-widest uppercase text-sm">From The Blog</span>
-                <h2 class="font-serif text-5xl font-bold text-brand-brown mt-3 mb-6">Latest Stories</h2>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AllFashionMatters | Streetwear Culture & Curated Finds</title>
+    <meta name="description" content="Daily fashion insights, streetwear culture, and curated eBay finds. Shop authentic Supreme, Nike, vintage watches, and more.">
+    <meta name="keywords" content="Streetwear, Fashion Blog, Supreme, Nike, eBay Store, Vintage, Hypebeast, AllFashionMatters">
+    <meta name="author" content="AllFashionMatters">
+    <meta property="og:title" content="AllFashionMatters | Streetwear Culture">
+    <meta property="og:description" content="Daily fashion insights and curated eBay finds. Shop authentic streetwear and vintage pieces.">
+    <meta property="og:image" content="https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 
+                            white: '#FFFFFF', 
+                            turquoise: '#40E0D0', 
+                            darkTurquoise: '#00CED1', 
+                            brown: '#8B4513', 
+                            chocolate: '#D2691E', 
+                            lightGray: '#F9FAFB',
+                            black: '#0a0a0a',
+                            dark: '#1a1a1a'
+                        }
+                    },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        serif: ['Playfair Display', 'serif'] 
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp')"
+                    },
+                    animation: { 
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.6s ease-out forwards'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-brand-white text-gray-900 antialiased selection:bg-brand-turquoise selection:text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl font-bold tracking-tighter text-white">AFM<span class="text-brand-turquoise">.</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#featured" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Featured</a>
+                    <a href="#blog" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Stories</a>
+                    <a href="#edits" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Shop</a>
+                    <a href="#trending" class="text-sm uppercase tracking-widest text-white/80 hover:text-brand-turquoise transition-colors">Trending</a>
+                    <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="px-4 py-2 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">Shop eBay</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-turquoise focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <a href="blog/telfar-clemens.html" class="block bg-brand-dark rounded-2xl overflow-hidden hover:shadow-xl transition">
-                    <img src="https://cdn.shopify.com/s/files/1/0880/7204/files/TELFAR-DUFFLE-LARGE-OXBLOOD-HERO.jpg?v=1685653861&width=800&height=800&crop=center" alt="Telfar" class="w-full aspect-video object-cover">
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-turquoise uppercase">Designer Spotlight</span>
-                        <h3 class="font-serif text-xl font-bold text-white mt-2">Telfar Clemens: Democracy of Luxury</h3>
+        </div>
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-brand-black/98 backdrop-blur-xl flex flex-col justify-center items-center">
+            <div class="flex flex-col space-y-6 text-center">
+                <a href="#featured" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Featured</a>
+                <a href="#blog" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Stories</a>
+                <a href="#edits" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Shop</a>
+                <a href="#trending" class="mobile-link text-2xl font-serif text-white hover:text-brand-turquoise transition-colors">Trending</a>
+                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="text-brand-turquoise font-bold uppercase tracking-widest text-lg mt-8">Visit Store →</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="featured" class="relative min-h-screen flex items-end pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col md:flex-row justify-between items-end">
+                <div class="w-full md:w-2/3">
+                    <span class="inline-block bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-3 py-1 mb-4">Featured Story</span>
+                    <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">Why Supreme Still Matters in 2026</h1>
+                    <p class="text-white/70 text-lg md:text-xl max-w-xl mb-6">As the iconic brand drops its SS26 collection, we explore why the red box remains streetwear's crown jewel after 32 years.</p>
+                    <div class="flex items-center gap-4 text-sm text-white/60 mb-8">
+                        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 5 min read</span>
+                        <span>•</span>
+                        <span>Feb 20, 2026</span>
+                        <span>•</span>
+                        <span class="text-brand-turquoise">Streetwear</span>
+                    </div>
+                    <a href="blog/supreme-2026.html" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">
+                        Read Full Story <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="hidden md:block w-1/3 text-right">
+                    <div class="inline-flex flex-col items-end space-y-3">
+                        <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" class="p-3 bg-white/10 backdrop-blur rounded-full hover:bg-brand-turquoise transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" class="p-3 bg-white/10 backdrop-blur rounded-full hover:bg-brand-turquoise transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="https://x.com/ALLFSHNMATTERS" target="_blank" class="p-3 bg-white/10 backdrop-blur rounded-full hover:bg-brand-turquoise transition-colors">
+                            <i data-lucide="x" class="w-5 h-5 text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trending Now -->
+    <section id="trending" class="py-16 bg-brand-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-8">
+                <i data-lucide="trending-up" class="w-6 h-6 text-brand-turquoise"></i>
+                <h2 class="font-serif text-2xl font-bold">Trending Now</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="blog/supreme-2026.html" class="group relative aspect-square overflow-hidden rounded-xl">
+                    <img src="https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp" alt="Supreme" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-brand-turquoise text-xs font-bold uppercase tracking-widest">Streetwear</span>
+                        <h3 class="font-bold text-white mt-1 group-hover:text-brand-turquoise transition-colors">Why Supreme Still Matters</h3>
                     </div>
                 </a>
-                <a href="blog/quiet-luxury.html" class="block bg-brand-dark rounded-2xl overflow-hidden hover:shadow-xl transition">
-                    <img src="https://media.loropiana.com/HYBRIS/FAM/FAM4591/C8ACFA57-D947-4829-9965-876ED6ACEA73/FAM4591_H0CH_MEDIUM.jpg" alt="Quiet Luxury" class="w-full aspect-video object-cover">
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-turquoise uppercase">Trend Report</span>
-                        <h3 class="font-serif text-xl font-bold text-white mt-2">Quiet Luxury in 2026</h3>
+                <a href="#" class="group relative aspect-square overflow-hidden rounded-xl opacity-60">
+                    <img src="https://r2.flowith.net/files/jpeg/JUN4E-ebay_nike_af1_product_showcase_index_4@1024x1024.jpeg" alt="Nike AF1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-brand-turquoise text-xs font-bold uppercase tracking-widest">Sneakers</span>
+                        <h3 class="font-bold text-white mt-1">Nike AF1 — The Classic</h3>
                     </div>
                 </a>
-                <a href="blog/kid-super.html" class="block bg-brand-dark rounded-2xl overflow-hidden hover:shadow-xl transition">
-                    <img src="https://imageio.forbes.com/specials-images/imageserve/67f4aa469e2d3e41ad5c8998/bape-by-kidsuper-lookbook-7---colm/0x0.jpg?format=jpg&crop=2400,1916,x0,y55,safe&width=960" alt="Kid Super" class="w-full aspect-video object-cover">
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-turquoise uppercase">NYFW 2026</span>
-                        <h3 class="font-serif text-xl font-bold text-white mt-2">Kid Super and The People</h3>
+                <a href="#" class="group relative aspect-square overflow-hidden rounded-xl opacity-60">
+                    <img src="https://i.ebayimg.com/images/g/3ZkAAOSwmVJnI7F2/s-l500.webp" alt="Vintage Watch" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-brand-turquoise text-xs font-bold uppercase tracking-widest">Luxury</span>
+                        <h3 class="font-bold text-white mt-1">Vintage Watches 2026</h3>
                     </div>
                 </a>
-            </div>
-            <div class="text-center mt-12">
-                <a href="designer-archive.html" class="inline-flex items-center space-x-2 text-white hover:text-brand-turquoise transition-colors font-bold tracking-widest uppercase border-b-2 border-brand-brown hover:border-brand-turquoise pb-1">
-                    <span>View Designer Archive</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-            </div>
-            <!-- Inline Newsletter Signup -->
-            <div class="mt-16 bg-brand-dark rounded-2xl p-8 text-center">
-                <div class="max-w-xl mx-auto">
-                    <h3 class="font-serif text-2xl font-bold text-white mb-2">Join 500+ Fashion Insiders</h3>
-                    <p class="text-white/70 mb-6">Get weekly drops, designer deep dives, and exclusive finds delivered to your inbox.</p>
-                    <form id="inline-newsletter" class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <input type="email" placeholder="Enter your email" required class="px-4 py-3 rounded-lg text-gray-900 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-brand-turquoise">
-                        <button type="submit" class="px-6 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest rounded-lg hover:bg-brand-darkTurquoise transition-colors">Subscribe</button>
-                    </form>
-                    <p id="newsletter-success" class="hidden text-brand-turquoise mt-3 font-medium">Thanks for subscribing! 🎉</p>
+                <div class="group relative aspect-square overflow-hidden bg-brand-turquoise rounded-xl flex items-center justify-center cursor-pointer">
+                    <div class="text-center">
+                        <i data-lucide="arrow-right" class="w-8 h-8 text-white mx-auto mb-2 group-hover:translate-x-2 transition-transform"></i>
+                        <span class="text-white font-bold uppercase tracking-widest">View All</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Curated Edits (Blog/Product Showcase) -->    <section id="edits" class="py-24 bg-brand-black text-white relative">        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            <div class="text-center mb-20 reveal-on-scroll">                <span class="text-brand-turquoise font-bold tracking-widest uppercase text-sm">Shop The Look</span>                <h2 class="font-serif text-5xl font-bold text-brand-brown mt-3 mb-6">Curated Edits</h2>                <p class="text-white/60 max-w-xl mx-auto">Hand-picked selections from our latest inventory drops.</p>            </div>            <!-- Dynamic Grid Container -->            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">                <!-- Products injected via script.js -->            </div>                        <div class="mt-20 text-center reveal-on-scroll">                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="inline-flex items-center space-x-2 text-white hover:text-brand-turquoise transition-colors font-bold tracking-widest uppercase border-b-2 border-brand-brown hover:border-brand-turquoise pb-1">                    <span>View All Inventory</span>                    <i data-lucide="arrow-right" class="w-4 h-4"></i>                </a>            </div>        </div>    </section>    <!-- Contact Section -->    <section id="contact" class="py-24 relative bg-brand-dark">        <div class="absolute top-0 left-0 w-full h-1/2 bg-brand-lightGray -skew-y-3 transform origin-top-left z-0"></div>                <div class="max-w-4xl mx-auto px-4 relative z-10">            <div class="glass-panel p-8 md:p-12 rounded-2xl shadow-xl reveal-on-scroll">                <div class="text-center mb-10">                    <h2 class="font-serif text-4xl font-bold text-brand-brown mb-4">Get In Touch</h2>                    <p class="text-gray-600">Have a question about an item? Need styling advice? Drop us a line.</p>                </div>                <form id="contactForm" class="space-y-6" novalidate>                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">                        <div class="relative group">                            <input type="text" id="name" name="name" required class="peer w-full bg-brand-lightGray/50 border-b-2 border-gray-300 py-3 px-4 text-gray-900 focus:outline-none focus:border-brand-turquoise transition-colors placeholder-transparent">                            <label for="name" class="absolute left-4 -top-3.5 text-xs text-brand-brown transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-brand-turquoise">Name</label>                            <span class="error-msg text-xs text-red-500 absolute -bottom-5 left-0 hidden">Name is required</span>                        </div>                        <div class="relative group">                            <input type="email" id="email" name="email" required class="peer w-full bg-brand-lightGray/50 border-b-2 border-gray-300 py-3 px-4 text-gray-900 focus:outline-none focus:border-brand-turquoise transition-colors placeholder-transparent">                            <label for="email" class="absolute left-4 -top-3.5 text-xs text-brand-brown transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-brand-turquoise">Email</label>                            <span class="error-msg text-xs text-red-500 absolute -bottom-5 left-0 hidden">Valid email is required</span>                        </div>                    </div>                                        <div class="relative group">                        <textarea id="message" name="message" rows="4" required class="peer w-full bg-brand-lightGray/50 border-b-2 border-gray-300 py-3 px-4 text-gray-900 focus:outline-none focus:border-brand-turquoise transition-colors placeholder-transparent resize-none"></textarea>                        <label for="message" class="absolute left-4 -top-3.5 text-xs text-brand-brown transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-brand-turquoise">Message</label>                        <span class="error-msg text-xs text-red-500 absolute -bottom-5 left-0 hidden">Message cannot be empty</span>                    </div>                    <div class="text-center pt-4">                        <button type="submit" class="w-full md:w-auto px-10 py-4 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-all duration-300 shadow-lg hover:shadow-brand-turquoise/50 rounded-sm">                            Send Message                        </button>                    </div>                    <p id="formStatus" class="text-center text-sm mt-4 hidden"></p>                </form>            </div>        </div>    </section>    <!-- Footer -->    <footer class="bg-brand-dark text-white py-16 relative overflow-hidden">        <!-- Abstract Decoration -->        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-chocolate opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>        <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-turquoise opacity-5 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">            <div class="flex flex-col md:flex-row justify-between items-center mb-12">                <div class="mb-8 md:mb-0 text-center md:text-left">                    <h3 class="font-serif text-4xl font-bold mb-2">AFM.</h3>                    <p class="text-brand-turquoise uppercase tracking-widest text-xs">All Fashion Matters</p>                </div>                                <div class="flex space-x-8">                    <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" aria-label="Instagram" class="group relative p-3 glass-icon rounded-full hover:bg-brand-turquoise transition-colors duration-300">                        <i data-lucide="instagram" class="w-6 h-6 text-white"></i>                    </a>                    <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" aria-label="Facebook" class="group relative p-3 glass-icon rounded-full hover:bg-brand-turquoise transition-colors duration-300">                        <i data-lucide="facebook" class="w-6 h-6 text-white"></i>                    </a>                    <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" aria-label="eBay Store" class="group relative p-3 glass-icon rounded-full hover:bg-brand-turquoise transition-colors duration-300">                        <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>                    </a>                </div>            </div>            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/60">                <p>&copy; 2025 AllFashionMatters. All rights reserved.</p>                <div class="flex space-x-6 mt-4 md:mt-0">                    <a href="#" class="hover:text-brand-turquoise transition-colors">Privacy</a>                    <a href="#" class="hover:text-brand-turquoise transition-colors">Terms</a>                    <a href="https://github.com" class="hover:text-brand-turquoise transition-colors">GitHub Pages</a>                </div>            </div>        </div>    </footer>    <!-- Scripts -->    <script type="module" src="data.js"></script>    <script type="module" src="script.js"></script></body></html>
+    <!-- Blog Stories Grid -->
+    <section id="blog" class="py-20 bg-brand-lightGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">From The Blog</span>
+                    <h2 class="font-serif text-4xl font-bold text-brand-brown mt-2">Latest Stories</h2>
+                </div>
+                <a href="blog/index.html" class="hidden md:flex items-center gap-2 text-brand-brown hover:text-brand-turquoise font-bold uppercase tracking-widest text-sm transition-colors">
+                    View All Stories <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://i.ebayimg.com/images/g/iz8AAOSw3Wxno7Yd/s-l1600.webp" alt="Supreme 2026" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-turquoise text-white text-xs font-bold uppercase tracking-widest px-3 py-1">Streetwear</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                            <span>Feb 20, 2026</span>
+                            <span>•</span>
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 5 min</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-turquoise transition-colors">Why Supreme Still Matters in 2026</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">As Supreme drops its SS26 collection, we explore why the iconic brand remains the gold standard...</p>
+                        <a href="blog/supreme-2026.html" class="inline-flex items-center text-brand-brown font-bold uppercase tracking-widest text-xs hover:text-brand-turquoise transition-colors">
+                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 opacity-75">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-200">
+                        <img src="https://r2.flowith.net/files/jpeg/JUN4E-ebay_nike_af1_product_showcase_index_4@1024x1024.jpeg" alt="Nike AF1" class="w-full h-full object-cover opacity-50">
+                        <span class="absolute top-4 left-4 bg-gray-400 text-white text-xs font-bold uppercase tracking-widest px-3 py-1">Coming Soon</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                            <span>Feb 22, 2026</span>
+                            <span>•</span>
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 6 min</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Nike Air Force 1 — The Eternal Classic</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Why the AF1 remains the most iconic sneaker of all time...</p>
+                        <span class="inline-flex items-center text-gray-400 font-bold uppercase tracking-widest text-xs">
+                            <i data-lucide="lock" class="w-4 h-4 mr-1"></i> Draft
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 opacity-75">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-200">
+                        <img src="https://i.ebayimg.com/images/g/3ZkAAOSwmVJnI7F2/s-l500.webp" alt="Vintage Watch" class="w-full h-full object-cover opacity-50">
+                        <span class="absolute top-4 left-4 bg-gray-400 text-white text-xs font-bold uppercase tracking-widest px-3 py-1">Coming Soon</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                            <span>Feb 27, 2026</span>
+                            <span>•</span>
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 7 min</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Vintage Watches — Investment Pieces</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Which vintage timepieces are worth investing in this year...</p>
+                        <span class="inline-flex items-center text-gray-400 font-bold uppercase tracking-widest text-xs">
+                            <i data-lucide="lock" class="w-4 h-4 mr-1"></i> Draft
+                        </span>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="text-center mt-10 md:hidden">
+                <a href="blog/index.html" class="inline-flex items-center gap-2 text-brand-brown font-bold uppercase tracking-widest text-sm hover:text-brand-turquoise transition-colors">
+                    View All Stories <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section id="reviews" class="py-20 bg-brand-brown text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">Customer Love</span>
+                <h2 class="font-serif text-4xl font-bold mt-2">What Buyers Say</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-white/90 leading-relaxed mb-4 text-sm">"Amazing seller! Item arrived exactly as described. Fast shipping, great packaging. Will definitely buy again."</p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brand-turquoise rounded-full flex items-center justify-center text-white font-bold text-sm">JD</div>
+                        <div>
+                            <p class="font-bold text-sm">John D.</p>
+                            <p class="text-white/60 text-xs">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-white/90 leading-relaxed mb-4 text-sm">"The Supreme hat is legit! Condition was perfect. Great communication throughout. Highly recommend!"</p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brand-chocolate rounded-full flex items-center justify-center text-white font-bold text-sm">SM</div>
+                        <div>
+                            <p class="font-bold text-sm">SneakerMike</p>
+                            <p class="text-white/60 text-xs">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-white/90 leading-relaxed mb-4 text-sm">"Best vintage watch I've purchased online. Seller was super helpful with questions. Will be back!"</p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brand-turquoise rounded-full flex items-center justify-center text-white font-bold text-sm">LW</div>
+                        <div>
+                            <p class="font-bold text-sm">LuxuryWatcher</p>
+                            <p class="text-white/60 text-xs">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="inline-flex items-center gap-2 text-white/80 hover:text-brand-turquoise text-sm font-bold uppercase tracking-widest transition-colors">
+                    Read All Reviews <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curated Edits -->
+    <section id="edits" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-turquoise font-bold uppercase tracking-widest text-sm">Handpicked</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-brown mt-2">Curated Edits</h2>
+                <p class="text-gray-500 mt-4">Latest drops from our eBay store</p>
+            </div>
+            <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"></div>
+            <div class="text-center mt-10">
+                <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-brown text-white font-bold uppercase tracking-widest hover:bg-brand-turquoise transition-colors rounded-sm">
+                    Visit Store <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-brand-black text-white">
+        <div class="max-w-2xl mx-auto px-4 text-center">
+            <i data-lucide="mail" class="w-10 h-10 text-brand-turquoise mx-auto mb-4"></i>
+            <h2 class="font-serif text-3xl font-bold mb-3">Stay in the Loop</h2>
+            <p class="text-white/60 mb-6">Get weekly fashion insights, trend forecasts, and exclusive deals delivered.</p>
+            <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                <input type="email" placeholder="Your email" required class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-brand-turquoise rounded-sm">
+                <button type="submit" class="px-6 py-3 bg-brand-turquoise text-white font-bold uppercase tracking-widest hover:bg-brand-darkTurquoise transition-colors rounded-sm">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <h3 class="font-serif text-2xl font-bold text-white mb-4">AFM<span class="text-brand-turquoise">.</span></h3>
+                    <p class="text-sm max-w-sm">Curated fashion since 2011. Streetwear culture, vintage finds, and timeless pieces.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-widest text-sm mb-4">Navigate</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#featured" class="hover:text-brand-turquoise transition-colors">Featured</a></li>
+                        <li><a href="#blog" class="hover:text-brand-turquoise transition-colors">Stories</a></li>
+                        <li><a href="#edits" class="hover:text-brand-turquoise transition-colors">Shop</a></li>
+                        <li><a href="#trending" class="hover:text-brand-turquoise transition-colors">Trending</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-widest text-sm mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/allfashionmatters_/" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://www.facebook.com/AllFashionMattersStore" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="https://x.com/ALLFSHNMATTERS" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="x" class="w-5 h-5"></i></a>
+                        <a href="https://www.ebay.com/usr/allfashionmatters" target="_blank" class="hover:text-brand-turquoise transition-colors"><i data-lucide="shopping-bag" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2026 AllFashionMatters. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-turquoise transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-brand-turquoise transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="data.js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+        function showPollResult() {
+            document.getElementById('poll-result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
