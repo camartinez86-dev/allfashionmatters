@@ -1,0 +1,18 @@
+{
+  "instagram": {
+    "primary": ["#Streetwear", "#FashionBlogger", "#LuxuryFashion", "#SneakerHead", "#Hypebeast", "#StreetStyle", "#FashionTrends", "#MensFashion"],
+    "secondary": ["#KicksofTheYear", "#Supremes", "#UrbanFashion", "#SneakerCulture", "#AFMfinds", "#NewYorkStyle", "#MensStyle", "#OOTD"],
+    "max": 30
+  },
+  "facebook": {
+    "primary": ["Streetwear Fashion", "Luxury Fashion", "Sneaker News", "Designer Spotlight", "Fashion Trends"],
+    "secondary": ["Urban Style", "Mens Fashion", "Street Culture", "Fashion Blogger"]
+  },
+  "twitter": {
+    "primary": ["#Streetwear", "#Fashion", "#Sneakers", "#Hypebeast", "#Luxury"],
+    "secondary": ["#MensFashion", "#Style", "#StreetStyle", "#AFMfinds"]
+  },
+  "pinterest": {
+    "keywords": ["streetwear fashion", "luxury sneakers", "designer spotlight", "mens fashion trends", "nike air force", "supreme drops"]
+  }
+}
