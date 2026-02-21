@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control | AFM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background: #0a0a0a; }
+        .glass { background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(12px); }
+        .log-entry { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .scrollbar::-webkit-scrollbar { width: 6px; }
+        .scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
+        .scrollbar::-webkit-scrollbar-thumb { background: #40E0D0; border-radius: 3px; }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-turquoise rounded-lg flex items-center justify-center">
+                    <i data-lucide="rocket" class="w-6 h-6 text-black"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl">Mission Control</h1>
+                    <p class="text-xs text-white/50">AllFashionMatters</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="live-indicator" class="flex items-center gap-2 text-xs text-brand-turquoise">
+                    <span class="w-2 h-2 bg-brand-turquoise rounded-full animate-pulse"></span>
+                    LIVE
+                </span>
+                <button onclick="clearAllData()" class="text-xs text-white/40 hover:text-red-400">Reset</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-12 px-4 max-w-7xl mx-auto">
+        <!-- Quick Actions -->
+        <section class="mb-8">
+            <div class="flex flex-wrap gap-3">
+                <button onclick="addLog('System', 'Dashboard opened', 'info')" class="px-4 py-2 bg-white/10 hover:bg-brand-turquoise hover:text-black rounded-lg text-sm transition flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Home
+                </button>
+                <button onclick="showSection('logs')" class="px-4 py-2 bg-white/10 hover:bg-brand-turquoise hover:text-black rounded-lg text-sm transition flex items-center gap-2">
+                    <i data-lucide="scroll" class="w-4 h-4"></i> Live Logs
+                </button>
+                <button onclick="showSection('tasks')" class="px-4 py-2 bg-white/10 hover:bg-brand-turquoise hover:text-black rounded-lg text-sm transition flex items-center gap-2">
+                    <i data-lucide="check-square" class="w-4 h-4"></i> Tasks
+                </button>
+                <button onclick="showSection('usage')" class="px-4 py-2 bg-white/10 hover:bg-brand-turquoise hover:text-black rounded-lg text-sm transition flex items-center gap-2">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4"></i> Usage
+                </button>
+                <button onclick="showSection('memory')" class="px-4 py-2 bg-white/10 hover:bg-brand-turquoise hover:text-black rounded-lg text-sm transition flex items-center gap-2">
+                    <i data-lucide="brain" class="w-4 h-4"></i> Memory
+                </button>
+            </div>
+        </section>
+
+        <!-- Live Logs (Default) -->
+        <section id="logs-section" class="mb-8">
+            <div class="glass rounded-xl border border-white/10 overflow-hidden">
+                <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center">
+                    <h2 class="font-bold text-lg flex items-center gap-2">
+                        <i data-lucide="activity" class="w-5 h-5 text-brand-turquoise"></i>
+                        Live Logs
+                    </h2>
+                    <span id="log-count" class="text-xs text-white/50">0 entries</span>
+                </div>
+                <div class="p-4">
+                    <div id="log-input" class="flex gap-3 mb-4">
+                        <input type="text" id="new-log" placeholder="Add a log entry..." 
+                            class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-turquoise"
+                            onkeypress="if(event.key==='Enter')addManualLog()">
+                        <select id="log-category" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm focus:outline-none">
+                            <option value="Task">Task</option>
+                            <option value="Website">Website</option>
+                            <option value="Business">Business</option>
+                            <option value="System">System</option>
+                        </select>
+                        <button onclick="addManualLog()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold hover:bg-brand-darkTurquoise">
+                            Add
+                        </button>
+                    </div>
+                    <div id="log-container" class="space-y-2 max-h-96 overflow-y-auto scrollbar">
+                        <div class="text-center text-white/30 py-8" id="empty-logs">
+                            No logs yet. Add one above!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks-section" class="mb-8 hidden">
+            <div class="glass rounded-xl border border-white/10">
+                <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center">
+                    <h2 class="font-bold text-lg flex items-center gap-2">
+                        <i data-lucide="check-square" class="w-5 h-5 text-brand-turquoise"></i>
+                        Tasks & Projects
+                    </h2>
+                    <button onclick="addTask()" class="text-brand-turquoise hover:text-white text-sm">+ Add Task</button>
+                </div>
+                <div class="p-4">
+                    <div id="task-input" class="flex gap-3 mb-4">
+                        <input type="text" id="new-task" placeholder="Add a new task..." 
+                            class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-turquoise"
+                            onkeypress="if(event.key==='Enter')addTask()">
+                        <button onclick="addTask()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Add</button>
+                    </div>
+                    <div id="task-list" class="space-y-2">
+                        <!-- Tasks render here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Stats -->
+        <section id="usage-section" class="mb-8 hidden">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="glass rounded-xl border border-white/10 p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
+                            <i data-lucide="message-square" class="w-5 h-5 text-brand-turquoise"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold" id="total-messages">0</p>
+                            <p class="text-xs text-white/50">Total Messages</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl border border-white/10 p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
+                            <i data-lucide="cpu" class="w-5 h-5 text-brand-turquoise"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold" id="total-tokens">0</p>
+                            <p class="text-xs text-white/50">Tokens Used</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl border border-white/10 p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
+                            <i data-lucide="dollar-sign" class="w-5 h-5 text-brand-turquoise"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold" id="total-cost">$0</p>
+                            <p class="text-xs text-white/50">Est. Cost</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 glass rounded-xl border border-white/10 p-4">
+                <h3 class="font-bold mb-3">Quick Log</h3>
+                <div class="flex gap-3">
+                    <input type="number" id="msg-count" placeholder="Messages" class="w-24 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <input type="number" id="token-count" placeholder="Tokens" class="w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <input type="number" id="cost-count" placeholder="Cost ($)" step="0.01" class="w-24 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                    <button onclick="addUsage()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Log</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memory Section -->
+        <section id="memory-section" class="mb-8 hidden">
+            <div class="glass rounded-xl border border-white/10">
+                <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center">
+                    <h2 class="font-bold text-lg flex items-center gap-2">
+                        <i data-lucide="brain" class="w-5 h-5 text-brand-turquoise"></i>
+                        Key Memories
+                    </h2>
+                    <button onclick="addMemory()" class="text-brand-turquoise hover:text-white text-sm">+ Add</button>
+                </div>
+                <div class="p-4">
+                    <div id="memory-input" class="flex gap-3 mb-4">
+                        <input type="text" id="new-memory" placeholder="Add a memory..." 
+                            class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-turquoise"
+                            onkeypress="if(event.key==='Enter')addMemory()">
+                        <button onclick="addMemory()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Save</button>
+                    </div>
+                    <div id="memory-list" class="space-y-2 max-h-64 overflow-y-auto scrollbar">
+                        <!-- Memories render here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Morning Report Summary -->
+        <section class="mb-8">
+            <div class="glass rounded-xl border border-white/10 p-6">
+                <h2 class="font-bold text-lg flex items-center gap-2 mb-4">
+                    <i data-lucide="sunrise" class="w-5 h-5 text-brand-turquoise"></i>
+                    Morning Report Summary
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" id="report-date" placeholder="Date (e.g., Feb 21)" 
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm mb-2"
+                            onkeypress="if(event.key==='Enter')saveReport()">
+                        <textarea id="report-summary" placeholder="Paste morning report summary here..." 
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm h-32 resize-none"
+                            onkeypress="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); saveReport(); }"></textarea>
+                        <button onclick="saveReport()" class="mt-2 px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Save Report</button>
+                    </div>
+                    <div id="latest-report" class="bg-white/5 rounded-lg p-4 h-48 overflow-y-auto scrollbar text-sm text-white/70">
+                        No report saved yet.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-white/30 text-sm py-8">
+            <p>Data stored in browser localStorage • No server required</p>
+            <p class="mt-1">Last updated: <span id="last-updated">-</span></p>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+// Initialize with sample data if empty
+        if (!localStorage.getItem('mc-logs')) {
+            const sampleLogs = [
+                { id: 1, time: 'Just now', category: 'System', message: 'Welcome to Mission Control!', type: 'info' },
+                { id: 2, time: 'Today', category: 'Website', message: 'Dark theme applied to homepage', type: 'success' },
+                { id: 3, time: 'Today', category: 'Website', message: 'Fixed designer archive links', type: 'success' },
+                { id: 4, time: 'Today', category: 'Website', message: 'Added Hot Drops section', type: 'success' },
+                { id: 5, time: 'Today', category: 'Business', message: 'eBay store products cataloged', type: 'info' }
+            ];
+            localStorage.setItem('mc-logs', JSON.stringify(sampleLogs));
+        }
+        
+        if (!localStorage.getItem('mc-tasks')) {
+            const sampleTasks = [
+                { id: 1, text: 'Fix remaining blog post images', done: false },
+                { id: 2, text: 'Verify all brand links are correct', done: false },
+                { id: 3, text: 'Add more products to Hot Drops', done: true }
+            ];
+            localStorage.setItem('mc-tasks', JSON.stringify(sampleTasks));
+        }
+        
+        if (!localStorage.getItem('mc-memories')) {
+            const sampleMemories = [
+                { id: 1, text: 'Brand images must be from official sources', date: 'Today' },
+                { id: 2, text: 'Link protocol: brand articles → official brand sites', date: 'Today' },
+                { id: 3, text: 'eBay links only for seller products', date: 'Today' }
+            ];
+            localStorage.setItem('mc-memories', JSON.stringify(sampleMemories));
+        }
+        
+        if (!localStorage.getItem('mc-usage')) {
+            const sampleUsage = { messages: 247, tokens: 15420, cost: 0.00 };
+            localStorage.setItem('mc-usage', JSON.stringify(sampleUsage));
+        }
+
+        // Colors for categories
+        const categoryColors = {
+            'Task': 'text-blue-400',
+            'Website': 'text-green-400',
+            'Business': 'text-yellow-400',
+            'System': 'text-purple-400',
+            'Info': 'text-white/60'
+        };
+
+        // Load data from localStorage
+        function loadData() {
+            const logs = JSON.parse(localStorage.getItem('mc-logs') || '[]');
+            const tasks = JSON.parse(localStorage.getItem('mc-tasks') || '[]');
+            const memories = JSON.parse(localStorage.getItem('mc-memories') || '[]');
+            const usage = JSON.parse(localStorage.getItem('mc-usage') || '{"messages":0,"tokens":0,"cost":0}');
+            const report = localStorage.getItem('mc-report') || '';
+            
+            renderLogs(logs);
+            renderTasks(tasks);
+            renderMemories(memories);
+            renderUsage(usage);
+            document.getElementById('latest-report').innerHTML = report || 'No report saved yet.';
+            document.getElementById('last-updated').innerText = new Date().toLocaleString();
+        }
+
+        // Add log entry
+        function addLog(category, message, type = 'info') {
+            const logs = JSON.parse(localStorage.getItem('mc-logs') || '[]');
+            const entry = {
+                id: Date.now(),
+                time: new Date().toLocaleTimeString(),
+                category: category,
+                message: message,
+                type: type
+            };
+            logs.unshift(entry);
+            if (logs.length > 100) logs.pop();
+            localStorage.setItem('mc-logs', JSON.stringify(logs));
+            renderLogs(logs);
+        }
+
+        function addManualLog() {
+            const input = document.getElementById('new-log');
+            const category = document.getElementById('log-category').value;
+            if (input.value.trim()) {
+                addLog(category, input.value.trim());
+                input.value = '';
+            }
+        }
+
+        // Render logs
+        function renderLogs(logs) {
+            const container = document.getElementById('log-container');
+            document.getElementById('log-count').innerText = `${logs.length} entries`;
+            
+            if (logs.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/30 py-8">No logs yet. Add one above!</div>';
+                return;
+            }
+            
+            container.innerHTML = logs.map(log => `
+                <div class="log-entry flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                    <span class="text-xs text-white/40 whitespace-nowrap">${log.time}</span>
+                    <span class="text-xs font-bold ${categoryColors[log.category] || 'text-white/60'}">${log.category}</span>
+                    <span class="text-sm text-white/80 flex-1">${log.message}</span>
+                </div>
+            `).join('');
+        }
+
+        // Tasks
+        function addTask() {
+            const input = document.getElementById('new-task');
+            if (input.value.trim()) {
+                const tasks = JSON.parse(localStorage.getItem('mc-tasks') || '[]');
+                tasks.unshift({ id: Date.now(), text: input.value.trim(), done: false });
+                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                input.value = '';
+                renderTasks(tasks);
+                addLog('Task', `Added: ${input.value.trim()}`);
+            }
+        }
+
+        function toggleTask(id) {
+            const tasks = JSON.parse(localStorage.getItem('mc-tasks') || '[]');
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.done = !task.done;
+                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                renderTasks(tasks);
+            }
+        }
+
+        function deleteTask(id) {
+            let tasks = JSON.parse(localStorage.getItem('mc-tasks') || '[]');
+            tasks = tasks.filter(t => t.id !== id);
+            localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+            renderTasks(tasks);
+        }
+
+        function renderTasks(tasks) {
+            const container = document.getElementById('task-list');
+            if (tasks.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/30 py-4">No tasks yet</div>';
+                return;
+            }
+            container.innerHTML = tasks.map(task => `
+                <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg ${task.done ? 'opacity-50' : ''}">
+                    <button onclick="toggleTask(${task.id})" class="text-brand-turquoise">
+                        <i data-lucide="${task.done ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
+                    </button>
+                    <span class="flex-1 ${task.done ? 'line-through text-white/40' : ''}">${task.text}</span>
+                    <button onclick="deleteTask(${task.id})" class="text-white/30 hover:text-red-400">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+// Initialize with sample data if empty
+        if (!localStorage.getItem('mc-logs')) {
+            const sampleLogs = [
+                { id: 1, time: 'Just now', category: 'System', message: 'Welcome to Mission Control!', type: 'info' },
+                { id: 2, time: 'Today', category: 'Website', message: 'Dark theme applied to homepage', type: 'success' },
+                { id: 3, time: 'Today', category: 'Website', message: 'Fixed designer archive links', type: 'success' },
+                { id: 4, time: 'Today', category: 'Website', message: 'Added Hot Drops section', type: 'success' },
+                { id: 5, time: 'Today', category: 'Business', message: 'eBay store products cataloged', type: 'info' }
+            ];
+            localStorage.setItem('mc-logs', JSON.stringify(sampleLogs));
+        }
+        
+        if (!localStorage.getItem('mc-tasks')) {
+            const sampleTasks = [
+                { id: 1, text: 'Fix remaining blog post images', done: false },
+                { id: 2, text: 'Verify all brand links are correct', done: false },
+                { id: 3, text: 'Add more products to Hot Drops', done: true }
+            ];
+            localStorage.setItem('mc-tasks', JSON.stringify(sampleTasks));
+        }
+        
+        if (!localStorage.getItem('mc-memories')) {
+            const sampleMemories = [
+                { id: 1, text: 'Brand images must be from official sources', date: 'Today' },
+                { id: 2, text: 'Link protocol: brand articles → official brand sites', date: 'Today' },
+                { id: 3, text: 'eBay links only for seller products', date: 'Today' }
+            ];
+            localStorage.setItem('mc-memories', JSON.stringify(sampleMemories));
+        }
+        
+        if (!localStorage.getItem('mc-usage')) {
+            const sampleUsage = { messages: 247, tokens: 15420, cost: 0.00 };
+            localStorage.setItem('mc-usage', JSON.stringify(sampleUsage));
+        }
+        }
+
+        // Memories
+        function addMemory() {
+            const input = document.getElementById('new-memory');
+            if (input.value.trim()) {
+                const memories = JSON.parse(localStorage.getItem('mc-memories') || '[]');
+                memories.unshift({ id: Date.now(), text: input.value.trim(), date: new Date().toLocaleDateString() });
+                localStorage.setItem('mc-memories', JSON.stringify(memories));
+                input.value = '';
+                renderMemories(memories);
+            }
+        }
+
+        function renderMemories(memories) {
+            const container = document.getElementById('memory-list');
+            if (memories.length === 0) {
+                container.innerHTML = '<div class="text-center text-white/30 py-4">No memories yet</div>';
+                return;
+            }
+            container.innerHTML = memories.map(m => `
+                <div class="p-3 bg-white/5 rounded-lg flex justify-between items-start">
+                    <div>
+                        <span class="text-sm">${m.text}</span>
+                        <span class="text-xs text-white/30 block mt-1">${m.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Usage
+        function addUsage() {
+            const msg = parseInt(document.getElementById('msg-count').value) || 0;
+            const tok = parseInt(document.getElementById('token-count').value) || 0;
+            const cost = parseFloat(document.getElementById('cost-count').value) || 0;
+            
+            const usage = JSON.parse(localStorage.getItem('mc-usage') || '{"messages":0,"tokens":0,"cost":0}');
+            usage.messages += msg;
+            usage.tokens += tok;
+            usage.cost += cost;
+            localStorage.setItem('mc-usage', JSON.stringify(usage));
+            
+            document.getElementById('msg-count').value = '';
+            document.getElementById('token-count').value = '';
+            document.getElementById('cost-count').value = '';
+            
+            renderUsage(usage);
+            addLog('System', `Usage logged: ${msg} msgs, ${tok} tokens, $${cost}`);
+        }
+
+        function renderUsage(usage) {
+            document.getElementById('total-messages').innerText = usage.messages.toLocaleString();
+            document.getElementById('total-tokens').innerText = usage.tokens.toLocaleString();
+            document.getElementById('total-cost').innerText = '$' + usage.cost.toFixed(2);
+        }
+
+        // Report
+        function saveReport() {
+            const date = document.getElementById('report-date').value;
+            const summary = document.getElementById('report-summary').value;
+            if (date && summary) {
+                const html = `<strong>${date}</strong><br><br>${summary.replace(/\n/g, '<br>')}`;
+                localStorage.setItem('mc-report', html);
+                document.getElementById('latest-report').innerHTML = html;
+                addLog('System', `Morning report saved for ${date}`);
+            }
+        }
+
+        // Navigation
+        function showSection(section) {
+            ['logs', 'tasks', 'usage', 'memory'].forEach(s => {
+                document.getElementById(s + '-section').classList.add('hidden');
+            });
+            document.getElementById(section + '-section').classList.remove('hidden');
+        }
+
+        // Reset
+        function clearAllData() {
+            if (confirm('Clear all data? This cannot be undone.')) {
+                localStorage.clear();
+                loadData();
+                addLog('System', 'All data cleared');
+            }
+        }
+
+        // Initialize
+        loadData();
+        addLog('System', 'Dashboard loaded', 'info');
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

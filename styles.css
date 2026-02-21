@@ -225,3 +225,191 @@ input::placeholder, textarea::placeholder {
 #contact {
     background-color: #1A1A1A;
 }
+
+/* Designer Legacy Blocks */
+.designer-legacy {
+    margin-top: 4rem;
+    padding: 3rem;
+    border-radius: 32px;
+    background: radial-gradient(circle at top, rgba(64, 224, 208, 0.15), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(64, 224, 208, 0.2);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.designer-legacy-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+}
+
+.designer-legacy-tag {
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--color-turquoise);
+}
+
+.designer-legacy-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .designer-legacy-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.designer-legacy-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.designer-legacy-card img {
+    border-radius: 20px;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.designer-legacy-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--color-turquoise);
+}
+
+.designer-legacy-context {
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.9;
+}
+
+.designer-legacy-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.designer-legacy-timeline li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.designer-legacy-timeline span {
+    font-weight: 600;
+    color: var(--color-turquoise);
+    min-width: 64px;
+}
+
+.designer-legacy-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.designer-legacy-gallery figure {
+    margin: 0;
+    text-align: left;
+}
+
+.designer-legacy-gallery figcaption {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.5rem;
+}
+
+.designer-legacy-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.designer-legacy-cta a {
+    flex: 1 1 200px;
+    text-align: center;
+    border-radius: 999px;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.designer-legacy-cta a:first-child {
+    background: var(--color-turquoise);
+    color: #0b0b0b;
+    border-color: transparent;
+}
+
+.designer-legacy-cta a:last-child {
+    color: var(--color-turquoise);
+}
+
+/* Exit Intent Modal */
+.exit-intent-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.exit-intent-modal.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.exit-intent-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.exit-intent-card {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    width: 90%;
+    background: #0f0f0f;
+    border: 1px solid rgba(64, 224, 208, 0.2);
+    border-radius: 32px;
+    padding: 2.5rem;
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+}
+
+.exit-intent-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.exit-intent-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+body.exit-intent-open {
+    overflow: hidden;
+}

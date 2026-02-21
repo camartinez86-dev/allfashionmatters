@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderEbaySpotlight();
     renderShopFeed();
     initContactForm();
-    initNewsletterForm();
+    initNewsletterForms();
     initStylePoll();
+    initExitIntentPopup();
     lucide.createIcons();
 });
 
@@ -300,26 +301,53 @@ function renderDesignerArchive() {
     }
 }
 
-function initNewsletterForm() {
-    const form = document.getElementById('inline-newsletter');
-    const success = document.getElementById('newsletter-success');
-    if (!form || !success) return;
+function initNewsletterForms() {
+    const forms = document.querySelectorAll('[data-newsletter-form]');
+    if (!forms.length) return;
 
-    form.addEventListener('submit', event => {
-        event.preventDefault();
-        const emailInput = form.querySelector('input[type="email"]');
-        if (!emailInput || !emailInput.value.trim()) {
-            success.textContent = 'Drop an email and we'll send the next drop.';
-            success.classList.remove('hidden');
-            success.classList.add('text-red-400');
-            return;
-        }
-        success.textContent = 'Welcome aboard! New drops hit every week.';
-        success.classList.remove('hidden', 'text-red-400');
-        success.classList.add('text-brand-turquoise');
-        emailInput.value = '';
-        setTimeout(() => success.classList.add('hidden'), 4000);
+    forms.forEach(form => {
+        const successId = form.getAttribute('data-success-target');
+        const successEl = successId ? document.getElementById(successId) : null;
+        const sourceLabel = form.getAttribute('data-newsletter-source') || 'AFM List';
+        const successCopy = form.getAttribute('data-success-message') || `Welcome to the ${sourceLabel} fam.`;
+        const errorCopy = form.getAttribute('data-error-message') || 'Drop a valid email to join the list.';
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const emailInput = form.querySelector('input[type="email"]');
+            const email = emailInput?.value.trim();
+            if (!email) {
+                handleNewsletterFeedback(successEl, errorCopy, true);
+                emailInput?.focus();
+                return;
+            }
+
+            handleNewsletterFeedback(successEl, successCopy, false);
+            if (emailInput) emailInput.value = '';
+
+            if (window?.gtag) {
+                window.gtag('event', 'newsletter_signup', {
+                    placement: sourceLabel,
+                });
+            }
+        });
     });
+}
+
+function handleNewsletterFeedback(target, message, isError) {
+    if (!target) {
+        console[isError ? 'warn' : 'log'](message);
+        return;
+    }
+
+    target.textContent = message;
+    target.classList.remove('hidden');
+    target.classList.toggle('text-red-400', isError);
+    target.classList.toggle('text-brand-turquoise', !isError);
+
+    if (!isError) {
+        setTimeout(() => target.classList.add('hidden'), 4000);
+    }
 }
 
 function initStylePoll() {
@@ -428,4 +456,48 @@ function validateField(input) {
     }
 
     return valid;
+}
+
+function initExitIntentPopup() {
+    const modal = document.getElementById('exit-intent-modal');
+    if (!modal) return;
+
+    const overlay = modal.querySelector('[data-exit-overlay]');
+    const dismissButtons = modal.querySelectorAll('[data-exit-close]');
+    const storageKey = 'afmExitIntentSeen';
+    const lastSeen = Number(localStorage.getItem(storageKey));
+    const cooldownMs = 24 * 60 * 60 * 1000;
+
+    if (lastSeen && Date.now() - lastSeen < cooldownMs) {
+        return;
+    }
+
+    let hasShown = false;
+
+    const showModal = () => {
+        if (hasShown) return;
+        modal.classList.add('is-visible');
+        document.body.classList.add('exit-intent-open');
+        hasShown = true;
+    };
+
+    const hideModal = () => {
+        modal.classList.remove('is-visible');
+        document.body.classList.remove('exit-intent-open');
+        localStorage.setItem(storageKey, String(Date.now()));
+    };
+
+    dismissButtons.forEach(btn => btn.addEventListener('click', hideModal));
+    overlay?.addEventListener('click', hideModal);
+
+    const desktopMedia = window.matchMedia('(pointer: fine)');
+    if (desktopMedia.matches) {
+        document.addEventListener('mouseleave', event => {
+            if (event.clientY <= 0) {
+                showModal();
+            }
+        });
+    } else {
+        setTimeout(showModal, 20000);
+    }
 }
