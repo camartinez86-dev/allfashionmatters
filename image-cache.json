@@ -1,0 +1,19 @@
+{
+  "sources": [
+    "GQ",
+    "Vogue",
+    "Hypebeast"
+  ],
+  "patterns": {
+    "cargo_pants": "media.gq.com",
+    "gorpcore": "media.gq-magazine.co.uk",
+    "trends": "assets.vogue.com",
+    "virgil_abloh": "image-cdn.hypb.st"
+  },
+  "images": {
+    "black-cargo-pants-2026.html": "https://media.gq.com/photos/68bf22069c0be9fea11d25ce/3:4/w_748%2Cc_limit/cargo1.jpg",
+    "gorpcore-sneakers-2026.html": "https://media.gq-magazine.co.uk/photos/6481e30e406976fe334ee53a/16:9/w_2240,c_limit/Screenshot%202023-06-08%20at%2015.17.34.png",
+    "spring-summer-2026-fashion-trends-guide.html": "https://assets.vogue.com/photos/694078b2c193ff476f65e157/16:9/w_3552,h_1998,c_limit/final_rtf trends_mainholding.jpg",
+    "virgil-abloh-archive-air-jordan-alaska-2026.html": "https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2024%2F10%2F10%2Foff-white-air-jordan-1-high-og-aa3834-100-release-01.jpg?q=75&w=800&cbr=1&fit=max"
+  }
+}
