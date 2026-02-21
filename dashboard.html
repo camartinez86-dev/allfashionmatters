@@ -6,305 +6,235 @@
     <title>Mission Control | AFM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #0a0a0a; }
-        .glass { background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(12px); }
-        .log-entry { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .scrollbar::-webkit-scrollbar { width: 6px; }
-        .scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
-        .scrollbar::-webkit-scrollbar-thumb { background: #40E0D0; border-radius: 3px; }
-        .calendar-day:hover { background: rgba(64, 224, 208, 0.1); }
-        .calendar-day.has-event { position: relative; }
-        .calendar-day.has-event::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: #40E0D0; border-radius: 50%; }
-        .event-pill { font-size: 10px; padding: 2px 6px; border-radius: 4px; }
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #0f0f0f; }
+        .sidebar { background: #1a1a1a; }
+        .sidebar-item:hover { background: #2a2a2a; }
+        .sidebar-item.active { background: #2a2a2a; border-left: 3px solid #ec4899; }
+        .calendar-day:hover { background: #1f1f1f; }
+        .calendar-day.today { background: #1f1f1f; border: 1px solid #3b3b3b; }
+        .tag-social { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
+        .tag-task { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .tag-default { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+        .schedule-item { border-left: 2px solid #3b3b3b; }
+        .schedule-item:last-child { border-left-color: transparent; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #3b3b3b; border-radius: 3px; }
     </style>
 </head>
-<body class="text-white min-h-screen">
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-brand-turquoise rounded-lg flex items-center justify-center">
-                    <i data-lucide="rocket" class="w-6 h-6 text-black"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-xl">Mission Control</h1>
-                    <p class="text-xs text-white/50">AllFashionMatters</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <span id="live-indicator" class="flex items-center gap-2 text-xs text-brand-turquoise">
-                    <span class="w-2 h-2 bg-brand-turquoise rounded-full animate-pulse"></span>
-                    LIVE
-                </span>
-                <button onclick="clearAllData()" class="text-xs text-white/40 hover:text-red-400">Reset</button>
-            </div>
+<body class="text-white h-screen flex overflow-hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 flex-shrink-0 border-r border-white/5 p-4 flex flex-col">
+        <div class="mb-8">
+            <h1 class="text-xl font-bold">Mission Control</h1>
+            <p class="text-xs text-gray-500">AllFashionMatters</p>
         </div>
-    </header>
-
-    <main class="pt-24 pb-12 px-4 max-w-7xl mx-auto">
-        <!-- Navigation Tabs -->
-        <div class="flex flex-wrap gap-2 mb-6">
-            <button onclick="showTab('dashboard')" id="tab-dashboard" class="tab-btn px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Dashboard</button>
-            <button onclick="showTab('calendar')" id="tab-calendar" class="tab-btn px-4 py-2 bg-white/10 text-white/70 rounded-lg text-sm hover:bg-white/20">Calendar</button>
-            <button onclick="showTab('tasks')" id="tab-tasks" class="tab-btn px-4 py-2 bg-white/10 text-white/70 rounded-lg text-sm hover:bg-white/20">Tasks</button>
-            <button onclick="showTab('logs')" id="tab-logs" class="tab-btn px-4 py-2 bg-white/10 text-white/70 rounded-lg text-sm hover:bg-white/20">Logs</button>
-            <button onclick="showTab('analytics')" id="tab-analytics" class="tab-btn px-4 py-2 bg-white/10 text-white/70 rounded-lg text-sm hover:bg-white/20">Analytics</button>
+        
+        <nav class="flex-1 space-y-1">
+            <button onclick="showView('dashboard')" id="nav-dashboard" class="sidebar-item active w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                DASHBOARD
+            </button>
+            <button onclick="showView('calendar')" id="nav-calendar" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="calendar-days" class="w-4 h-4"></i>
+                CALENDAR
+            </button>
+            <button onclick="showView('tasks')" id="nav-tasks" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="check-square" class="w-4 h-4"></i>
+                TASKS
+            </button>
+            <button onclick="showView('notes')" id="nav-notes" class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-3 text-gray-400">
+                <i data-lucide="sticky-note" class="w-4 h-4"></i>
+                NOTES
+            </button>
+        </nav>
+        
+        <div class="mt-auto pt-4 border-t border-white/5">
+            <p class="text-xs text-gray-500">Last updated: <span id="last-updated">Just now</span></p>
         </div>
+    </aside>
 
-        <!-- DASHBOARD TAB -->
-        <div id="view-dashboard" class="tab-view">
-            <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
-                            <i data-lucide="calendar" class="w-5 h-5 text-brand-turquoise"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold" id="upcoming-events-count">0</p>
-                            <p class="text-xs text-white/50">Upcoming Events</p>
-                        </div>
-                    </div>
+    <!-- Main Content -->
+    <main class="flex-1 overflow-auto p-8">
+        <!-- DASHBOARD VIEW -->
+        <div id="view-dashboard" class="view">
+            <!-- Header -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold">Dashboard</h2>
+                <p class="text-gray-500 text-sm mt-1">Welcome back! Here's your overview.</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Total Tasks</p>
+                    <p class="text-3xl font-semibold mt-2" id="total-tasks">0</p>
                 </div>
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
-                            <i data-lucide="check-square" class="w-5 h-5 text-brand-turquoise"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold" id="pending-tasks-count">0</p>
-                            <p class="text-xs text-white/50">Pending Tasks</p>
-                        </div>
-                    </div>
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Completed</p>
+                    <p class="text-3xl font-semibold mt-2 text-green-400" id="completed-tasks">0</p>
                 </div>
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-brand-turquoise/20 rounded-lg flex items-center justify-center">
-                            <i data-lucide="trending-up" class="w-5 h-5 text-brand-turquoise"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold" id="completed-today">0</p>
-                            <p class="text-xs text-white/50">Completed Today</p>
-                        </div>
-                    </div>
+                <div class="bg-white/5 rounded-xl p-5">
+                    <p class="text-gray-400 text-sm">Upcoming Events</p>
+                    <p class="text-3xl font-semibold mt-2 text-pink-400" id="upcoming-events">0</p>
                 </div>
             </div>
-
-            <!-- Upcoming Events Preview -->
-            <div class="glass rounded-xl border border-white/10 p-6 mb-8">
-                <h2 class="font-bold text-lg mb-4 flex items-center gap-2">
-                    <i data-lucide="calendar" class="w-5 h-5 text-brand-turquoise"></i>
-                    Upcoming Events
-                </h2>
-                <div id="upcoming-events-list" class="space-y-2">
-                    <p class="text-white/50 text-sm">No upcoming events</p>
+            
+            <!-- Schedule Section -->
+            <div class="bg-white/5 rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Schedule</h3>
+                <div id="schedule-list" class="space-y-0">
+                    <!-- Events will be rendered here -->
                 </div>
             </div>
-
-            <!-- Quick Add Event -->
-            <div class="glass rounded-xl border border-white/10 p-6">
-                <h2 class="font-bold text-lg mb-4">Quick Add Event</h2>
-                <div class="flex flex-col md:flex-row gap-3">
-                    <input type="text" id="quick-event-title" placeholder="Event title" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                    <input type="datetime-local" id="quick-event-date" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                    <button onclick="addQuickEvent()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Add Event</button>
-                </div>
+            
+            <!-- Quick Add -->
+            <div class="mt-6 flex gap-3">
+                <input type="text" id="quick-add-input" placeholder="Add a task..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')quickAdd()">
+                <select id="quick-add-type" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
+                    <option value="task">Task</option>
+                    <option value="social">Social</option>
+                    <option value="email">Email</option>
+                </select>
+                <input type="date" id="quick-add-date" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
+                <button onclick="quickAdd()" class="px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Add</button>
             </div>
         </div>
 
-        <!-- CALENDAR TAB -->
-        <div id="view-calendar" class="tab-view hidden">
-            <div class="glass rounded-xl border border-white/10 p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <button onclick="changeMonth(-1)" class="p-2 hover:bg-white/10 rounded-lg"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                    <h2 id="calendar-month" class="font-bold text-xl">February 2026</h2>
-                    <button onclick="changeMonth(1)" class="p-2 hover:bg-white/10 rounded-lg"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+        <!-- CALENDAR VIEW -->
+        <div id="view-calendar" class="view hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <button onclick="changeMonth(-1)" class="p-2 hover:bg-white/5 rounded-lg"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                    <h2 id="calendar-title" class="text-xl font-semibold">February 2026</h2>
+                    <button onclick="changeMonth(1)" class="p-2 hover:bg-white/5 rounded-lg"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
                 </div>
-                <div class="grid grid-cols-7 gap-1 mb-2">
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Sun</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Mon</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Tue</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Wed</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Thu</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Fri</div>
-                    <div class="text-center text-xs text-white/50 font-bold py-2">Sat</div>
-                </div>
-                <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+                <button onclick="goToToday()" class="text-sm text-gray-400 hover:text-white">Today</button>
             </div>
-
-            <!-- Add Event Form -->
-            <div class="glass rounded-xl border border-white/10 p-6 mt-6">
-                <h2 class="font-bold text-lg mb-4">Add New Event</h2>
-                <div class="grid md:grid-cols-4 gap-3">
-                    <input type="text" id="event-title" placeholder="Event title" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                    <input type="date" id="event-date" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                    <input type="time" id="event-time" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                    <button onclick="addEvent()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Add Event</button>
-                </div>
-                <div class="mt-4">
-                    <label class="flex items-center gap-2 text-sm">
-                        <input type="checkbox" id="event-reminder" class="rounded">
-                        <span>Set reminder (notify when event is due)</span>
-                    </label>
-                </div>
+            
+            <!-- Calendar Grid -->
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="text-center text-xs text-gray-500 py-2">Sun</div>
+                <div class="text-center text-xs text-gray-500 py-2">Mon</div>
+                <div class="text-center text-xs text-gray-500 py-2">Tue</div>
+                <div class="text-center text-xs text-gray-500 py-2">Wed</div>
+                <div class="text-center text-xs text-gray-500 py-2">Thu</div>
+                <div class="text-center text-xs text-gray-500 py-2">Fri</div>
+                <div class="text-center text-xs text-gray-500 py-2">Sat</div>
             </div>
+            <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
         </div>
 
-        <!-- TASKS TAB -->
-        <div id="view-tasks" class="tab-view hidden">
-            <div class="glass rounded-xl border border-white/10 p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="font-bold text-lg">Tasks</h2>
-                    <button onclick="addTask()" class="px-3 py-1 bg-brand-turquoise text-black rounded text-sm font-bold">+ Add Task</button>
-                </div>
-                <div class="flex gap-3 mb-4">
-                    <input type="text" id="new-task" placeholder="Add a new task..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')addTask()">
-                    <select id="task-date" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm">
-                        <option value="">No date</option>
-                    </select>
-                </div>
-                <div id="task-list" class="space-y-2 max-h-96 overflow-y-auto scrollbar">
-                </div>
-            </div>
+        <!-- TASKS VIEW -->
+        <div id="view-tasks" class="view hidden">
+            <h2 class="text-2xl font-semibold mb-6">Tasks</h2>
+            <div id="tasks-list" class="space-y-2"></div>
         </div>
 
-        <!-- LOGS TAB -->
-        <div id="view-logs" class="tab-view hidden">
-            <div class="glass rounded-xl border border-white/10 p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="font-bold text-lg">Live Logs</h2>
-                    <span id="log-count" class="text-xs text-white/50">0 entries</span>
-                </div>
-                <div class="flex gap-3 mb-4">
-                    <input type="text" id="new-log" placeholder="Add a log entry..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm" onkeypress="if(event.key==='Enter')addManualLog()">
-                    <select id="log-category" class="bg-white/5 border border-white/10 rounded-lg px-3 text-sm">
-                        <option value="Task">Task</option>
-                        <option value="Website">Website</option>
-                        <option value="Business">Business</option>
-                        <option value="System">System</option>
-                    </select>
-                    <button onclick="addManualLog()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Add</button>
-                </div>
-                <div id="log-container" class="space-y-2 max-h-96 overflow-y-auto scrollbar">
-                </div>
-            </div>
+        <!-- NOTES VIEW -->
+        <div id="view-notes" class="view hidden">
+            <h2 class="text-2xl font-semibold mb-6">Notes</h2>
+            <textarea id="notes-area" class="w-full h-96 bg-white/5 border border-white/10 rounded-xl p-4 text-sm resize-none" placeholder="Write your notes here..."></textarea>
+            <button onclick="saveNotes()" class="mt-4 px-4 py-2 bg-pink-500 text-white rounded-lg text-sm font-medium hover:bg-pink-600">Save Notes</button>
         </div>
-
-        <!-- ANALYTICS TAB -->
-        <div id="view-analytics" class="tab-view hidden">
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <h3 class="font-bold mb-3">Messages</h3>
-                    <p class="text-3xl font-bold text-brand-turquoise" id="total-messages">0</p>
-                </div>
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <h3 class="font-bold mb-3">Tokens</h3>
-                    <p class="text-3xl font-bold text-brand-turquoise" id="total-tokens">0</p>
-                </div>
-                <div class="glass rounded-xl border border-white/10 p-6">
-                    <h3 class="font-bold mb-3">Est. Cost</h3>
-                    <p class="text-3xl font-bold text-brand-turquoise" id="total-cost">$0</p>
-                </div>
-            </div>
-            <div class="glass rounded-xl border border-white/10 p-6 mt-6">
-                <h3 class="font-bold mb-3">Log Usage</h3>
-                <div class="flex gap-3">
-                    <input type="number" id="msg-count" placeholder="Messages" class="w-24 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
-                    <input type="number" id="token-count" placeholder="Tokens" class="w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
-                    <input type="number" id="cost-count" placeholder="Cost ($)" step="0.01" class="w-24 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm">
-                    <button onclick="addUsage()" class="px-4 py-2 bg-brand-turquoise text-black rounded-lg text-sm font-bold">Log</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="text-center text-white/30 text-sm py-8">
-            <p>Data stored in browser localStorage • No server required</p>
-            <p class="mt-1">Last updated: <span id="last-updated">-</span></p>
-        </footer>
     </main>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        let currentDate = new Date();
-        let events = JSON.parse(localStorage.getItem('mc-events') || '[]');
-        let tasks = JSON.parse(localStorage.getItem('mc-tasks') || '[]');
-        let logs = JSON.parse(localStorage.getItem('mc-logs') || '[]');
-        let usage = JSON.parse(localStorage.getItem('mc-usage') || '{"messages":0,"tokens":0,"cost":0}');
-
-        // Initialize with sample data if empty
+        // Data
+        let events = JSON.parse(localStorage.getItem('mc-events')) || [];
+        let tasks = JSON.parse(localStorage.getItem('mc-tasks')) || [];
+        let notes = localStorage.getItem('mc-notes') || '';
+        
+        // Initialize with sample data
         if (events.length === 0) {
             events = [
-                { id: 1, title: 'Social Media Post', date: '2026-02-21', time: '14:00', reminder: true },
-                { id: 2, title: 'Check Analytics', date: '2026-02-21', time: '19:00', reminder: true }
+                { id: 1, title: 'Post to socials', date: '2026-02-20', type: 'social' },
+                { id: 2, title: 'Finish blog post', date: '2026-02-21', type: 'task' },
+                { id: 3, title: 'Email', date: '2026-02-22', type: 'email' },
+                { id: 4, title: 'Post to socials', date: '2026-02-24', type: 'social' },
+                { id: 5, title: 'Post to socials', date: '2026-02-25', type: 'social' },
+                { id: 6, title: 'Finish blog post', date: '2026-02-26', type: 'task' },
+                { id: 7, title: 'Post to socials', date: '2026-02-28', type: 'social' }
             ];
             localStorage.setItem('mc-events', JSON.stringify(events));
         }
+        
         if (tasks.length === 0) {
             tasks = [
-                { id: 1, text: 'Post to Instagram', date: '2026-02-21', done: false },
-                { id: 2, text: 'Check eBay sales', date: '2026-02-22', done: false }
+                { id: 1, text: 'Post to Instagram', done: false },
+                { id: 2, text: 'Check analytics', done: false },
+                { id: 3, text: 'Write blog post', done: true }
             ];
             localStorage.setItem('mc-tasks', JSON.stringify(tasks));
         }
-        if (logs.length === 0) {
-            logs = [
-                { id: 1, time: 'Just now', category: 'System', message: 'Welcome to Mission Control!', type: 'info' }
-            ];
-            localStorage.setItem('mc-logs', JSON.stringify(logs));
-        }
+        
+        document.getElementById('notes-area').value = notes;
 
-        // Tab navigation
-        function showTab(tab) {
-            document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('bg-brand-turquoise', 'text-black');
-                b.classList.add('bg-white/10', 'text-white/70');
+        let currentDate = new Date(2026, 1, 1); // February 2026
+
+        // Navigation
+        function showView(view) {
+            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+            document.getElementById('view-' + view).classList.remove('hidden');
+            
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-gray-400');
             });
-            document.getElementById('view-' + tab).classList.remove('hidden');
-            document.getElementById('tab-' + tab).classList.add('bg-brand-tucquoise', 'text-black');
-            document.getElementById('tab-' + tab).classList.remove('bg-white/10', 'text-white/70');
+            document.getElementById('nav-' + view).classList.add('active');
+            document.getElementById('nav-' + view).classList.remove('text-gray-400');
+            
             renderAll();
         }
 
-        // Calendar functions
+        // Calendar
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
-            const monthLabel = document.getElementById('calendar-month');
+            const title = document.getElementById('calendar-title');
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
             
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            monthLabel.textContent = `${months[month]} ${year}`;
+            title.textContent = `${months[month]} ${year}`;
             
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
             
             let html = '';
             
-            // Empty cells for days before first of month
+            // Empty cells
             for (let i = 0; i < firstDay; i++) {
-                html += '<div class="h-20 p-1"></div>';
+                html += '<div class="h-24"></div>';
             }
             
-            // Days of month
-            const today = new Date();
+            // Days
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dayEvents = events.filter(e => e.date === dateStr);
                 const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
                 
-                html += `<div class="calendar-day h-20 p-1 rounded-lg ${isToday ? 'bg-brand-turquoise/20 border border-brand-turquoise' : ''} ${dayEvents.length > 0 ? 'has-event' : ''}" onclick="showEventsForDay('${dateStr}')">
-                    <div class="text-sm font-bold ${isToday ? 'text-brand-turquoise' : ''}">${day}</div>
-                    ${dayEvents.slice(0, 2).map(e => `<div class="event-pill bg-brand-turquoise/20 text-brand-turquoise truncate text-xs">${e.title}</div>`).join('')}
-                    ${dayEvents.length > 2 ? `<div class="text-xs text-white/50">+${dayEvents.length - 2} more</div>` : ''}
+                html += `<div class="calendar-day h-24 p-2 rounded-lg cursor-pointer ${isToday ? 'today' : ''}" onclick="addEventOnDate('${dateStr}')">
+                    <div class="text-sm font-medium ${isToday ? 'text-pink-400' : ''}">${day}</div>
+                    <div class="mt-1 space-y-1">
+                        ${dayEvents.slice(0, 2).map(e => `<div class="text-xs px-1.5 py-0.5 rounded ${getTypeClass(e.type)} truncate">${e.title}</div>`).join('')}
+                        ${dayEvents.length > 2 ? `<div class="text-xs text-gray-500">+${dayEvents.length - 2} more</div>` : ''}
+                    </div>
                 </div>`;
             }
             
             grid.innerHTML = html;
+        }
+
+        function getTypeClass(type) {
+            if (type === 'social') return 'tag-social';
+            if (type === 'task') return 'tag-task';
+            return 'tag-default';
         }
 
         function changeMonth(delta) {
@@ -312,48 +242,85 @@
             renderCalendar();
         }
 
-        function showEventsForDay(dateStr) {
-            const dayEvents = events.filter(e => e.date === dateStr);
-            alert(dayEvents.length > 0 ? `Events on ${dateStr}:\n${dayEvents.map(e => `- ${e.title} at ${e.time}`).join('\n')}` : `No events on ${dateStr}`);
+        function goToToday() {
+            currentDate = new Date();
+            renderCalendar();
         }
 
-        // Event functions
-        function addEvent() {
-            const title = document.getElementById('event-title').value;
-            const date = document.getElementById('event-date').value;
-            const time = document.getElementById('event-time').value;
-            const reminder = document.getElementById('event-reminder').checked;
+        // Schedule
+        function renderSchedule() {
+            const list = document.getElementById('schedule-list');
+            const sortedEvents = [...events].sort((a, b) => a.date.localeCompare(b.date));
+            const upcoming = sortedEvents.filter(e => e.date >= new Date().toISOString().split('T')[0]).slice(0, 5);
             
-            if (title && date) {
-                events.push({ id: Date.now(), title, date, time: time || '00:00', reminder });
-                localStorage.setItem('mc-events', JSON.stringify(events));
-                document.getElementById('event-title').value = '';
-                renderAll();
-                addLog('System', `Event added: ${title}`);
+            if (upcoming.length === 0) {
+                list.innerHTML = '<p class="text-gray-500 text-sm">No upcoming events</p>';
+                return;
             }
+            
+            list.innerHTML = upcoming.map(e => `
+                <div class="schedule-item pl-4 pb-4">
+                    <p class="text-xs text-gray-500">${formatDate(e.date)}</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-sm font-medium">${e.title}</span>
+                        <span class="text-xs px-2 py-0.5 rounded ${getTypeClass(e.type)}">${e.type}</span>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function addQuickEvent() {
-            const title = document.getElementById('quick-event-title').value;
-            const date = document.getElementById('quick-event-date').value;
-            if (title && date) {
-                events.push({ id: Date.now(), title, date, time: '09:00', reminder: true });
-                localStorage.setItem('mc-events', JSON.stringify(events));
-                document.getElementById('quick-event-title').value = '';
-                renderAll();
-                addLog('Task', `Quick event added: ${title}`);
-            }
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            if (dateStr === today.toISOString().split('T')[0]) return 'Today';
+            if (dateStr === tomorrow.toISOString().split('T')[0]) return 'Tomorrow';
+            
+            return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }
 
-        // Task functions
-        function addTask() {
-            const input = document.getElementById('new-task');
-            const dateInput = document.getElementById('task-date');
+        // Tasks
+        function renderTasks() {
+            const list = document.getElementById('tasks-list');
+            list.innerHTML = tasks.map(t => `
+                <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                    <button onclick="toggleTask(${t.id})" class="text-${t.done ? 'green' : 'gray'}-400">
+                        <i data-lucide="${t.done ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
+                    </button>
+                    <span class="flex-1 ${t.done ? 'line-through text-gray-500' : ''}">${t.text}</span>
+                    <button onclick="deleteTask(${t.id})" class="text-gray-500 hover:text-red-400"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // Quick add
+        function quickAdd() {
+            const input = document.getElementById('quick-add-input');
+            const type = document.getElementById('quick-add-type').value;
+            const date = document.getElementById('quick-add-date').value;
+            
             if (input.value.trim()) {
-                tasks.unshift({ id: Date.now(), text: input.value.trim(), date: dateInput.value, done: false });
-                localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                if (date) {
+                    events.push({ id: Date.now(), title: input.value, date, type });
+                    localStorage.setItem('mc-events', JSON.stringify(events));
+                } else {
+                    tasks.push({ id: Date.now(), text: input.value, done: false });
+                    localStorage.setItem('mc-tasks', JSON.stringify(tasks));
+                }
                 input.value = '';
-                dateInput.value = '';
+                renderAll();
+            }
+        }
+
+        function addEventOnDate(dateStr) {
+            const title = prompt('Event title:');
+            if (title) {
+                const type = prompt('Type (task/social/email):') || 'task';
+                events.push({ id: Date.now(), title, date: dateStr, type });
+                localStorage.setItem('mc-events', JSON.stringify(events));
                 renderAll();
             }
         }
@@ -362,13 +329,7 @@
             const task = tasks.find(t => t.id === id);
             if (task) {
                 task.done = !task.done;
-                if (task.done) {
-                    // Add to calendar as completed
-                    const today = new Date().toISOString().split('T')[0];
-                    events.push({ id: Date.now(), title: '✅ ' + task.text, date: today, time: '00:00', reminder: false });
-                }
                 localStorage.setItem('mc-tasks', JSON.stringify(tasks));
-                localStorage.setItem('mc-events', JSON.stringify(events));
                 renderAll();
             }
         }
@@ -379,158 +340,28 @@
             renderAll();
         }
 
-        // Log functions
-        function addLog(category, message) {
-            logs.unshift({ id: Date.now(), time: new Date().toLocaleTimeString(), category, message, type: 'info' });
-            if (logs.length > 100) logs.pop();
-            localStorage.setItem('mc-logs', JSON.stringify(logs));
-            renderAll();
+        function saveNotes() {
+            localStorage.setItem('mc-notes', document.getElementById('notes-area').value);
+            alert('Notes saved!');
         }
 
-        function addManualLog() {
-            const input = document.getElementById('new-log');
-            const category = document.getElementById('log-category').value;
-            if (input.value.trim()) {
-                addLog(category, input.value.trim());
-                input.value = '';
-            }
-        }
-
-        // Usage functions
-        function addUsage() {
-            const msg = parseInt(document.getElementById('msg-count').value) || 0;
-            const tok = parseInt(document.getElementById('token-count').value) || 0;
-            const cost = parseFloat(document.getElementById('cost-count').value) || 0;
-            usage.messages += msg;
-            usage.tokens += tok;
-            usage.cost += cost;
-            localStorage.setItem('mc-usage', JSON.stringify(usage));
-            document.getElementById('msg-count').value = '';
-            document.getElementById('token-count').value = '';
-            document.getElementById('cost-count').value = '';
-            renderAll();
-            addLog('System', `Usage logged: ${msg} msgs, ${tok} tokens`);
-        }
-
-        // Render all
         function renderAll() {
             renderCalendar();
+            renderSchedule();
             renderTasks();
-            renderLogs();
-            renderUsage();
-            renderDashboard();
-            document.getElementById('last-updated').innerText = new Date().toLocaleString();
-        }
-
-        function renderTasks() {
-            const container = document.getElementById('task-list');
-            if (tasks.length === 0) {
-                container.innerHTML = '<div class="text-center text-white/30 py-4">No tasks yet</div>';
-                return;
-            }
-            container.innerHTML = tasks.map(task => `
-                <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg ${task.done ? 'opacity-50' : ''}">
-                    <button onclick="toggleTask(${task.id})" class="text-brand-turquoise">
-                        <i data-lucide="${task.done ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
-                    </button>
-                    <span class="flex-1 ${task.done ? 'line-through text-white/40' : ''}">${task.text}</span>
-                    ${task.date ? `<span class="text-xs text-white/50">${task.date}</span>` : ''}
-                    <button onclick="deleteTask(${task.id})" class="text-white/30 hover:text-red-400"><i data-lucide="x" class="w-4 h-4"></i></button>
-                </div>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        function renderLogs() {
-            const container = document.getElementById('log-container');
-            document.getElementById('log-count').innerText = `${logs.length} entries`;
-            const categoryColors = { 'Task': 'text-blue-400', 'Website': 'text-green-400', 'Business': 'text-yellow-400', 'System': 'text-purple-400', 'Info': 'text-white/60' };
             
-            if (logs.length === 0) {
-                container.innerHTML = '<div class="text-center text-white/30 py-8">No logs yet</div>';
-                return;
-            }
-            container.innerHTML = logs.map(log => `
-                <div class="log-entry flex items-start gap-3 p-3 bg-white/5 rounded-lg">
-                    <span class="text-xs text-white/40 whitespace-nowrap">${log.time}</span>
-                    <span class="text-xs font-bold ${categoryColors[log.category] || 'text-white/60'}">${log.category}</span>
-                    <span class="text-sm text-white/80 flex-1">${log.message}</span>
-                </div>
-            `).join('');
-        }
-
-        function renderUsage() {
-            document.getElementById('total-messages').innerText = usage.messages.toLocaleString();
-            document.getElementById('total-tokens').innerText = usage.tokens.toLocaleString();
-            document.getElementById('total-cost').innerText = '$' + usage.cost.toFixed(2);
-        }
-
-        function renderDashboard() {
-            // Upcoming events
+            // Stats
+            document.getElementById('total-tasks').textContent = tasks.length;
+            document.getElementById('completed-tasks').textContent = tasks.filter(t => t.done).length;
             const today = new Date().toISOString().split('T')[0];
-            const upcomingEvents = events.filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 5);
-            document.getElementById('upcoming-events-count').innerText = upcomingEvents.length;
+            document.getElementById('upcoming-events').textContent = events.filter(e => e.date >= today).length;
             
-            const eventsList = document.getElementById('upcoming-events-list');
-            if (upcomingEvents.length === 0) {
-                eventsList.innerHTML = '<p class="text-white/50 text-sm">No upcoming events</p>';
-            } else {
-                eventsList.innerHTML = upcomingEvents.map(e => `
-                    <div class="flex items-center gap-3 p-2 bg-white/5 rounded-lg">
-                        <i data-lucide="calendar" class="w-4 h-4 text-brand-turquoise"></i>
-                        <span class="flex-1 text-sm">${e.title}</span>
-                        <span class="text-xs text-white/50">${e.date} ${e.time}</span>
-                    </div>
-                `).join('');
-            }
-            
-            // Tasks
-            const pendingTasks = tasks.filter(t => !t.done);
-            document.getElementById('pending-tasks-count').innerText = pendingTasks.length;
-            
-            // Completed today
-            const completedToday = tasks.filter(t => t.done && t.id > Date.now() - 86400000).length;
-            document.getElementById('completed-today').innerText = completedToday;
-            
+            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
             lucide.createIcons();
-        }
-
-        // Clear all data
-        function clearAllData() {
-            if (confirm('Clear all data? This cannot be undone.')) {
-                localStorage.clear();
-                events = [];
-                tasks = [];
-                logs = [];
-                usage = { messages: 0, tokens: 0, cost: 0 };
-                renderAll();
-            }
         }
 
         // Initialize
         renderAll();
-        addLog('System', 'Dashboard loaded', 'info');
-
-        // Check reminders every minute
-        setInterval(() => {
-            const now = new Date();
-            const currentTime = now.toTimeString().slice(0, 5);
-            const today = now.toISOString().split('T')[0];
-            
-            events.forEach(e => {
-                if (e.reminder && e.date === today && e.time === currentTime) {
-                    if (Notification.permission === 'granted') {
-                        new Notification('Mission Control Reminder', { body: e.title });
-                    }
-                    addLog('Reminder', `🔔 ${e.title}`);
-                }
-            });
-        }, 60000);
-
-        // Request notification permission
-        if ('Notification' in window && Notification.permission === 'default') {
-            Notification.requestPermission();
-        }
     </script>
 </body>
 </html>
