@@ -1,213 +1,215 @@
 # All Fashion Matters - Social Media Posts
-# Generated: February 20, 2026 (Afternoon Edition)
+# Generated: February 20, 2026 (Evening Edition)
 
-## POST 1: Virgil Abloh Archive x Air Jordan 1 "Alaska"
+## POST 1: Spring/Summer 2026 Fashion Trends
 
 ### Instagram Caption
-═══ 🔥 THE DROP IS COMING 🔥 ═══
+═══ 📅 SS26 TREND REPORT ═══
 
-The Virgil Abloh Archive x Air Jordan 1 "Alaska" drops MARCH 28, 2026.
+Spring/Summer 2026 is HERE and it's eclectic AF.
 
-This isn't just another sneaker release. It's a cultural moment.
+6 trends you need to know:
 
-The continuation of a legacy that changed streetwear forever.
+01 ✨ Clever Layering
+02 🏃 Sporty Silhouettes  
+03 💎 Carolyn Bessette Energy
+04 👙 Lingerie-Inspired
+80s Geometric
+06 👖 90s Staples
 
-📅 March 28, 2026
-💰 Expected: $200-$250 retail
-📈 Resale: 300-500% within days
+From minimal to maximal—there's something for everyone.
 
-Save this post. Set your alarms. 🔔
-
-Swipe for the full story →
+Swipe for the full guide →
 Link in bio 🖤
 
-#VirgilAbloh #AirJordan1 #OffWhite #SneakerHead #2026Releases #Archive #Grailes #Hypebeast
+#SS26 #FashionTrends #SpringFashion #Summer2026 #StyleGuide #Streetwear
 
 ---
 
 ### Facebook Post
-🚨 IT'S FINALLY HAPPENING.
+📅 THE TRENDS ARE HERE.
 
-The Virgil Abloh Archive x Air Jordan 1 "Alaska" is confirmed for MARCH 28, 2026 release.
+Spring/Summer 2026 is shaping up to be one of the most eclectic, exciting fashion seasons in years.
 
-If you know, you know. This is one of the most anticipated sneaker drops in years.
+Here's your complete guide to the trends that will define the season:
 
-Here's the story:
-• Part of the Virgil Abloh Archive collection
-• Signature deconstructed aesthetic
-• Exposed foam tongue, Off-White tags
-• First major Abloh archive release since his passing
+01. CLEVER LAYERING
+Transitional pieces that work from winter into spring. Lightweight jackets over dresses, vests over tees.
 
-The "Alaska" colorway has been mythical—years in the making, now finally releasing. And with the Grand Palais exhibition ("Virgil Abloh: The Codes") still fresh in memory, this drop couldn't be more timely.
+02. SPORTY SILHOUETTES
+Athleisure continues its evolution. Track pants and nylon jackets are now fully integrated into "real" fashion.
 
-Whether you're copping or just watching from the sidelines, March 28, 2026 is a date that will go down in sneaker history.
+03. CAROLYN BESSETTE ENERGY
+The iconic minimalist is inspiring a return to understated elegance. Clean lines, neutral palettes.
 
-Read the full breakdown at the link in our bio.
+04. LINGERIE-INSPIRED
+Bras as tops, corset details, silk slip dresses. Your underwear is now outerwear.
 
-#VirgilAbloh #AirJordan1 #OffWhite #SneakerNews #2026
+05. 80s GEOMETRIC
+Bold shapes, angular silhouettes—but modernized for 2026.
+
+06. 90s STAPLES
+Slip dresses, minimal denim, "heroin chic" minimalism are back.
+
+Read the full guide at the link in our bio.
+
+#SS26 #FashionTrends #Spring2026 #StyleGuide
 
 ---
 
 ### X (Twitter) Thread
-🧵 1/ MARK YOUR CALENDARS.
+🧵 1/ SPRING/SUMMER 2026 TREND REPORT 🧵
 
-The Virgil Abloh Archive x Air Jordan 1 "Alaska" drops March 28, 2026.
+The runways have spoken. Here's what's defining SS26:
 
-This is HUGE. 🧵
+01. Clever Layering
+Transitional pieces that work winter → spring
 
-— All Fashion Matters (@allfashionmatters)
+02. Sporty Silhouettes  
+Athleisure is now just "fashion"
 
-2/ Here's why this matters:
+03. Carolyn Bessette Energy
+Understated elegance is back
 
-• First major Abloh Archive release since his passing
-• Signature deconstructed aesthetic
-• "Alaska" colorway was mythical—years of rumors
-• The continuation of a legacy that changed everything
-
-— All Fashion Matters (@allfashionmatters)
-
-3/ The timeline:
-• 2017: "The Ten" changes sneaker culture
-• 2021: Virgil passes away
-• 2025: Grand Palais exhibition opens
-• 2026: "Alaska" finally drops
-
-The legend lives on.
+04. Lingerie-Inspired
+Your underwear is outerwear now
 
 — All Fashion Matters (@allfashionmatters)
 
-4/ Expected resale value? 300-500% within days.
+2/ 05. 80s Geometric
+Bold shapes, angular silhouettes—modernized
 
-Set your alarms. March 28, 2026.
+06. 90s Staples
+Slip dresses, minimal denim are back
 
-Read the full story 👉 [Link]
+The theme? Personal expression over rigid rules.
+
+This season invites you to play.
+
+Read the full guide 👉 [Link]
 
 — All Fashion Matters (@allfashionmatters)
 
 ---
 
 ### Pinterest Post
-📌 VIRGIL ABLOH ARCHIVE x AIR JORDAN 1 "ALASKA" | MARCH 28, 2026
+📌 SPRING/SUMMER 2026 FASHION TRENDS GUIDE
 
-The most anticipated sneaker of 2026 is finally dropping!
+6 trends defining SS26:
 
-Release Date: March 28, 2026
-Expected Price: $200-$250 retail
-Resale: 300-500% within days
-
-Key details:
-• Deconstructed aesthetic
-• Exposed foam tongue
-• Off-White signature tags
-• First major Abloh Archive release
-
-SAVE for later | SET ALARMS | READ full article via link in bio
-
-#VirgilAbloh #AirJordan1 #OffWhite #SneakerNews #2026Releases #Hypebeast #Grailes #SneakerHead
-
----
-
-## POST 2: Pharrell's Louis Vuitton SS26
-
-### Instagram Caption
-═══ 🌸 PHARRELL'S BLOOMING ERA 🌸 ═══
-
-Louis Vuitton Men's SS26 is HERE and it's absolutely beautiful.
-
-Pharrell Williams just unveiled:
-▫️ Blooming Monogram
-▫️ LV Flower X-Ray
-▫️ Hybrid wardrobe (tailoring + sportswear)
-
-This is what happens when a musical genius gets loose in a 170-year-old archive.
-
-The collection bridges traditional tailoring and sportswear—because why choose?
-
-Swipe for the full breakdown →
-Link in bio 🖤
-
-#PharrellWilliams #LouisVuitton #SS26 #LuxuryFashion #FashionTrends #BloomingMonogram
-
----
-
-### Facebook Post
-💐 PHARRELL IS BLOOMING.
-
-Louis Vuitton Men's Spring 2026 capsule collection just dropped and it's everything.
-
-Here's what's happening:
-
-🌸 BLOOMING MONOGRAM - The iconic LV pattern, reimagined through a floral lens
-
-🔍 LV FLOWER X-RAY - Almost like seeing the internal structure of a bloom. Playful, technical, genius.
-
-👔 + 🎽 HYBRID WARDROBE - Tailoring meets sportswear. Because why choose?
-
-And that's not all. The FW26 show featured a full house built with NOT A HOTEL called "HOMEWORK"—models walking through a glass-walled home as if it was their actual life.
-
-Pharrell isn't just designing clothes. He's building worlds.
-
-Read the full breakdown at the link in our bio.
-
-#PharrellWilliams #LouisVuitton #SS26 #FashionTrends #Luxury
-
----
-
-### X (Twitter) Thread
-🧵 1/ Pharrell Williams just reimagThe SSined Louis Vuitton.
-
-26 collection features:
-• Blooming Monogram
-• LV Flower X-Ray
-• Tailoring + Sportswear hybrid
-
-This is incredible. 🧵
-
-— All Fashion Matters (@allfashionmatters)
-
-2/ The Blooming Monogram is genius:
-
-Flowers blooming outward from the iconic LV. Recognizable but revolutionary. A visual metaphor for growth and renewal.
-
-And the X-Ray treatment takes it to another dimension.
-
-— All Fashion Matters (@allfashionmatters)
-
-3/ But the real story is the philosophy:
-
-"We bridge traditional tailoring and sportswear."
-
-Pharrell isn't choosing sides. He's creating a new one entirely.
-
-This is what streetwear-meets-luxury looks like when done right.
-
-— All Fashion Matters (@allfashionmatters)
-
-4/ Plus: The FW26 "HOMEWORK" show featured a full house built with NOT A HOTEL.
-
-Fashion as lifestyle. Fashion as living.
-
-Read the full story 👉 [Link]
-
-Welcome to the blooming era. 🌸
-
-— All Fashion Matters (@allfashionmatters)
-
----
-
-### Pinterest Post
-📌 PHARRELL'S LOUIS VUITTON SS26 | BLOOMING MONOGRAM
-
-Louis Vuitton Men's Spring 2026 is here! 🌸
-
-Key innovations:
-• Blooming Monogram - floral reinterpretation of iconic pattern
-• LV Flower X-Ray - playful technical treatment
-• Hybrid wardrobe - tailoring meets sportswear
-• "HOMEWORK" show - fashion as lifestyle with NOT A HOTEL
-
-Pharrell Williams continues to redefine what luxury means.
+• Clever Layering - transitional pieces
+• Sporty Silhouettes - athleisure evolution
+• Carolyn Bessette Energy - minimalist elegance
+• Lingerie-Inspired - underwear as outerwear
+• 80s Geometric - bold shapes
+• 90s Staples - slip dresses, minimal denim
 
 SAVE for later | SHARE with fashion friends | READ full article via link in bio
 
-#PharrellWilliams #LouisVuitton #SS26 #FashionTrends #LuxuryFashion #BloomingMonogram #Streetwear
+#SS26 #FashionTrends #SpringFashion #Summer2026 #StyleGuide #Streetwear
+
+---
+
+## POST 2: Travis Scott 2026 Release Calendar
+
+### Instagram Caption
+═══ 🔥 2026 RELEASE CALENDAR 🔥 ═══
+
+Travis Scott is NOT holding back this year.
+
+📅 MARCH 14: Jordan Jumpman Jack "Green Spark"
+📅 MARCH 28: Virgil Abloh Archive x AJ1 "Alaska"
+📅 MAY 22: Travis Scott x Air Jordan 1 "Pink Pack"
+📅 TBA: Air Jordan 4 "Cactus Jack"
+
+Plus ongoing Cactus Jack apparel drops.
+
+This is your complete guide. Don't miss a drop.
+
+Swipe for the full calendar →
+Link in bio 🖤
+
+#TravisScott #CactusJack #AirJordan #SneakerNews #2026Releases
+
+---
+
+### Facebook Post
+🚀 TRAVIS SCOTT 2026 = 🚀
+
+The release calendar is STACKED. Here's every drop you need to know:
+
+📅 MARCH 14: Jordan Jumpman Jack "Green Spark"
+Travis's new silhouette continues. Green for St. Patrick's timing—because green = money in the sneaker game.
+
+📅 MARCH 28: Virgil Abloh Archive x Air Jordan 1 "Alaska"
+The mythical release finally drops. One of the most anticipated sneakers in years.
+
+📅 MAY 22: Travis Scott x Air Jordan 1 "Pink Pack"
+Lovestruck branding, dual-branded insoles. The collaboration continues.
+
+📅 TBA: Air Jordan 4 "Cactus Jack"
+Houston football-inspired. This one's personal.
+
+PLUS: Ongoing Cactus Jack apparel collection (hoodies, tees, cargo pants)
+
+This is your complete guide. Set your alarms.
+
+Read the full breakdown at the link in our bio.
+
+#TravisScott #CactusJack #AirJordan #SneakerNews #2026
+
+---
+
+### X (Twitter) Thread
+🧵 1/ TRAVIS SCOTT 2026 RELEASE CALENDAR 🧵
+
+The calendar is STACKED. Here's every drop:
+
+📅 MARCH 14
+Jordan Jumpman Jack "Green Spark"
+New silhouette. St. Patrick's timing.
+
+📅 MARCH 28  
+Virgil Abloh Archive x AJ1 "Alaska"
+The mythical release finally drops.
+
+📅 MAY 22
+Travis Scott x Air Jordan 1 "Pink Pack"
+Lovestruck branding continues.
+
+📅 TBA 2026
+Air Jordan 4 "Cactus Jack"
+Houston football-inspired.
+
+— All Fashion Matters (@allfashionmatters)
+
+2/ Plus ongoing Cactus Jack apparel:
+• Hoodies
+• T-shirts  
+• Cargo pants
+• Full clothing line
+
+This is the complete guide.
+
+Set your alarms. Do your research. May the sneaker gods be in your favor.
+
+Read the full breakdown 👉 [Link]
+
+— All Fashion Matters (@allfashionmatters)
+
+---
+
+### Pinterest Post
+📌 TRAVIS SCOTT 2026 RELEASE CALENDAR
+
+Complete guide to every Travis Scott drop in 2026:
+
+📅 March 14 - Jordan Jumpman Jack "Green Spark"
+📅 March 28 - Virgil Abloh Archive x AJ1 "Alaska"
+📅 May 22 - Travis Scott x Air Jordan 1 "Pink Pack"
+📅 TBA - Air Jordan 4 "Cactus Jack"
+📅 Ongoing - Cactus Jack apparel collection
+
+SAVE for later | SET ALARMS | READ full article via link in bio
+
+#TravisScott #CactusJack #AirJordan #SneakerNews #2026Releases #SneakerHead
