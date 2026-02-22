@@ -2,6 +2,8 @@ import { products, designerSpotlights } from './data.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    initScrollSpy();
+    initMotionPreference();
     initScrollAnimations();
     renderProducts();
     renderHotProducts();
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNewsletterForms();
     initStylePoll();
     initExitIntentPopup();
+    initFloatingCTA();
     lucide.createIcons();
 });
 
@@ -55,6 +58,85 @@ function initNavigation() {
     });
 }
 
+function initScrollSpy() {
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('nav .nav-link[href^="#"]'));
+    if (!sections.length || !navLinks.length) return;
+
+    const map = new Map(navLinks.map(link => [link.getAttribute('href')?.replace('#', ''), link]));
+
+    const handleScroll = () => {
+        const offset = window.scrollY + window.innerHeight * 0.35;
+        let activeId = sections[0]?.id || null;
+
+        sections.forEach(section => {
+            if (offset >= section.offsetTop) {
+                activeId = section.id;
+            }
+        });
+
+        const activeLink = activeId ? map.get(activeId) : null;
+
+        navLinks.forEach(link => {
+            const isActive = link === activeLink;
+            link.classList.toggle('nav-link-active', isActive);
+            if (isActive) {
+                link.setAttribute('aria-current', 'true');
+            } else {
+                link.removeAttribute('aria-current');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+}
+
+function initMotionPreference() {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!media) return;
+
+    const applyPreference = () => {
+        document.body.classList.toggle('reduce-motion', media.matches);
+    };
+
+    if (typeof media.addEventListener === 'function') {
+        media.addEventListener('change', applyPreference);
+    } else if (typeof media.addListener === 'function') {
+        media.addListener(applyPreference);
+    }
+
+    applyPreference();
+}
+
+function initFloatingCTA() {
+    const cta = document.getElementById('floating-cta');
+    if (!cta || cta.getAttribute('data-dismissed') === 'true') return;
+
+    const dismissBtn = cta.querySelector('[data-floating-dismiss]');
+    const revealOffset = 600;
+
+    const toggleCta = () => {
+        if (window.scrollY > revealOffset) {
+            cta.classList.add('is-visible');
+            cta.setAttribute('aria-hidden', 'false');
+        } else {
+            cta.classList.remove('is-visible');
+            cta.setAttribute('aria-hidden', 'true');
+        }
+    };
+
+    window.addEventListener('scroll', toggleCta, { passive: true });
+    toggleCta();
+
+    dismissBtn?.addEventListener('click', () => {
+        cta.classList.remove('is-visible');
+        cta.setAttribute('aria-hidden', 'true');
+        cta.setAttribute('data-dismissed', 'true');
+        window.removeEventListener('scroll', toggleCta);
+    });
+}
+
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -72,7 +154,6 @@ function initScrollAnimations() {
 
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 }
-
 
 // Render Hot Drops products
 function renderHotProducts() {

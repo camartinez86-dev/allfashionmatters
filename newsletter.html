@@ -78,7 +78,7 @@
                         <input type="email" placeholder="Email for early access" required class="px-4 py-3 rounded-lg text-gray-900 w-full focus:outline-none focus:ring-2 focus:ring-brand-turquoise">
                         <button type="submit" class="px-6 py-3 bg-brand-turquoise text-brand-black font-semibold uppercase tracking-[0.3em] rounded-lg hover:bg-white transition">Join Free</button>
                     </form>
-                    <p id="newsletter-hero-success" class="hidden text-brand-turquoise text-sm mt-3"></p>
+                    <p id="newsletter-hero-success" class="hidden text-brand-turquoise text-sm mt-3" role="status" aria-live="polite"></p>
                     <p class="text-xs text-white/50 mt-4">Trusted by stylists at Milwaukee Film Fest, Nike community leads, and 500+ newsletter readers.</p>
                 </div>
                 <div class="relative">
@@ -159,8 +159,43 @@
                             <input type="email" placeholder="Email address" required class="px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-turquoise">
                             <button type="submit" class="px-6 py-3 bg-white text-brand-black font-bold uppercase tracking-[0.3em] rounded-lg hover:bg-brand-turquoise hover:text-white transition">Claim Bonus</button>
                         </form>
-                        <p id="newsletter-secondary-success" class="hidden text-brand-turquoise text-sm mt-3"></p>
+                        <p id="newsletter-secondary-success" class="hidden text-brand-turquoise text-sm mt-3" role="status" aria-live="polite"></p>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section id="faq" class="max-w-6xl mx-auto px-4 mt-20" aria-labelledby="faq-title">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div>
+                    <p class="text-brand-turquoise uppercase tracking-[0.4em] text-xs mb-3" id="faq-title">FAQ + receipts</p>
+                    <h2 class="font-serif text-4xl font-bold mb-6">What new subscribers usually ask.</h2>
+                    <div class="space-y-4">
+                        <details class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                            <summary class="font-semibold cursor-pointer">When does the newsletter send?</summary>
+                            <p class="text-white/70 text-sm mt-2">Every Sunday at 8 AM CT. Breaking drops or Nike SNKRS alerts may trigger a mid-week SMS ping.</p>
+                        </details>
+                        <details class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                            <summary class="font-semibold cursor-pointer">Do you share discount codes?</summary>
+                            <p class="text-white/70 text-sm mt-2">Yep—subscribers receive private eBay coupons + Milwaukee pick-up bundles before we post to IG.</p>
+                        </details>
+                        <details class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                            <summary class="font-semibold cursor-pointer">Is there spam?</summary>
+                            <p class="text-white/70 text-sm mt-2">Never. You’ll only hear from us when we have real inventory intel or designer research.</p>
+                        </details>
+                    </div>
+                </div>
+                <div class="bg-brand-dark border border-white/10 rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="pill-badge">Office hours</div>
+                        <p class="text-sm text-white/60">Tuesdays + Thursdays • Noon-4 PM CT</p>
+                    </div>
+                    <p class="text-white/70 text-sm">Hop on a 15-min video consult for styling questions, reseller pricing strategy, or to plan a pop-up table.</p>
+                    <div class="space-y-3 text-sm text-white/70">
+                        <p>✔️ Free for newsletter members</p>
+                        <p>✔️ Includes sourcing worksheet</p>
+                        <p>✔️ Follow-up email with itemized links</p>
+                    </div>
+                    <a href="index.html#contact" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-brand-black font-semibold uppercase tracking-[0.3em] hover:bg-brand-turquoise hover:text-white transition">Book a slot</a>
                 </div>
             </div>
         </section>
