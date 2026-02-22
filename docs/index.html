@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Mission Control</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+        .dashboard { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+        .sidebar { background: linear-gradient(180deg, #12121a 0%, #0a0a0f 100%); border-right: 1px solid #1a1a2e; padding: 20px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+        .main { padding: 24px; overflow-y: auto; }
+        .logo { padding: 0 20px 20px; font-size: 1.4rem; font-weight: 700; color: #6366f1; display: flex; align-items: center; gap: 10px; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-title { padding: 8px 20px; font-size: 0.7rem; text-transform: uppercase; color: #666; letter-spacing: 1px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: #888; cursor: pointer; transition: all 0.2s; border-left: 2px solid transparent; }
+        .nav-item:hover, .nav-item.active { background: rgba(99, 102, 241, 0.1); color: #e0e0e0; border-left-color: #6366f1; }
+        .nav-item .icon { font-size: 1.2rem; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .header h1 { font-size: 1.8rem; font-weight: 600; }
+        .header-actions { display: flex; gap: 12px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: #6366f1; color: white; }
+        .btn-primary:hover { background: #4f46e5; }
+        .btn-secondary { background: #1a1a2e; color: #e0e0e0; }
+        .btn-secondary:hover { background: #252540; }
+        .card { background: #12121a; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .card-title { font-size: 1rem; font-weight: 600; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: linear-gradient(135deg, #1a1a2e 0%, #12121a 100%); border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; }
+        .stat-card .value { font-size: 2rem; font-weight: 700; color: #6366f1; }
+        .stat-card .label { color: #666; font-size: 0.85rem; margin-top: 4px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .task-list { list-style: none; }
+        .task-item { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid #1a1a2e; }
+        .task-item:last-child { border-bottom: none; }
+        .task-check { width: 20px; height: 20px; border: 2px solid #333; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .task-check.checked { background: #6366f1; border-color: #6366f1; }
+        .task-content { flex: 1; }
+        .task-title { font-weight: 500; margin-bottom: 2px; }
+        .task-meta { font-size: 0.8rem; color: #666; }
+        .task-priority { padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .priority-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .priority-medium { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .priority-low { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .project-item { display: flex; align-items: center; gap: 16px; padding: 16px; background: #0a0a0f; border-radius: 10px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+        .project-item:hover { border-color: #6366f1; background: #12121a; }
+        .project-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .project-info { flex: 1; }
+        .project-name { font-weight: 600; margin-bottom: 4px; }
+        .project-desc { font-size: 0.85rem; color: #666; }
+        .project-progress { width: 100%; height: 6px; background: #1a1a2e; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .project-progress-bar { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 3px; transition: width 0.3s; }
+        .memory-timeline { position: relative; padding-left: 24px; }
+        .memory-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #6366f1, transparent); }
+        .memory-item { position: relative; padding: 12px 0 12px 20px; }
+        .memory-item::before { content: ''; position: absolute; left: -20px; top: 18px; width: 10px; height: 10px; background: #6366f1; border-radius: 50%; border: 2px solid #0a0a0f; }
+        .memory-date { font-size: 0.75rem; color: #6366f1; margin-bottom: 4px; }
+        .memory-content { font-size: 0.9rem; color: #ccc; }
+        .agent-card { background: linear-gradient(135deg, #1a1a2e 0%, #12121a 100%); border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; text-align: center; }
+        .agent-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .agent-name { font-weight: 600; margin-bottom: 4px; }
+        .agent-role { font-size: 0.8rem; color: #666; margin-bottom: 12px; }
+        .agent-status { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(34, 197, 94, 0.2); color: #22c55e; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
+        .agent-status::before { content: ''; width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .chart-container { position: relative; height: 250px; }
+        .cost-table { width: 100%; border-collapse: collapse; }
+        .cost-table th, .cost-table td { padding: 12px; text-align: left; border-bottom: 1px solid #1a1a2e; }
+        .cost-table th { color: #666; font-weight: 500; font-size: 0.8rem; }
+        .doc-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #0a0a0f; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; }
+        .doc-item:hover { background: #12121a; }
+        .doc-icon { font-size: 1.5rem; }
+        .doc-name { font-weight: 500; }
+        .doc-meta { font-size: 0.8rem; color: #666; }
+        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+        .quick-action { background: #12121a; border: 1px solid #1a1a2e; border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .quick-action:hover { background: #1a1a2e; border-color: #6366f1; transform: translateY(-2px); }
+        .quick-action .icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .quick-action .label { font-size: 0.85rem; color: #888; }
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .grid-2, .grid-3 { grid-template-columns: 1fr; } .quick-actions { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .sidebar { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="logo">🚀 Mission Control</div>
+            <div class="nav-section">
+                <div class="nav-title">Overview</div>
+                <div class="nav-item active" onclick="showPanel('overview')"><span class="icon">📊</span><span>Dashboard</span></div>
+                <div class="nav-item" onclick="showPanel('costs')"><span class="icon">💰</span><span>Token Costs</span></div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-title">Work</div>
+                <div class="nav-item" onclick="showPanel('tasks')"><span class="icon">✓</span><span>Tasks</span></div>
+                <div class="nav-item" onclick="showPanel('projects')"><span class="icon">📁</span><span>Projects</span></div>
+                <div class="nav-item" onclick="showPanel('agents')"><span class="icon">🤖</span><span>Agents</span></div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-title">Knowledge</div>
+                <div class="nav-item" onclick="showPanel('memory')"><span class="icon">🧠</span><span>Memory</span></div>
+                <div class="nav-item" onclick="window.open('calendar.html','_blank')"><span class="icon">📅</span><span>Calendar</span></div>
+                <div class="nav-item" onclick="showPanel('docs')"><span class="icon">📄</span><span>Docs</span></div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-title">System</div>
+                <div class="nav-item" onclick="showPanel('settings')"><span class="icon">⚙</span><span>Settings</span></div>
+            </div>
+        </nav>
+        <main class="main">
+            <div id="overview" class="panel active">
+                <div class="header">
+                    <h1>Dashboard Overview</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="location.reload()">↻ Refresh</button>
+                        <button class="btn btn-primary" onclick="addTask()">+ Add Task</button>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <div class="quick-action" onclick="showPanel('tasks')"><div class="icon">✓</div><div class="label">New Task</div></div>
+                    <div class="quick-action" onclick="showPanel('projects')"><div class="icon">📁</div><div class="label">New Project</div></div>
+                    <div class="quick-action" onclick="window.open('http://localhost:8080', '_blank')"><div class="icon">📊</div><div class="label">Usage Dashboard</div></div>
+                    <div class="quick-action" onclick="window.open('calendar.html',_blank)"><div class="icon">📅</div><div class="label">Calendar</div></div>
+                    <div class="quick-action" onclick="showPanel('docs')"><div class="icon">📄</div><div class="label">Docs</div></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="value" id="stat-tasks">3</div><div class="label">Active Tasks</div></div>
+                    <div class="stat-card"><div class="value" id="stat-projects">4</div><div class="label">Projects</div></div>
+                    <div class="stat-card"><div class="value" id="stat-tokens">8,250</div><div class="label">Tokens Today</div></div>
+                    <div class="stat-card"><div class="value" id="stat-cost">$0.00</div><div class="label">Cost Today</div></div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Cost by Model</div></div>
+                        <div class="chart-container"><canvas id="costModelChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Cost by Task</div></div>
+                        <div class="chart-container"><canvas id="costTaskChart"></canvas></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-title">Recent Activity</div></div>
+                    <div class="memory-timeline" id="recentActivity">
+                        <div class="memory-item"><div class="memory-date">Today</div><div class="memory-content">Mission Control dashboard created</div></div>
+                        <div class="memory-item"><div class="memory-date">Today</div><div class="memory-content">Morning report scheduler activated</div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="costs" class="panel">
+                <div class="header"><h1>💰 Token Costs</h1></div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="value" id="total-cost">$0.00</div><div class="label">Total Cost</div></div>
+                    <div class="stat-card"><div class="value" id="total-calls">6</div><div class="label">API Calls</div></div>
+                    <div class="stat-card"><div class="value" id="total-tokens">8,250</div><div class="label">Total Tokens</div></div>
+                    <div class="stat-card"><div class="value" id="avg-cost">$0.0000</div><div class="label">Avg Cost/Call</div></div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Cost by Model</div></div>
+                        <div class="chart-container"><canvas id="costModelPie"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Usage Trend</div></div>
+                        <div class="chart-container"><canvas id="usageTrend"></canvas></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-title">Recent API Calls</div></div>
+                    <table class="cost-table">
+                        <thead><tr><th>Time</th><th>Model</th><th>Task</th><th>Tokens</th><th>Cost</th></tr></thead>
+                        <tbody id="apiCallsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tasks" class="panel">
+                <div class="header"><h1>✓ Tasks</h1><div class="header-actions"><button class="btn btn-primary" onclick="addTask()">+ Add Task</button></div></div>
+                <div class="card">
+                    <ul class="task-list" id="taskList">
+                        <li class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-content"><div class="task-title">Set up morning report cron job</div><div class="task-meta">Created today</div></div><span class="task-priority priority-high">High</span></li>
+                        <li class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-content"><div class="task-title">Configure Brave API for web search</div><div class="task-meta">Created today</div></div><span class="task-priority priority-medium">Medium</span></li>
+                        <li class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-content"><div class="task-title">Build Mission Control dashboard</div><div class="task-meta">In progress</div></div><span class="task-priority priority-high">High</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="projects" class="panel">
+                <div class="header"><h1>📁 Projects</h1></div>
+                <div class="grid-2">
+                    <div class="project-item"><div class="project-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">🌅</div><div class="project-info"><div class="project-name">Morning Report System</div><div class="project-desc">Automated daily reports</div><div class="project-progress"><div class="project-progress-bar" style="width: 85%"></div></div></div></div>
+                    <div class="project-item"><div class="project-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">📊</div><div class="project-info"><div class="project-name">Usage Tracker</div><div class="project-desc">Token and cost tracking</div><div class="project-progress"><div class="project-progress-bar" style="width: 100%"></div></div></div></div>
+                    <div class="project-item"><div class="project-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🧠</div><div class="project-info"><div class="project-name">Memory System</div><div class="project-desc">Self-improving memory</div><div class="project-progress"><div class="project-progress-bar" style="width: 70%"></div></div></div></div>
+                    <div class="project-item"><div class="project-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">🚀</div><div class="project-info"><div class="project-name">Mission Control</div><div class="project-desc">Unified dashboard</div><div class="project-progress"><div class="project-progress-bar" style="width: 100%"></div></div></div></div>
+                </div>
+            </div>
+            <div id="agents" class="panel">
+                <div class="header"><h1>🤖 Agent Team</h1></div>
+                <div class="grid-3">
+                    <div class="agent-card"><div class="agent-avatar">🤖</div><div class="agent-name">MiniMax M2.1</div><div class="agent-role">Primary Planning Agent</div><div class="agent-status">Active</div></div>
+                    <div class="agent-card"><div class="agent-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);">⚡</div><div class="agent-name">Codex 5.1</div><div class="agent-role">Coding Specialist</div><div class="agent-status">Available</div></div>
+                    <div class="agent-card"><div class="agent-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">💬</div><div class="agent-name">GPT-5.2</div><div class="agent-role">General Purpose</div><div class="agent-status">Available</div></div>
+                </div>
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header"><div class="card-title">Agent Performance</div></div>
+                    <div class="chart-container"><canvas id="agentChart"></canvas></div>
+                </div>
+            </div>
+            <div id="memory" class="panel">
+                <div class="header"><h1>🧠 Memory</h1></div>
+                <div class="grid-2">
+                    <div class="card"><div class="card-header"><div class="card-title">Long-term Memory</div></div>
+                        <div class="memory-timeline">
+                            <div class="memory-item"><div class="memory-date">2026-02-19</div><div class="memory-content">Self-evolve skill installed</div></div>
+                            <div class="memory-item"><div class="memory-date">2026-02-19</div><div class="memory-content">Morning report system created</div></div>
+                            <div class="memory-item"><div class="memory-date">2026-02-19</div><div class="memory-content">Brave API configured</div></div>
+                        </div>
+                    </div>
+                    <div class="card"><div class="card-header"><div class="card-title">Daily Logs</div></div>
+                        <div class="doc-item"><span class="doc-icon">📝</span><div><div class="doc-name">2026-02-19.md</div><div class="doc-meta">Today's session</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="docs" class="panel">
+                <div class="header"><h1>📄 Documents</h1></div>
+                <div class="grid-2">
+                    <div class="card"><div class="card-header"><div class="card-title">☀️ Morning Reports</div></div>
+                        <div class="doc-item" onclick="window.open('documents/morning-reports/latest.txt', '_blank')"><span class="doc-icon">☀️</span><div><div class="doc-name">Latest Report</div><div class="doc-meta">Most recent morning report</div></div></div>
+                    </div>
+                    <div class="card"><div class="card-header"><div class="card-title">📱 Social Posts</div></div>
+                        <div class="doc-item"><span class="doc-icon">📱</span><div><div class="doc-name">Generated Posts</div><div class="doc-meta">Auto-generated social content</div></div></div>
+                    </div>
+                    <div class="card"><div class="card-header"><div class="card-title">Core Files</div></div>
+                        <div class="doc-item"><span class="doc-icon">💭</span><div><div class="doc-name">SOUL.md</div><div class="doc-meta">Agent identity</div></div></div>
+                        <div class="doc-item"><span class="doc-icon">🧠</span><div><div class="doc-name">MEMORY.md</div><div class="doc-meta">Long-term memory</div></div></div>
+                        <div class="doc-item"><span class="doc-icon">👤</span><div><div class="doc-name">USER.md</div><div class="doc-meta">User preferences</div></div></div>
+                        <div class="doc-item"><span class="doc-icon">📋</span><div><div class="doc-name">AGENTS.md</div><div class="doc-meta">Workspace guidelines</div></div></div>
+                    </div>
+                    <div class="card"><div class="card-header"><div class="card-title">Skills</div></div>
+                        <div class="doc-item"><span class="doc-icon">🧬</span><div><div class="doc-name">self-evolve</div><div class="doc-meta">Autonomous self-improvement</div></div></div>
+                        <div class="doc-item"><span class="doc-icon">🌅</span><div><div class="doc-name">morning-report</div><div class="doc-meta">Daily reports</div></div></div>
+                        <div class="doc-item"><span class="doc-icon">🚀</span><div><div class="doc-name">mission-control</div><div class="doc-meta">This dashboard</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="settings" class="panel">
+                <div class="header"><h1>⚙️ Settings</h1></div>
+                <div class="card"><div class="card-header"><div class="card-title">Configuration</div></div>
+                    <div style="display: grid; gap: 16px;">
+                        <div><label style="color: #888;">Timezone</label><div style="margin-top: 4px;">America/New_York</div></div>
+                        <div><label style="color: #888;">Default Model</label><div style="margin-top: 4px;">MiniMax M2.1</div></div>
+                        <div><label style="color: #888;">API Keys</label><div style="margin-top: 4px;"><span style="color: #22c55e;">✓ Brave</span> • <span style="color: #22c55e;">✓ MiniMax</span></div></div>
+                    </div>
+                </div>
+                <div class="card"><div class="card-header"><div class="card-title">Quick Links</div></div>
+                    <div class="quick-actions" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="quick-action" onclick="window.open('http://localhost:8080', '_blank')"><div class="icon">📊</div><div class="label">Usage Dashboard</div></div>
+                        <div class="quick-action" onclick="runMorningReport()"><div class="icon">🌅</div><div class="label">Run Morning Report</div></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        function toggleTask(el) { el.classList.toggle('checked'); el.parentElement.querySelector('.task-title').style.textDecoration = el.classList.contains('checked') ? 'line-through' : 'none'; }
+        function addTask() {
+            const title = prompt('Task title:');
+            if(title) {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                li.innerHTML = `<div class="task-check" onclick="toggleTask(this)"></div><div class="task-content"><div class="task-title">${title}</div><div class="task-meta">Just now</div></div><span class="task-priority priority-low">Low</span>`;
+                document.getElementById('taskList').prepend(li);
+                document.getElementById('stat-tasks').textContent = parseInt(document.getElementById('stat-tasks').textContent) + 1;
+            }
+        }
+        function runMorningReport() { alert('Run: python3 /data/.openclaw/workspace/skills/morning-report/morning_report.py'); }
+        function initCharts() {
+    loadMinimaxBalance();
+            new Chart(document.getElementById('costModelChart'), { type: 'doughnut', data: { labels: ['MiniMax M2.1', 'Codex 5.1', 'GPT-5.2'], datasets: [{ data: [6700, 1400, 150], backgroundColor: ['#6366f1', '#22c55e', '#f59e0b'] }] }, options: { plugins: { legend: { position: 'bottom', labels: { color: '#888' } } } } });
+            new Chart(document.getElementById('costTaskChart'), { type: 'bar', data: { labels: ['Planning', 'Coding', 'General', 'Transcription'], datasets: [{ data: [3, 1, 1, 1], backgroundColor: '#6366f1' }] }, options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { color: '#888' }, grid: { color: '#1a1a2e' } }, x: { ticks: { color: '#888' }, grid: { display: false } } } } });
+            new Chart(document.getElementById('costModelPie'), { type: 'pie', data: { labels: ['MiniMax M2.1', 'Codex 5.1', 'GPT-5.2'], datasets: [{ data: [6700, 1400, 150], backgroundColor: ['#6366f1', '#22c55e', '#f59e0b'] }] }, options: { plugins: { legend: { position: 'bottom', labels: { color: '#888' } } } } });
+            new Chart(document.getElementById('agentChart'), { type: 'bar', data: { labels: ['MiniMax M2.1', 'Codex 5.1', 'GPT-5.2'], datasets: [{ label: 'API Calls', data: [3, 1, 2], backgroundColor: ['#6366f1', '#22c55e', '#f59e0b'] }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#888' }, grid: { color: '#1a1a2e' } }, y: { ticks: { color: '#888' }, grid: { display: false } } } } });
+            const calls = [
+                {time: '18:24:10', model: 'MiniMax M2.1', task: 'Planning', tokens: 3700, cost: '$0.00'},
+                {time: '18:24:10', model: 'Codex 5.1', task: 'Coding', tokens: 1400, cost: '$0.00'},
+                {time: '18:22:45', model: 'GPT-5.2', task: 'General', tokens: 150, cost: '$0.00'},
+                {time: '18:22:33', model: 'MiniMax M2.1', task: 'Planning', tokens: 1500, cost: '$0.00'},
+                {time: '18:22:23', model: 'MiniMax M2.1', task: 'Planning', tokens: 1500, cost: '$0.00'}
+            ];
+            document.getElementById('apiCallsTable').innerHTML = calls.map(c => `<tr><td>${c.time}</td><td>${c.model}</td><td>${c.task}</td><td>${c.tokens}</td><td>${c.cost}</td></tr>`).join('');
+        }
+        initCharts();
+    </script>
+
+<script>
+// MiniMax balance simulation for demo
+if (typeof fetch !== 'undefined') {
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+        if (url === '/minimax-balance.json') {
+            return Promise.resolve(new Response(
+                JSON.stringify({"balance": "Loading...", "status": "checking"}),
+                {status: 200, headers: {"Content-Type": "application/json"}}
+            ));
+        }
+        return originalFetch.apply(this, arguments);
+    };
+}
+</script>
+
+</body>
+</html>

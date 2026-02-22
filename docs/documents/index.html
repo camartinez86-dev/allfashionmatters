@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - AFM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 24px; }
+        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+        .back-btn { background: #6366f1; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+        h1 { font-size: 1.5rem; }
+        .section { margin-bottom: 32px; }
+        .section h2 { font-size: 1.1rem; color: #6366f1; margin-bottom: 16px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .doc-card { background: #1a1a2e; padding: 20px; border-radius: 12px; border: 1px solid #333; transition: transform 0.2s; }
+        .doc-card:hover { transform: translateY(-2px); border-color: #6366f1; }
+        .doc-card h3 { font-size: 1rem; margin-bottom: 8px; color: #fff; }
+        .doc-card p { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+        .doc-card a { color: #6366f1; text-decoration: none; font-size: 0.9rem; }
+        .doc-card .date { font-size: 0.75rem; color: #555; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <div class="header">
