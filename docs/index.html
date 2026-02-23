@@ -274,11 +274,38 @@
                 const response = await fetch('usage-data.json');
                 usageData = await response.json();
                 updateCostsPanel();
-            } catch(e) { console.log('No usage data'); }
+                updateCharts();
+            } catch(e) { console.log('No usage data: ' + e); }
         }
         
         function updateCostsPanel() {
             if(!usageData) return;
+            document.getElementById('total-cost').textContent = '$' + usageData.summary.totalCost.toFixed(2);
+            document.getElementById('total-calls').textContent = usageData.summary.apiCalls;
+            document.getElementById('total-tokens').textContent = usageData.summary.totalTokens.toLocaleString();
+            document.getElementById('avg-cost').textContent = '$' + usageData.summary.avgCostPerCall.toFixed(2);
+            
+            const tbody = document.getElementById('apiCallsTable');
+            tbody.innerHTML = usageData.recentCalls.map(c => 
+                `<tr><td>${c.date} ${c.time}</td><td>${c.model}</td><td>${c.task}</td><td>${c.tokens.toLocaleString()}</td><td>$${c.cost.toFixed(2)}</td></tr>`
+            ).join('');
+        }
+        
+        function updateCharts() {
+            if(!usageData || !usageData.byModel) return;
+            
+            const models = Object.keys(usageData.byModel);
+            const modelCosts = models.map(m => usageData.byModel[m].cost);
+            const colors = ['#6366f1', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
+            
+            if(document.getElementById('costModelPie')) {
+                new Chart(document.getElementById('costModelPie'), {
+                    type: 'doughnut',
+                    data: { labels: models, datasets: [{ data: modelCosts, backgroundColor: colors.slice(0, models.length) }] },
+                    options: { plugins: { legend: { position: 'bottom', labels: { color: '#888' } } }, responsive: true, maintainAspectRatio: false }
+                });
+            }
+        } return;
             document.getElementById('total-cost').textContent = '$' + usageData.summary.totalCost.toFixed(2);
             document.getElementById('total-calls').textContent = usageData.summary.apiCalls;
             document.getElementById('total-tokens').textContent = usageData.summary.totalTokens.toLocaleString();
