@@ -267,11 +267,35 @@
         </main>
     </div>
     <script>
+        let usageData = null;
+        
+        async function loadUsageData() {
+            try {
+                const response = await fetch('usage-data.json');
+                usageData = await response.json();
+                updateCostsPanel();
+            } catch(e) { console.log('No usage data'); }
+        }
+        
+        function updateCostsPanel() {
+            if(!usageData) return;
+            document.getElementById('total-cost').textContent = '$' + usageData.summary.totalCost.toFixed(2);
+            document.getElementById('total-calls').textContent = usageData.summary.apiCalls;
+            document.getElementById('total-tokens').textContent = usageData.summary.totalTokens.toLocaleString();
+            document.getElementById('avg-cost').textContent = '$' + usageData.summary.avgCostPerCall.toFixed(2);
+            
+            const tbody = document.getElementById('apiCallsTable');
+            tbody.innerHTML = usageData.recentCalls.map(c => 
+                `<tr><td>${c.date} ${c.time}</td><td>${c.model}</td><td>${c.task}</td><td>${c.tokens.toLocaleString()}</td><td>$${c.cost.toFixed(2)}</td></tr>`
+            ).join('');
+        }
+        
         function showPanel(panelId) {
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(panelId).classList.add('active');
             event.currentTarget.classList.add('active');
+            if(panelId === 'costs' && !usageData) loadUsageData();
         }
         function toggleTask(el) { el.classList.toggle('checked'); el.parentElement.querySelector('.task-title').style.textDecoration = el.classList.contains('checked') ? 'line-through' : 'none'; }
         function addTask() {
