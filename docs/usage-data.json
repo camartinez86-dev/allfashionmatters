@@ -1,0 +1,19 @@
+{
+  "lastUpdated": "2026-02-22",
+  "note": "Manual import from MiniMax CSV export - provided by user",
+  "summary": {
+    "totalCost": 52.47,
+    "totalTokens": 135000000,
+    "apiCalls": 89,
+    "avgCostPerCall": 0.59
+  },
+  "byModel": {
+    "MiniMax-M2.1": { "calls": 85, "tokens": 130000000, "cost": 50.00 },
+    "MiniMax-M2.5": { "calls": 1, "tokens": 5000000, "cost": 2.47 }
+  },
+  "recentCalls": [
+    {"date": "2026-02-21", "time": "23:00", "model": "MiniMax-M2.1", "task": "chatcompletion", "tokens": 10565402, "cost": 3.19},
+    {"date": "2026-02-21", "time": "22:00", "model": "MiniMax-M2.1", "task": "chatcompletion", "tokens": 1027820, "cost": 0.31},
+    {"date": "2026-02-21", "time": "21:00", "model": "MiniMax-M2.1", "task": "chatcompletion", "tokens": 2616621, "cost": 0.80},
+    {"date": "2026-02-21", "time": "20:00", "model": "MiniMax-M2.1", "task": "chatcompletion", "tokens": 3108553, "cost": 0.94},
+    {"date": "2026-02-21", "time": "19:00
