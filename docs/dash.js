@@ -87,3 +87,6 @@ function closeModal(m){document.getElementById('modal-'+m).classList.remove('on'
 document.querySelectorAll('.nav_item').forEach(i=>{i.addEventListener('click',function(){document.querySelectorAll('.nav_item').forEach(n=>n.classList.remove('active'));this.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+this.dataset.p).classList.add('active')})});
 document.querySelectorAll('.filter').forEach(b=>{b.addEventListener('click',function(){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));this.classList.add('active');curFilter=this.dataset.f;renderTable()})});
 stats();
+
+function switchModel(model){document.getElementById("currentModel").innerText=model;document.getElementById("modelDisplay").innerText=model;alert("Model switched to "+model+". This will apply to your next conversation.")}
+function selectAgent(agent){alert("Agent selection: "+agent)}

@@ -102,6 +102,7 @@ body{font-family:Inter,sans-serif;background:var(--bg);color:var(--txt);min-heig
 <div class="nav_item" data-p="docs"><span class="ic">📄</span> Docs</div>
 <div class="nav_item" data-p="memory"><span class="ic">🧠</span> Memory</div></div>
 <div class="section"><div class="sec_title">System</div>
+<div class="nav_item" data-p="agents"><span class="ic">🤖</span> Agents</div>
 <div class="nav_item" data-p="skills"><span class="ic">⚡</span> Skills</div>
 <div class="nav_item" data-p="cron"><span class="ic">⏰</span> Cron Jobs</div></div>
 <div style="margin-top:auto;padding:20px"><div class="nav_item"><span class="ic">👤</span> User</div></div>
@@ -165,6 +166,51 @@ body{font-family:Inter,sans-serif;background:var(--bg);color:var(--txt);min-heig
 <div style="color:var(--txt2);font-size:0.85rem">BM25 + vectors + reranking enabled</div></div>
 <div class="stats_row"><div class="stat"><div class="stat_t">Backend</div><div class="stat_v" style="font-size:1rem">QMD</div></div>
 <div class="stat"><div class="stat_t">Session</div><div class="stat_v green" style="font-size:1rem">Enabled</div></div></div></div>
+<div class="panel" id="panel-agents">
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Current Agent</div><div class="stat_v purple" style="font-size:1.2rem" id="currentAgent">Main</div></div>
+<div class="stat"><div class="stat_t">Current Model</div><div class="stat_v green" style="font-size:1.2rem" id="currentModel">MiniMax M2.1</div></div>
+</div>
+<div class="card"><div class="card_h"><div class="card_t">Available Agents</div></div>
+<div class="agent_card" style="background:var(--bg3);border:1px solid var(--purple);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer" onclick="selectAgent('main')">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:600">Main Agent</div><div style="font-size:0.8rem;color:var(--txt3)">Primary conversation agent</div></div>
+<span class="tag tag_purple">Active</span>
+</div>
+</div>
+<div class="card"><div class="card_h"><div class="card_t">Model Selection</div></div>
+<div class="grid3">
+<div class="model_card" onclick="switchModel('MiniMax M2.1')" style="background:var(--bg3);border:2px solid var(--purple);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+<div style="font-weight:600;margin-bottom:4px">MiniMax M2.1</div>
+<div style="font-size:0.75rem;color:var(--txt3)">Primary</div>
+<div style="font-size:0.7rem;color:var(--green);margin-top:8px">$0.20/1M</div>
+</div>
+<div class="model_card" onclick="switchModel('MiniMax M2.5')" style="background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+<div style="font-weight:600;margin-bottom:4px">MiniMax M2.5</div>
+<div style="font-size:0.75rem;color:var(--txt3)">Enhanced</div>
+<div style="font-size:0.7rem;color:var(--orange);margin-top:8px">$0.40/1M</div>
+</div>
+<div class="model_card" onclick="switchModel('GPT-4.1')" style="background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+<div style="font-weight:600;margin-bottom:4px">GPT-4.1</div>
+<div style="font-size:0.75rem;color:var(--txt3)">Fallback</div>
+<div style="font-size:0.7rem;color:var(--red);margin-top:8px">$2-8/1M</div>
+</div>
+<div class="model_card" onclick="switchModel('GPT-5 Mini')" style="background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+<div style="font-weight:600;margin-bottom:4px">GPT-5 Mini</div>
+<div style="font-size:0.75rem;color:var(--txt3)">Fast</div>
+<div style="font-size:0.7rem;color:var(--orange);margin-top:8px">$0.60/1M</div>
+</div>
+<div class="model_card" onclick="switchModel('GPT-5.1 Codex')" style="background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+<div style="font-weight:600;margin-bottom:4px">GPT-5.1 Codex</div>
+<div style="font-size:0.75rem;color:var(--txt3)">Coding Only</div>
+<div style="font-size:0.7rem;color:var(--red);margin-top:8px">$10-40/1M</div>
+</div>
+</div>
+<div style="margin-top:20px;padding:16px;background:rgba(168,85,247,0.1);border-radius:12px;border:1px solid var(--purple)">
+<div style="font-weight:600;margin-bottom:8px">⚠️ Switch Model</div>
+<div style="font-size:0.85rem;color:var(--txt2)">Click a model above to switch. This will change the AI model used for your next conversation. Current: <span id="modelDisplay" style="color:var(--purple);font-weight:600">MiniMax M2.1</span></div>
+</div>
+</div>
 <div class="panel" id="panel-skills">
 <div class="grid3">
 <div class="doc_card"><div class="icon">🤖</div><div class="name">github</div><div class="meta">Operations</div></div>
