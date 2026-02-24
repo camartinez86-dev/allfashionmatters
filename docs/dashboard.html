@@ -3,265 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mission Control - Alex Finn Style</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Mission Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--card:#1c2128;--blue:#58a6ff;--blue2:#79c0ff;--gold:#f0b429;--txt:#f0f6fc;--txt2:#8b949e;--txt3:#6e7681;--bdr:rgba(240,246,252,0.1);--active:rgba(88,166,255,0.4);--ok:#3fb950;--warn:#d29922;--err:#f85149}
+:root{--bg:#0d0d12;--bg2:#16161f;--bg3:#1e1e2a;--bg4:#262635;--purple:#a855f7;--orange:#f97316;--green:#10b981;--blue:#3b82f6;--red:#ef4444;--txt:#fff;--txt2:#9ca3af;--txt3:#6b7280;--bdr:#2a2a3a}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:4px}
-.dash{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-.sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
-.logo{padding:0 16px 24px;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:10px}
-.logo i{width:28px;height:28px;background:linear-gradient(135deg,#58a6ff,#79c0ff);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.nav{margin-bottom:20px}
-.nav_t{padding:8px 16px;font-size:0.6rem;text-transform:uppercase;color:var(--txt3);letter-spacing:1px;font-weight:600;font-family:JetBrains Mono}
-.nav_i{display:flex;align-items:center;gap:10px;padding:8px 16px;color:var(--txt2);cursor:pointer;transition:all .2s;border-left:3px solid transparent;font-weight:500;font-size:0.85rem}
-.nav_i:hover{background:rgba(88,166,255,0.08);color:var(--txt)}
-.nav_i.active{background:rgba(88,166,255,0.12);color:var(--blue);border-left-color:var(--blue)}
-.main{padding:24px;overflow-y:auto}
-.panel{display:none}.panel.active{display:block;animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.h{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.h h1{font-size:1.6rem;font-weight:600}
-.acts{display:flex;gap:8px}
-.btn{padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:all .2s}
-.btn1{background:linear-gradient(135deg,#58a6ff,#79c0ff);color:#0d1117}
-.btn1:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(88,166,255,0.3)}
-.btn2{background:var(--bg3);color:var(--txt);border:1px solid var(--bdr)}
-.btn2:hover{background:var(--card);border-color:var(--active)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
-.stat{background:linear-gradient(145deg,#1c2128,#161b22);border:1px solid var(--bdr);border-radius:10px;padding:16px;position:relative}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#58a6ff,#79c0ff);opacity:0;transition:opacity .2s}
-.stat:hover{border-color:var(--active)}.stat:hover::before{opacity:1}
-.stat .v{font-size:1.5rem;font-weight:700;color:var(--blue);font-family:JetBrains Mono}
-.stat .l{color:var(--txt3);font-size:0.75rem;margin-top:4px}
-.stat .t{position:absolute;top:12px;right:12px;font-size:0.7rem;padding:2px 6px;border-radius:10px}
-.tup{background:rgba(63,185,80,0.15);color:var(--ok)}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:linear-gradient(145deg,#1c2128,#161b22);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-bottom:16px}
-.c_h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.c_t{font-size:0.95rem;font-weight:600}
-.u{display:flex;gap:10px;margin-bottom:24px}
-.u_i{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;flex:1}
-.u_i:hover{background:var(--bg3);border-color:var(--blue);transform:translateY(-2px)}
-.u_i .ic{font-size:1.3rem;margin-bottom:6px}
-.u_i .lb{font-size:0.75rem;color:var(--txt2)}
-ul{list-style:none}
-li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr)}
-li:last-child{border:none}
-.chk{width:18px;height:18px;border:2px solid var(--txt3);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.chk:hover{border-color:var(--blue)}
-.chk.ok{background:var(--blue);border-color:var(--blue)}
-.chk.ok::after{content:'✓';color:#0d1117;font-size:0.7rem;font-weight:bold}
-.con{flex:1}
-.tt{font-weight:500;margin-bottom:2px}
-li.ok .tt{text-decoration:line-through;color:var(--txt3)}
-.tm{font-size:0.7rem;color:var(--txt3);font-family:JetBrains Mono}
-.pr{padding:3px 8px;border-radius:10px;font-size:0.6rem;font-weight:600;text-transform:uppercase}
-.ph{background:rgba(248,81,73,0.15);color:var(--err)}
-.pm{background:rgba(210,153,34,0.15);color:var(--warn)}
-.pl{background:rgba(63,185,80,0.15);color:var(--ok)}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cd{aspect-ratio:1;background:var(--bg3);border-radius:6px;padding:6px;font-size:0.75rem;cursor:pointer;transition:all .2s}
-.cd:hover{background:var(--card);border-color:var(--blue)}
-.cd.today{border:2px solid var(--blue)}
-.cd.has{position:relative}
-.cd.has::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--gold);border-radius:50%}
-.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.cn{display:flex;gap:6px}
-.cn button{background:none;border:none;color:var(--txt2);cursor:pointer;padding:4px 8px;border-radius:4px}
-.cn button:hover{background:var(--bg3);color:var(--txt)}
-.d_i{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg3);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:all .2s}
-.d_i:hover{background:var(--card);transform:translateX(4px)}
-.mb{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--bg3);border-radius:16px;font-size:0.75rem;font-family:JetBrains Mono}
-.mb.on{background:rgba(63,185,80,0.15);color:var(--ok)}
-.mod{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center}
-.mod.on{display:flex}
-.mc{background:var(--bg2);border:1px solid var(--bdr);border-radius:14px;padding:24px;width:400px;max-width:90vw}
-.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.mt{font-size:1.1rem;font-weight:600}
-.mx{background:none;border:none;color:var(--txt3);font-size:1.3rem;cursor:pointer}
-.fg{margin-bottom:14px}
-.lb{display:block;font-size:0.8rem;color:var(--txt2);margin-bottom:4px;font-weight:500}
-.in{width:100%;padding:8px 12px;background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:0.85rem}
-.in:focus{outline:none;border-color:var(--blue)}
-.sel{width:100%;padding:8px 12px;background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:0.85rem}
-.chk{display:flex;align-items:center;gap:8px}
-.chk input{width:16px;height:16px;accent-color:var(--blue)}
-.filt{display:flex;gap:6px;margin-bottom:14px}
-.filt button{padding:5px 12px;background:var(--bg3);border:none;border-radius:16px;color:var(--txt2);font-size:0.75rem;cursor:pointer}
-.filt button.on{background:var(--blue);color:#0d1117}
-.ai{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr)}
-.ai:last-child{border:none}
-.ad{width:6px;height:6px;background:var(--blue);border-radius:50%;margin-top:5px;flex-shrink:0}
-.at{font-size:0.8rem;color:var(--txt2)}
-.atm{font-size:0.7rem;color:var(--txt3);font-family:JetBrains Mono}
-@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}}
-@media(max-width:700px){.dash{grid-template-columns:1fr}.sidebar{display:none}}
+.dash{display:grid;grid-template-columns:220px 1fr 280px;height:100vh}
+.sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:16px 0;display:flex;flex-direction:column}
+.logo{padding:12px 16px 20px;font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--txt)}
+.logo span{font-size:1.2rem}
+.nav_item{display:flex;align-items:center;gap:12px;padding:10px 16px;color:var(--txt2);cursor:pointer;transition:all .15s;border-left:3px solid transparent;font-size:0.9rem}
+.nav_item:hover{background:rgba(168,85,247,0.1);color:var(--txt)}
+.nav_item.active{background:rgba(168,85,247,0.15);color:var(--purple);border-left-color:var(--purple)}
+.nav_item .ic{width:18px;text-align:center}
+.section{margin:16px 0}
+.sec_title{padding:8px 16px;font-size:0.65rem;text-transform:uppercase;color:var(--txt3);letter-spacing:1px;font-weight:600}
+.main{background:var(--bg);overflow-y:auto}
+.header{padding:16px 24px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center}
+.search{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;gap:8px}
+.search input{background:none;border:none;outline:none;color:var(--txt);font-size:0.85rem;width:200px}
+.search span{color:var(--txt3);font-size:0.75rem}
+.header_btns{display:flex;gap:8px}
+.btn{padding:8px 16px;border:none;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all .15s}
+.btn_purple{background:var(--purple);color:#fff}
+.btn_purple:hover{background:#9333ea}
+.btn_gray{background:var(--bg3);color:var(--txt2);border:1px solid var(--bdr)}
+.btn_gray:hover{background:var(--bg4)}
+.view_toggle{display:flex;background:var(--bg3);border-radius:6px;padding:4px;gap:4px}
+.view_toggle button{padding:6px 14px;border:none;background:none;color:var(--txt2);font-size:0.8rem;border-radius:4px;cursor:pointer}
+.view_toggle button.active{background:var(--purple);color:#fff}
+.content{padding:20px 24px}
+.stats_row{display:flex;gap:24px;margin-bottom:20px}
+.stat{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:16px 20px;flex:1}
+.stat_t{font-size:0.75rem;color:var(--txt3);margin-bottom:4px}
+.stat_v{font-size:1.5rem;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:24px}
+.col_day{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:12px;min-height:200px}
+.day_h{font-size:0.75rem;color:var(--txt3);margin-bottom:10px;text-align:center}
+.day_num{font-weight:600;margin-bottom:8px}
+.task_block{padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:0.75rem;font-weight:500;cursor:pointer;transition:transform .1s}
+.task_block:hover{transform:scale(1.02)}
+.task_time{font-size:0.65rem;opacity:0.8;margin-bottom:2px}
+.task_purple{background:rgba(168,85,247,0.3);border-left:3px solid var(--purple)}
+.task_orange{background:rgba(249,115,22,0.3);border-left:3px solid var(--orange)}
+.task_green{background:rgba(16,185,129,0.3);border-left:3px solid var(--green)}
+.task_blue{background:rgba(59,130,246,0.3);border-left:3px solid var(--blue)}
+.task_red{background:rgba(239,68,68,0.3);border-left:3px solid var(--red)}
+.next_up{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:16px}
+.next_h{font-size:0.9rem;font-weight:600;margin-bottom:14px}
+.next_item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bdr)}
+.next_item:last-child{border:none}
+.next_l{display:flex;align-items:center;gap:10px}
+.next_dot{width:8px;height:8px;border-radius:50%}
+.next_t{font-size:0.85rem}
+.next_r{font-size:0.75rem;color:var(--txt3)}
+.always_run{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(59,130,246,0.15);border-radius:8px;margin-bottom:16px}
+.always_run .dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.always_run span{font-size:0.8rem;color:var(--blue)}
+.right{background:var(--bg2);border-left:1px solid var(--bdr);padding:16px;overflow-y:auto}
+.right_h{font-size:0.9rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.live_dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.activity_item{padding:10px 0;border-bottom:1px solid var(--bdr)}
+.activity_item:last-child{border:none}
+.activity_t{font-size:0.8rem;color:var(--txt2);margin-bottom:4px}
+.activity_tm{font-size:0.7rem;color:var(--txt3)}
+.empty{color:var(--txt3);font-size:0.8rem;font-style:italic}
+.doc_item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:8px;margin-bottom:8px;cursor:pointer;transition:all .15s}
+.doc_item:hover{background:var(--bg4);transform:translateX(4px)}
+.doc_icon{font-size:1rem}
+.doc_name{font-size:0.85rem}
+.doc_meta{font-size:0.7rem;color:var(--txt3)}
+.tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.6rem;font-weight:600}
+.tag_purple{background:rgba(168,85,247,0.2);color:var(--purple)}
+.tag_orange{background:rgba(249,115,22,0.2);color:var(--orange)}
+.tag_green{background:rgba(16,185,129,0.2);color:var(--green)}
+.tag_blue{background:rgba(59,130,246,0.2);color:var(--blue)}
+.panel{display:none}
+.panel.active{display:block}
+.morning_brief{background:linear-gradient(135deg,rgba(249,115,22,0.2),rgba(168,85,247,0.2));border:1px solid var(--orange);border-radius:10px;padding:16px;margin-bottom:20px}
+.morning_title{font-size:0.9rem;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.morning_title span{font-size:1rem}
+.morning_desc{font-size:0.8rem;color:var(--txt2)}
+@media(max-width:1100px){.dash{grid-template-columns:180px 1fr}.right{display:none}}
+@media(max-width:800px){.dash{grid-template-columns:1fr}.sidebar{display:none}}
 </style>
 </head>
 <body>
 <div class="dash">
 <aside class="sidebar">
-<div class="logo"><i>🚀</i>Mission Control</div>
-<div class="nav"><div class="nav_t">Main</div>
-<div class="nav_i active" data-p="overview"><span>📊</span> Overview</div>
-<div class="nav_i" data-p="calendar"><span>📅</span> Calendar</div>
-<div class="nav_i" data-p="tasks"><span>✓</span> Tasks</div>
-<div class="nav_i" data-p="docs"><span>📄</span> Docs</div>
+<div class="logo"><span>🚀</span> Mission Control</div>
+<div class="section">
+<div class="sec_title">Main</div>
+<div class="nav_item" data-p="tasks"><span class="ic">✓</span> Tasks</div>
+<div class="nav_item" data-p="content"><span class="ic">📝</span> Content</div>
+<div class="nav_item" data-p="calendar"><span class="ic">📅</span> Calendar</div>
+<div class="nav_item" data-p="docs"><span class="ic">📄</span> Docs</div>
 </div>
-<div class="nav"><div class="nav_t">System</div>
-<div class="nav_i" data-p="memory"><span>🧠</span> Memory</div>
-<div class="nav_i" data-p="skills"><span>⚡</span> Skills</div>
-<div class="nav_i" data-p="cron"><span>⏰</span> Cron Jobs</div>
-<div class="nav_i" data-p="models"><span>🤖</span> Models</div>
+<div class="section">
+<div class="sec_title">System</div>
+<div class="nav_item" data-p="memory"><span class="ic">🧠</span> Memory</div>
+<div class="nav_item" data-p="skills"><span class="ic">⚡</span> Skills</div>
+<div class="nav_item" data-p="cron"><span class="ic">⏰</span> Cron Jobs</div>
+<div class="nav_item" data-p="models"><span class="ic">🤖</span> Models</div>
 </div>
-<div class="nav" style="margin-top:auto"><div class="nav_i"><span>◉</span><span style="font-family:JetBrains Mono;font-size:0.75rem">MiniMax M2.1</span></div></div>
+<div style="margin-top:auto;padding:16px">
+<div class="nav_item"><span class="ic">👤</span> User</div>
+</div>
 </aside>
 <main class="main">
-<div class="panel active" id="panel-overview">
-<div class="h"><h1>Overview</h1><div class="acts"><button class="btn btn1" onclick="openM('task')>+ Add Task</button><button class="btn btn2" onclick="openM('event')>+ Add Event</button></div></div>
-<div class="stats">
-<div class="stat"><div class="v" id="s-tasks">0</div><div class="l">Active Tasks</div><div class="t tup">+0 today</div></div>
-<div class="stat"><div class="v" id="s-events">0</div><div class="l">Upcoming Events</div><div class="t tup">+0 this week</div></div>
-<div class="stat"><div class="v" id="s-remind">0</div><div class="l">Pending Reminders</div></div>
-<div class="stat"><div class="v" id="s-skills">0</div><div class="l">Active Skills</div></div>
+<div class="header">
+<div class="search"><span>⌘K</span><input type="text" placeholder="Search..."></div>
+<div class="header_btns">
+<div class="view_toggle">
+<button class="active" data-v="week">Week</button>
+<button data-v="today">Today</button>
 </div>
-<div class="u">
-<div class="u_i" onclick="openM('task')"><div class="ic">✓</div><div class="lb">Add Task</div></div>
-<div class="u_i" onclick="openM('event')"><div class="ic">📅</div><div class="lb">Add Event</div></div>
-<div class="u_i" onclick="switchP('tasks')"><div class="ic">📋</div><div class="lb">View Tasks</div></div>
-<div class="u_i" onclick="switchP('memory')"><div class="ic">🧠</div><div class="lb">Memory</div></div>
-<div class="u_i" onclick="switchP('cron')"><div class="ic">⏰</div><div class="lb">Cron Jobs</div></div>
+<button class="btn btn_gray">Pause</button>
+<button class="btn btn_gray">Ping</button>
 </div>
-<div class="grid2">
-<div class="card"><div class="c_h"><div class="c_t">Recent Activity</div></div>
-<div id="alist"><div class="ai"><div class="ad"></div><div><div class="at">Dashboard loaded - Alex Finn Style</div><div class="atm">Just now</div></div></div>
-<div class="ai"><div class="ad" style="background:var(--gold)"></div><div><div class="at">QMD memory backend enabled</div><div class="atm">Today</div></div></div></div></div>
-<div class="card"><div class="c_h"><div class="c_t">Upcoming Events</div></div>
-<div id="uevents"><div class="ai"><div class="at" style="color:var(--txt3)">No upcoming events</div></div></div></div>
-</div></div>
+</div>
+<div class="content">
+<div class="panel active" id="panel-tasks">
+<div class="stats_row">
+<div class="stat"><div class="stat_t">This week</div><div class="stat_v">0</div></div>
+<div class="stat"><div class="stat_t">In progress</div><div class="stat_v">3</div></div>
+<div class="stat"><div class="stat_t">Total</div><div class="stat_v">25</div></div>
+<div class="stat"><div class="stat_t">Completion</div><div class="stat_v">40%</div></div>
+</div>
+<div class="grid">
+<div class="col_day"><div class="day_h">SUN</div><div class="day_num">22</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">MON</div><div class="day_num">23</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">TUE</div><div class="day_num">24</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+<div class="task_block task_red"><div class="task_time">2:00 PM</div>Competitor YouTube</div>
+</div>
+<div class="col_day"><div class="day_h">WED</div><div class="day_num">25</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">THU</div><div class="day_num">26</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">FRI</div><div class="day_num">27</div>
+<div class="task_block task_purple"><div class="task_time">5:00 AM</div>AI Scarcity Research</div>
+<div class="task_block task_orange"><div class="task_time">8:00 AM</div>Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">SAT</div><div class="day_num">28</div>
+</div>
+</div>
+<div class="next_up">
+<div class="next_h">Next Up</div>
+<div class="always_run"><div class="dot"></div><span>Mission Control Check - Every 30 min</span></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--purple)"></div><div class="next_t">AI Scarcity Research</div></div><div class="next_r">In 17 min</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--orange)"></div><div class="next_t">Morning Brief</div></div><div class="next_r">3 hrs</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--red)"></div><div class="next_t">Competitor YouTube Scan</div></div><div class="next_r">Tomorrow</div></div>
+</div>
+</div>
 <div class="panel" id="panel-calendar">
-<div class="h"><h1>Calendar</h1><div class="acts"><button class="btn btn1" onclick="openM('event')>+ Add Event</button></div></div>
-<div class="card"><div class="ch"><h2 id="cmo">February 2026</h2><div class="cn"><button onclick="cM(-1)">←</button><button onclick="cM(1)">→</button></div></div><div class="cal" id="cal"></div></div>
-<div class="card"><div class="c_h"><div class="c_t">Todays Events</div></div><div id="tevents"><div class="ai"><div class="at" style="color:var(--txt3)">No events today</div></div></div></div>
+<div class="morning_brief">
+<div class="morning_title"><span>☀️</span> Morning Brief</div>
+<div class="morning_desc">Daily automated report at 8:00 AM - Weather, calendar, tasks, news</div>
 </div>
-<div class="panel" id="panel-tasks">
-<div class="h"><h1>Tasks</h1><div class="acts"><button class="btn btn1" onclick="openM('task')>+ Add Task</button></div></div>
-<div class="filt"><button class="on" data-f="all" onclick="filtT('all')">All</button><button data-f="active" onclick="filtT('active')">Active</button><button data-f="completed" onclick="filtT('completed')">Completed</button></div>
-<div class="card"><ul id="tlist"></ul></div>
+<div class="grid">
+<div class="col_day"><div class="day_h">SUN</div><div class="day_num">22</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">MON</div><div class="day_num">23</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">TUE</div><div class="day_num">24</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">WED</div><div class="day_num">25</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">THU</div><div class="day_num">26</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">FRI</div><div class="day_num">27</div>
+<div class="task_block task_purple">5:00 AM AI Research</div>
+<div class="task_block task_orange">8:00 AM Morning Brief</div>
+</div>
+<div class="col_day"><div class="day_h">SAT</div><div class="day_num">28</div></div>
+</div>
 </div>
 <div class="panel" id="panel-docs">
-<div class="h"><h1>Documentation</h1></div>
-<div class="grid2">
-<div class="card"><div class="c_h"><div class="c_t">📁 Workspace Docs</div></div>
-<div class="d_i"><span>📋</span><span>AGENTS.md</span></div>
-<div class="d_i"><span>👤</span><span>USER.md</span></div>
-<div class="d_i"><span>🧠</span><span>MEMORY.md</span></div>
-<div class="d_i"><span>⚡</span><span>SOUL.md</span></div>
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Total Docs</div><div class="stat_v">12</div></div>
+<div class="stat"><div class="stat_t">Last Modified</div><div class="stat_v">Today</div></div>
 </div>
-<div class="card"><div class="c_h"><div class="c_t">📂 Project Files</div></div>
-<div class="d_i"><span>🌐</span><span>allfashionmatters.com</span></div>
-<div class="d_i"><span>📊</span><span>Content Strategy</span></div>
-<div class="d_i"><span>📅</span><span>Content Calendar</span></div>
-</div>
-</div>
+<div class="doc_item"><span class="doc_icon">📋</span><div><div class="doc_name">AGENTS.md</div><div class="doc_meta">2 KB · Modified today</div></div></div>
+<div class="doc_item"><span class="doc_icon">👤</span><div><div class="doc_name">USER.md</div><div class="doc_meta">1 KB · Modified yesterday</div></div></div>
+<div class="doc_item"><span class="doc_icon">🧠</span><div><div class="doc_name">MEMORY.md</div><div class="doc_meta">4 KB · Modified today</div></div></div>
+<div class="doc_item"><span class="doc_icon">⚡</span><div><div class="doc_name">SOUL.md</div><div class="doc_meta">1 KB · Modified yesterday</div></div></div>
+<div class="doc_item"><span class="doc_icon">📊</span><div><div class="doc_name">Content Strategy</div><div class="doc_meta">8 KB · Modified 2 days ago</div></div></div>
+<div class="doc_item"><span class="doc_icon">📅</span><div><div class="doc_name">Content Calendar</div><div class="doc_meta">6 KB · Modified 3 days ago</div></div></div>
 </div>
 <div class="panel" id="panel-memory">
-<div class="h"><h1>Memory</h1></div>
-<div class="grid2">
-<div class="card"><div class="c_h"><div class="c_t">🧠 Recent Memories</div></div>
-<div class="ai"><div class="ad"></div><div><div class="at">QMD backend enabled</div><div class="atm">Today</div></div></div>
-<div class="ai"><div class="ad"></div><div><div class="at">Memory enhancements active</div><div class="atm">Today</div></div></div>
-<div class="ai"><div class="ad"></div><div><div class="at">Dashboard upgraded to Alex Finn style</div><div class="atm">Today</div></div></div>
+<div class="morning_brief">
+<div class="morning_title"><span>🧠</span> QMD Memory Backend</div>
+<div class="morning_desc">Semantic search enabled · BM25 + vectors + reranking</div>
 </div>
-<div class="card"><div class="c_h"><div class="c_t">📊 Memory Stats</div></div>
-<p style="font-family:JetBrains Mono;font-size:0.85rem;color:var(--txt2);margin-bottom:6px"><span style="color:var(--blue)">Backend:</span> QMD</p>
-<p style="font-family:JetBrains Mono;font-size:0.85rem;color:var(--txt2);margin-bottom:6px"><span style="color:var(--blue)">Citations:</span> Auto</p>
-<p style="font-family:JetBrains Mono;font-size:0.85rem;color:var(--txt2);margin-bottom:6px"><span style="color:var(--blue)">Index:</span> MEMORY.md + memory/*.md</p>
-<p style="font-family:JetBrains Mono;font-size:0.85rem;color:var(--txt2)"><span style="color:var(--blue)">Session Memory:</span> Enabled</p>
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Index Size</div><div class="stat_v">15</div></div>
+<div class="stat"><div class="stat_t">Last Sync</div><div class="stat_v">Now</div></div>
 </div>
-</div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--green)"></div><div class="next_t">QMD backend enabled</div></div><div class="next_r">Today</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--blue)"></div><div class="next_t">Memory flush enabled</div></div><div class="next_r">Today</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--purple)"></div><div class="next_t">Session memory active</div></div><div class="next_r">Always</div></div>
 </div>
 <div class="panel" id="panel-skills">
-<div class="h"><h1>Skills</h1></div>
-<div class="card"><div class="c_h"><div class="c_t">⚡ Active Skills</div></div>
-<div class="grid3">
-<div class="stat"><div style="font-size:1rem">🤖</div><div class="l">github</div></div>
-<div class="stat"><div style="font-size:1rem">🌦️</div><div class="l">weather</div></div>
-<div class="stat"><div style="font-size:1rem">💻</div><div class="l">coding-agent</div></div>
-<div class="stat"><div style="font-size:1rem">🔧</div><div class="l">git-essentials</div></div>
-<div class="stat"><div style="font-size:1rem">🛠️</div><div class="l">self-evolve</div></div>
-<div class="stat"><div style="font-size:1rem">🌐</div><div class="l">browser-use</div></div>
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Active Skills</div><div class="stat_v">6</div></div>
 </div>
-</div>
+<div class="doc_item"><span class="doc_icon">🤖</span><div><div class="doc_name">github</div><div class="doc_meta">GitHub operations</div></div></div>
+<div class="doc_item"><span class="doc_icon">🌦️</span><div><div class="doc_name">weather</div><div class="doc_meta">Weather forecasts</div></div></div>
+<div class="doc_item"><span class="doc_icon">💻</span><div><div class="doc_name">coding-agent</div><div class="doc_meta">Codex automation</div></div></div>
+<div class="doc_item"><span class="doc_icon">🛠️</span><div><div class="doc_name">self-evolve</div><div class="doc_meta">Self-improvement</div></div></div>
 </div>
 <div class="panel" id="panel-cron">
-<div class="h"><h1>Cron Jobs</h1></div>
-<div class="card"><div class="c_h"><div class="c_t">⏰ Scheduled Jobs</div></div>
-<ul>
-<li><div class="chk ok"></div><div class="con"><div class="tt">Morning Report</div><div class="tm">7:00 AM daily</div></div><span class="pr pl">Active</span></li>
-<li><div class="chk ok"></div><div class="con"><div class="tt">Content Researcher</div><div class="tm">9:00 AM daily</div></div><span class="pr pl">Active</span></li>
-<li><div class="chk ok"></div><div class="con"><div class="tt">Website Quality Audit</div><div class="tm">Daily</div></div><span class="pr pl">Active</span></li>
-</ul>
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Active Jobs</div><div class="stat_v">3</div></div>
 </div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--orange)"></div><div class="next_t">Morning Report</div></div><div class="next_r">8:00 AM daily</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--purple)"></div><div class="next_t">Content Researcher</div></div><div class="next_r">9:00 AM daily</div></div>
+<div class="next_item"><div class="next_l"><div class="next_dot" style="background:var(--green)"></div><div class="next_t">Website Audit</div></div><div class="next_r">Daily</div></div>
 </div>
 <div class="panel" id="panel-models">
-<div class="h"><h1>Models</h1></div>
-<div class="card"><div class="c_h"><div class="c_t">🤖 Active Model</div></div><div class="mb on"><span>◉</span> MiniMax M2.1 (Primary)</div></div>
-<div class="card"><div class="c_h"><div class="c_t">🔄 Fallback Chain</div></div>
-<ul>
-<li><div class="con"><div class="tt">MiniMax M2.1</div></div><span class="pr pl">Primary</span></li>
-<li><div class="con"><div class="tt">MiniMax M2.5</div></div><span class="pr pm">Fallback</span></li>
-<li><div class="con"><div class="tt">OpenAI GPT-4.1</div></div><span class="pr pm">Fallback</span></li>
-<li><div class="con"><div class="tt">OpenAI GPT-5 Mini</div></div><span class="pr ph">Final</span></li>
-</ul>
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Current</div><div class="stat_v">MiniMax M2.5</div></div>
+</div>
+<div class="doc_item"><span class="doc_icon">◉</span><div><div class="doc_name">MiniMax M2.1</div><div class="doc_meta">Primary</div></div><span class="tag tag_purple">Active</span></div>
+<div class="doc_item"><span class="doc_icon">○</span><div><div class="doc_name">MiniMax M2.5</div><div class="doc_meta">Fallback</div></div></div>
+<div class="doc_item"><span class="doc_icon">○</span><div><div class="doc_name">GPT-4.1</div><div class="doc_meta">Fallback</div></div></div>
+</div>
+<div class="panel" id="panel-content">
+<div class="stats_row">
+<div class="stat"><div class="stat_t">Blog Posts</div><div class="stat_v">8</div></div>
+<div class="stat"><div class="stat_t">Social Posts</div><div class="stat_v">24</div></div>
+</div>
 </div>
 </div>
 </main>
+<aside class="right">
+<div class="right_h"><div class="live_dot"></div>Live Activity</div>
+<div class="activity_item">
+<div class="activity_t">Dashboard loaded - Alex Finn Style</div>
+<div class="activity_tm">Just now</div>
 </div>
-<div class="mod" id="modal-task">
-<div class="mc">
-<div class="mh"><div class="mt">Add Task</div><button class="mx" onclick="closeM('task')">×</button></div>
-<div class="fg"><label class="lb">Task Title</label><input type="text" class="in" id="task-title" placeholder="Enter task title..."></div>
-<div class="fg"><label class="lb">Priority</label><select class="sel" id="task-priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
-<div class="fg"><label class="lb">Due Date (optional)</label><input type="date" class="in" id="task-due"></div>
-<div class="fg"><label class="chk"><input type="checkbox" id="task-reminder"><span>Set reminder</span></label></div>
-<button class="btn btn1" style="width:100%" onclick="addTask()">Add Task</button>
+<div class="activity_item">
+<div class="activity_t">QMD memory backend enabled</div>
+<div class="activity_tm">Today</div>
 </div>
+<div class="activity_item">
+<div class="activity_t">MiniMax M2.5 activated</div>
+<div class="activity_tm">Today</div>
 </div>
-<div class="mod" id="modal-event">
-<div class="mc">
-<div class="mh"><div class="mt">Add Event</div><button class="mx" onclick="closeM('event')">×</button></div>
-<div class="fg"><label class="lb">Event Title</label><input type="text" class="in" id="event-title" placeholder="Enter event title..."></div>
-<div class="fg"><label class="lb">Date</label><input type="date" class="in" id="event-date"></div>
-<div class="fg"><label class="lb">Time</label><input type="time" class="in" id="event-time"></div>
-<div class="fg"><label class="lb">Type</label><select class="sel" id="event-type"><option value="default">Default</option><option value="social">Social</option><option value="task">Task</option></select></div>
-<div class="fg"><label class="chk"><input type="checkbox" id="event-reminder"><span>Set reminder</span></label></div>
-<button class="btn btn1" style="width:100%" onclick="addEvent()">Add Event</button>
+<div class="activity_item">
+<div class="activity_t">Morning report delivered</div>
+<div class="activity_tm">8:00 AM</div>
 </div>
+</aside>
 </div>
 <script>
-var tasks=JSON.parse(localStorage.getItem("mctasks")||"[]");
-var events=JSON.parse(localStorage.getItem("mcevents")||"[]");
-var curFilt="all";
-var curMo=new Date();
-function sp(p){document.querySelectorAll(".nav_i").forEach(n=>n.classList.remove("active"));document.querySelector("[data-p="+p+"]").classList.add("active");document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById("panel-"+p).classList.add("active");if(p==="calendar")rc();if(p==="tasks")rt()}
-document.querySelectorAll(".nav_i").forEach(i=>{i.addEventListener("click",()=>sp(i.dataset.p))});
-function openM(t){document.getElementById("modal-"+t).classList.add("on")}
-function closeM(t){document.getElementById("modal-"+t).classList.remove("on")}
-function addTask(){var t=document.getElementById("task-title").value;var p=document.getElementById("task-priority").value;var d=document.getElementById("task-due").value;var r=document.getElementById("task-reminder").checked;if(!t)return;tasks.push({id:Date.now(),title:t,priority:p,due:d,reminder:r,ok:false});localStorage.setItem("mctasks",JSON.stringify(tasks));closeM('task');rt();updStats()}
-function addEvent(){var t=document.getElementById("event-title").value;var d=document.getElementById("event-date").value;var ti=document.getElementById("event-time").value;var ty=document.getElementById("event-type").value;var r=document.getElementById("event-reminder").checked;if(!t||!d)return;events.push({id:Date.now(),title:t,date:d,time:ti,type:ty,reminder:r});localStorage.setItem("mcevents",JSON.stringify(events));closeM('event');rc();updStats()}
-function rt(){var f=tasks;if(curFilt==="active")f=tasks.filter(t=>!t.ok);if(curFilt==="completed")f=tasks.filter(t=>t.ok);var h="";f.forEach(t=>{var pr=t.priority==="high"?"ph":t.priority==="medium"?"pm":"pl";h+='<li class="'+(t.ok?"ok":"")+'"><div class="chk'+(t.ok?" ok":"")+'" onclick="ttog('+t.id+')"></div><div class="con"><div class="tt">'+t.title+'</div>'+(t.due?'<div class="tm">Due: '+t.due+'</div>':'')+'</div><span class="pr '+pr+'">'+t.priority+'</span></li>'});document.getElementById("tlist").innerHTML=h||'<li><div class="at" style="color:var(--txt3)">No tasks yet</div></li>'}
-function ttog(id){var i=tasks.findIndex(t=>t.id===id);if(i>-1){tasks[i].ok=!tasks[i].ok;localStorage.setItem("mctasks",JSON.stringify(tasks));rt();updStats()}}
-function filtT(f){curFilt=f;document.querySelectorAll(".filt button").forEach(b=>b.classList.remove("on"));document.querySelector("[data-f="+f+"]").classList.add("on");rt()}
-function rc(){var m=curMo.getMonth();var y=curMo.getFullYear();document.getElementById("cmo").innerText=new Date(y,m).toLocaleString("default",{month:"long",year:"numeric"});var fd=new Date(y,m,1).getDay();var ld=new Date(y,m+1,0).getDate();var h="";for(var i=0;i<fd;i++)h+='<div></div>';var td=new Date();for(var d=1;d<=ld;d++){var tdA=td.getDate()===d&&td.getMonth()===m&&td.getFullYear()===y?" today":"";var ev=events.some(e=>e.date===y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0"))?" has":"";h+='<div class="cd'+tdA+ev+'" onclick="selD('+d+')">'+d+'</div>'}document.getElementById("cal").innerHTML=h}
-function cM(d){curMo.setMonth(curMo.getMonth()+d);rc()}
-function selD(d){var m=curMo.getMonth()+1;var dA=curMo.getFullYear()+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");var evs=events.filter(e=>e.date===dA);var h="";evs.forEach(e=>{h+='<div class="ai"><div class="ad" style="background:var(--'+(e.type==="social"?"err":e.type==="task"?"blue":"gold")+'"></div><div><div class="at">'+e.title+'</div><div class="atm">'+(e.time||"All day")+'</div></div></div>'});document.getElementById("tevents").innerHTML=h||'<div class="ai"><div class="at" style="color:var(--txt3)">No events</div></div>'}
-function updStats(){var at=tasks.filter(t=>!t.ok).length;var ue=events.filter(e=>new Date(e.date)>=new Date()).length;var rem=events.filter(e=>e.reminder).length;document.getElementById("s-tasks").innerText=at;document.getElementById("s-events").innerText=ue;document.getElementById("s-remind").innerText=rem;document.getElementById("s-skills").innerText=6}
-updStats();rc();rt();
+document.querySelectorAll('.nav_item').forEach(item=>{
+item.addEventListener('click',function(){
+document.querySelectorAll('.nav_item').forEach(n=>n.classList.remove('active'));
+this.classList.add('active');
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.getElementById('panel-'+this.dataset.p).classList.add('active');
+});
+});
+document.querySelectorAll('.view_toggle button').forEach(btn=>{
+btn.addEventListener('click',function(){
+document.querySelectorAll('.view_toggle button').forEach(b=>b.classList.remove('active'));
+this.classList.add('active');
+});
+});
 </script>
 </body>
 </html>
