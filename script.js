@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollSpy();
     initMotionPreference();
     initScrollAnimations();
+    initLazyImages();
     renderProducts();
     renderHotProducts();
     renderDesignerSpotlights();
@@ -18,6 +19,39 @@ document.addEventListener('DOMContentLoaded', () => {
     initFloatingCTA();
     lucide.createIcons();
 });
+
+function initLazyImages() {
+    // Lazy load images using Intersection Observer
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.onload = () => img.classList.add('loaded');
+                    img.onerror = () => {
+                        // Fallback for failed images
+                        img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%231A1A1A" width="400" height="300"/><text fill="%23666" x="50%" y="50%" text-anchor="middle">Image unavailable</text></svg>';
+                    };
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        });
+    }
+}
 
 function initNavigation() {
     const navbar = document.getElementById('navbar');
