@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initMotionPreference();
     initScrollAnimations();
     initLazyImages();
+    initNavbarHideOnScroll();
+    initSmoothScroll();
+    initKeyboardNavigation();
     renderProducts();
     renderHotProducts();
     renderDesignerSpotlights();
@@ -19,6 +22,122 @@ document.addEventListener('DOMContentLoaded', () => {
     initFloatingCTA();
     lucide.createIcons();
 });
+
+// Enhanced Smooth Scroll with Keyboard Support
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Set focus for accessibility
+                targetElement.setAttribute('tabindex', '-1');
+                targetElement.focus({ preventScroll: true });
+            }
+        });
+    });
+}
+
+// Navbar hide on scroll down, show on scroll up
+function initNavbarHideOnScroll() {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+    
+    let lastScroll = 0;
+    const scrollThreshold = 100;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            navbar.classList.remove('navbar-hide', 'navbar-show');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+            // Scrolling down
+            navbar.classList.add('navbar-hide');
+            navbar.classList.remove('navbar-show');
+        } else if (currentScroll < lastScroll) {
+            // Scrolling up
+            navbar.classList.remove('navbar-hide');
+            navbar.classList.add('navbar-show');
+        }
+        
+        lastScroll = currentScroll;
+    }, { passive: true });
+}
+
+// Enhanced Keyboard Navigation
+function initKeyboardNavigation() {
+    // Trap focus in modals
+    document.querySelectorAll('.exit-intent-modal, #mobile-menu').forEach(modal => {
+        if (!modal.classList.contains('hidden') || modal.classList.contains('is-visible')) {
+            trapFocus(modal);
+        }
+    });
+    
+    // ESC key to close modals
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            // Close mobile menu
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+                if (mobileBtn) {
+                    mobileBtn.innerHTML = '<i data-lucide="menu" class="w-8 h-8"></i>';
+                    lucide.createIcons();
+                }
+            }
+            
+            // Close exit intent modal
+            const exitModal = document.getElementById('exit-intent-modal');
+            if (exitModal && exitModal.classList.contains('is-visible')) {
+                exitModal.classList.remove('is-visible');
+                document.body.classList.remove('exit-intent-open');
+            }
+        }
+    });
+}
+
+// Trap focus within modal for accessibility
+function trapFocus(container) {
+    const focusableElements = container.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    
+    container.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        
+        if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+                lastFocusable.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastFocusable) {
+                firstFocusable.focus();
+                e.preventDefault();
+            }
+        }
+    });
+    
+    // Focus first element
+    if (firstFocusable) firstFocusable.focus();
+}
 
 function initLazyImages() {
     // Lazy load images using Intersection Observer
@@ -217,7 +336,21 @@ function renderProducts() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
-    grid.innerHTML = products
+    // Show loading skeleton
+    grid.innerHTML = Array(4).fill(0).map(() => `
+        <div class="skeleton-card bg-white rounded-xl overflow-hidden border border-gray-100">
+            <div class="skeleton-image"></div>
+            <div class="p-6 space-y-3">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-text" style="width: 60%"></div>
+                <div class="skeleton-text" style="width: 40%"></div>
+            </div>
+        </div>
+    `).join('');
+
+    // Simulate loading delay
+    setTimeout(() => {
+        grid.innerHTML = products
         .map(product => `
         <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 reveal-on-scroll flex flex-col h-full">
             <div class="relative aspect-square overflow-hidden bg-gray-100">

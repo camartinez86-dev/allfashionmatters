@@ -795,3 +795,183 @@ body.reduce-motion .animate-fade-in-up {
         border-width: 2px;
     }
 }
+
+/* Container Queries - Modern Responsive Design */
+@container (min-width: 400px) {
+    .product-card {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .product-card .product-image {
+        width: 40%;
+    }
+    
+    .product-card .product-info {
+        width: 60%;
+    }
+}
+
+/* Improved Focus States for Keyboard Navigation */
+:focus {
+    outline: 2px solid var(--color-turquoise);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-turquoise);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(64, 224, 208, 0.3);
+}
+
+/* Enhanced Card Hover Effects */
+.card-hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Improved Stagger Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Pulse Animation for CTA Buttons */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(64, 224, 208, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(64, 224, 208, 0);
+    }
+}
+
+.pulse-once {
+    animation: pulse-glow 2s ease-out;
+}
+
+/* Smooth Image Loading */
+.img-loading {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.img-loaded {
+    opacity: 1;
+}
+
+/* Shimmer Loading Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Product Card Loading Skeleton */
+.skeleton-card {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.skeleton-image {
+    aspect-ratio: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-title {
+    height: 1.5rem;
+    width: 70%;
+    border-radius: 4px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Navbar Scroll Behavior - Hide on Scroll Down, Show on Scroll Up */
+.navbar-hide {
+    transform: translateY(-100%);
+}
+
+.navbar-show {
+    transform: translateY(0);
+}
+
+/* Better Touch Targets for Mobile */
+@media (pointer: coarse) {
+    .btn-primary-outline,
+    button,
+    a.btn {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 12px 24px;
+    }
+    
+    nav .nav-link {
+        padding: 12px 16px;
+    }
+}
+
+/* Optimized GPU Acceleration */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Smooth Backdrop Filter Fallback */
+@supports not (backdrop-filter: blur(12px)) {
+    .glass-nav,
+    .glass-panel,
+    .glass-card {
+        background: rgba(10, 10, 10, 0.95);
+    }
+}
