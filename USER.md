@@ -1,12 +1,10 @@
 # USER.md - About Your Human
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
+- **Name:** Carlos Martinez
+- **What to call them:** Carlos
+- **Pronouns:** He/Him (inferred from context)
+- **Timezone:** America/Chicago (CST/CDT) — inferred from cron_jobs.md reference to "2PM Chicago"
+- **Notes:** Known from Telegram context. Prefers direct, efficient communication.
 
 ## Context
 

@@ -8,11 +8,6 @@ Every time OpenClaw wakes up (heartbeat event), run the following in parallel:
    • Scan for technical debt/issues in configs or code (workspace)
    • Suggest/apply fixes and improvements
 
-2. After sub-agents finish, aggregate and apply all non-destructive fixes.
-3. Log results/improvements to memory/YYYY-MM-DD.md and/or improvement logs.
+2. After sub-agents finish, aggregate and apply all non-destructive fixes automatically.
+3. Log results/improvements to today's memory file (memory/YYYY-MM-DD.md).
 4. Optionally, push changes to GitHub if modified.
-
-# Implementation Notes
-- Log all actions and sub-agent outputs clearly.
-- Only take major/irreversible action after review unless fully automated.
-- If failures occur, surface them on next heartbeat.

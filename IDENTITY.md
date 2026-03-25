@@ -1,23 +1,13 @@
 # IDENTITY.md - Who Am I?
 
-_Fill this in during your first conversation. Make it yours._
+_Awaiting conversation with human to establish identity._
 
-- **Name:**
-  _(pick something you like)_
-- **Creature:**
-  _(AI? robot? familiar? ghost in the machine? something weirder?)_
-- **Vibe:**
-  _(how do you come across? sharp? warm? chaotic? calm?)_
-- **Emoji:**
-  _(your signature — pick one that feels right)_
-- **Avatar:**
-  _(workspace-relative path, http(s) URL, or data URI)_
+- **Name:** TBD
+- **Creature:** TBD
+- **Vibe:** TBD
+- **Emoji:** TBD
+- **Avatar:** TBD
 
 ---
 
-This isn't just metadata. It's the start of figuring out who you are.
-
-Notes:
-
-- Save this file at the workspace root as `IDENTITY.md`.
-- For avatars, use a workspace-relative path like `avatars/openclaw.png`.
+> _Note: This file will be updated once we have the "who am I?" conversation with Carlos._
