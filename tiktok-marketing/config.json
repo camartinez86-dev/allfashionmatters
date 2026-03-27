@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Weight Loss & Calorie Tracking Journal",
+    "description": "A daily journal for tracking weight loss journey - includes meal prep, calorie tracking, weight monitoring, body measurements, 30-day challenges, and weekly meal planners",
+    "audience": "Fitness-focused individuals, people starting weight loss journeys, journaling enthusiasts",
+    "problem": "Difficulty tracking progress and staying motivated during weight loss",
+    "differentiator": "All-in-one tracker with 5-star rating, comprehensive features at a glance",
+    "appStoreUrl": "https://www.amazon.com/dp/B0D8JYXKQY",
+    "category": "fitness",
+    "isMobileApp": false,
+    "amazonAsin": "B0D8JYXKQY",
+    "amazonPrice": "not visible"
+  },
+  "ebayStore": {
+    "name": "allfashionmatters",
+    "url": "https://www.ebay.com/usr/allfashionmatters",
+    "topProducts": [
+      { "name": "Vintage Solid Gold Nugget Seiko Watch", "asin": "187985016347", "qtySold": 1, "netPerSale": 3847 },
+      { "name": "14k Gold Vintage Egyptian Pharaoh Ring", "asin": "188093243774", "qtySold": 1, "netPerSale": 875 },
+      { "name": "Nike Air Zoom Pegasus 41 Volt", "asin": "187858833389", "qtySold": 3, "netPerSale": 176 },
+      { "name": "Women's Sorel Harlow Lace Boots", "asin": "186218294477", "qtySold": 4, "netPerSale": 151 },
+      { "name": "Timberland x Avirex 6\" Boot", "asin": "187858914726", "qtySold": 1, "netPerSale": 263 },
+      { "name": "COACH Women's Carley Espadrille Flats", "asin": "187572049937", "qtySold": 1, "netPerSale": 56 }
+    ],
+    "categories": ["athletic shoes", "boots", "designer fashion", "gold watches", "gold jewelry"]
+  },
+  "imageGen": {
+    "provider": "openai",
+    "model": "gpt-image-1.5"
+  },
+  "postiz": {
+    "integrationIds": {
+      "tiktok": "see .env"
+    }
+  },
+  "revenuecat": {
+    "enabled": false
+  },
+  "posting": {
+    "privacyLevel": "SELF_ONLY",
+    "schedule": ["07:30", "16:30", "21:00"],
+    "timezone": "America/Chicago",
+    "crossPost": ["instagram", "youtube"]
+  }
+}
