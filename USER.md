@@ -80,7 +80,7 @@ Skill location: `/root/.openclaw/workspace/skills/larry`
 - **Mission Control Dashboard** — custom OpenClaw dashboard (Next.js, running on port 3000)
 - **Larry TikTok Strategy** — TikTok slideshow marketing automation (skill installed)
 - **FYIFinds** — TikTok + YouTube Shorts brand (fitness lifestyle, automated content)
-- **FYIFinds Substack** — https://substack.com/@fyifinds — fitness gear newsletter/blog
+- **FYIFinds YouTube:** https://www.youtube.com/channel/UCUcGM7G2tRh3eGBezCYMbfA
 - **OpenClaw workspace automation** — cron jobs, heartbeat self-repair, daily quality checks
 
 ---

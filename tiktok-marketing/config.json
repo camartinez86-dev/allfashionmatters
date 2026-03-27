@@ -15,14 +15,50 @@
     "name": "allfashionmatters",
     "url": "https://www.ebay.com/usr/allfashionmatters",
     "topProducts": [
-      { "name": "Vintage Solid Gold Nugget Seiko Watch", "asin": "187985016347", "qtySold": 1, "netPerSale": 3847 },
-      { "name": "14k Gold Vintage Egyptian Pharaoh Ring", "asin": "188093243774", "qtySold": 1, "netPerSale": 875 },
-      { "name": "Nike Air Zoom Pegasus 41 Volt", "asin": "187858833389", "qtySold": 3, "netPerSale": 176 },
-      { "name": "Women's Sorel Harlow Lace Boots", "asin": "186218294477", "qtySold": 4, "netPerSale": 151 },
-      { "name": "Timberland x Avirex 6\" Boot", "asin": "187858914726", "qtySold": 1, "netPerSale": 263 },
-      { "name": "COACH Women's Carley Espadrille Flats", "asin": "187572049937", "qtySold": 1, "netPerSale": 56 }
+      {
+        "name": "Vintage Solid Gold Nugget Seiko Watch",
+        "asin": "187985016347",
+        "qtySold": 1,
+        "netPerSale": 3847
+      },
+      {
+        "name": "14k Gold Vintage Egyptian Pharaoh Ring",
+        "asin": "188093243774",
+        "qtySold": 1,
+        "netPerSale": 875
+      },
+      {
+        "name": "Nike Air Zoom Pegasus 41 Volt",
+        "asin": "187858833389",
+        "qtySold": 3,
+        "netPerSale": 176
+      },
+      {
+        "name": "Women's Sorel Harlow Lace Boots",
+        "asin": "186218294477",
+        "qtySold": 4,
+        "netPerSale": 151
+      },
+      {
+        "name": "Timberland x Avirex 6\" Boot",
+        "asin": "187858914726",
+        "qtySold": 1,
+        "netPerSale": 263
+      },
+      {
+        "name": "COACH Women's Carley Espadrille Flats",
+        "asin": "187572049937",
+        "qtySold": 1,
+        "netPerSale": 56
+      }
     ],
-    "categories": ["athletic shoes", "boots", "designer fashion", "gold watches", "gold jewelry"]
+    "categories": [
+      "athletic shoes",
+      "boots",
+      "designer fashion",
+      "gold watches",
+      "gold jewelry"
+    ]
   },
   "imageGen": {
     "provider": "openai",
@@ -30,7 +66,8 @@
   },
   "postiz": {
     "integrationIds": {
-      "tiktok": "see .env"
+      "tiktok": "see .env",
+      "youtube": "UCUcGM7G2tRh3eGBezCYMbfA"
     }
   },
   "revenuecat": {
