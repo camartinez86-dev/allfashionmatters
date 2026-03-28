@@ -73,6 +73,10 @@
   "revenuecat": {
     "enabled": false
   },
+  "youtube": {
+    "verified": true,
+    "channelId": "UCUcGM7G2tRh3eGBezCYMbfA"
+  },
   "posting": {
     "privacyLevel": "SELF_ONLY",
     "schedule": ["07:30", "16:30", "21:00"],
