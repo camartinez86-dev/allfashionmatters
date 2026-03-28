@@ -1,0 +1,36 @@
+# Workspace directories (not tracked in git)
+.clawhub/
+skills/
+memory/
+.fyifinds/
+allfashionmatters/
+tiktok-marketing/
+mission-control/
+
+# Environment variables (API keys, tokens, secrets)
+.env
+.env.local
+.env.production
+.env.*.local
+**/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node modules (if workspace has any)
+node_modules/
+
+# SSH keys (private)
+*.pem
+id_rsa
+id_ed25519
+id_dsa
+
+# Temporary files
+*.tmp
+*.swp
