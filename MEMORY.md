@@ -295,7 +295,7 @@
 
 - Created comprehensive mistake tracking with date, impact, resolution columns
 - Pattern analysis identifies recurring issues:
-  1. **Timezone confusion** (4 occurrences) — #1 recurring problem
+  1. **Timezone confusion** (5+ occurrences) — #1 recurring problem
   2. **TypeScript/ESLint drift** — frequent as new routes added
   3. **Self-healing works** — missing files auto-created
 - Key insight: Regular review catches patterns before they become systemic issues
@@ -351,7 +351,7 @@
    - Lesson: Always explicitly specify timezone in cron jobs
 
 2. **Pattern Analysis Results**
-   - Timezone confusion: #1 recurring issue (4 occurrences)
+   - Timezone confusion: #1 recurring issue (5+ occurrences)
    - TypeScript/ESLint drift: frequent as new routes added
    - Self-healing works consistently
 
@@ -389,10 +389,145 @@
 
 Reviewed memory/2026-03-28.md (600+ lines of detailed logs) and verified:
 - **All historical mistakes documented** with date, impact, resolution columns
-- **Pattern analysis complete:** Timezone confusion is #1 recurring issue (4 occurrences)
+- **Pattern analysis complete:** Timezone confusion is #1 recurring issue (5+ occurrences)
 - **Technical debt scan complete:** System healthy, no critical issues
 - **Daily quality checks passed:** 4+ successful validations today
 - **Self-healing confirmed:** Working across multiple scan cycles
 - **Security hardened:** File permissions (.env 600, .ssh 700, openclaw.json 600), plugin allowlist active
 
 **Status:** MEMORY.md is current and comprehensive. No significant new learnings to add beyond what's already documented in daily memory files.
+
+---
+
+## March 28, 2026 - Evening Updates
+
+### Today's Key Accomplishments
+
+- **Dashboard Social Tab Enhanced:** Now includes all 4 platforms (TikTok, YouTube, Substack, eBay), clickable posts with full content modals, Substack section with 3 articles (1 posted, 2 scheduled)
+- **Pattern Analysis Formalized:** Comprehensive mistake tracking with date/impact/resolution columns, identified timezone confusion as #1 recurring issue (4 occurrences)
+- **Git Commit:** HEARTBEAT.md, MEMORY.md, memory/2026-03-28.md committed
+- **System Status:** All 13 cron jobs healthy, Gateway running (bind=lan), Lossless Claw active
+
+### System Stability Confirmed
+
+- Gateway: bind=lan ✅
+- Lossless Claw: active ✅
+- ESLint: resolved ✅
+- Security: hardened ✅
+- Self-healing: working ✅
+- Cron jobs: 13/13 healthy ✅
+
+### March 28, 2026 - Memory Maintenance Subagent
+
+- Completed two comprehensive reviews (18:46 and 19:16 UTC)
+- Past mistakes pattern analysis confirmed: timezone confusion #1 (5+ occurrences)
+- System technical debt scan: minor placeholders only (IDENTITY.md TBD), otherwise healthy
+- Updated MEMORY.md timezone counts from 4 to 5+ occurrences (reflects new analysis)
+- Memory files maintained: All entries current, comprehensive, no critical gaps
+
+### ESLint Errors Discovered (March 28, 2026)
+
+- **Files affected:** mission-control (2 files)
+- **Issues:** `prefer-const` (const instead of let for unchanged variables), `react/no-unescaped-entities` (unescaped quotes in JSX)
+- **Status:** Discovered by subagent scan, pending fix
+- **Prevention:** Daily Quality Check catches these automatically
+
+---
+
+## March 29, 2026 - Memory Maintenance
+
+### New Findings Today
+
+| Severity | Issue | Location | Action |
+|----------|-------|----------|--------|
+| Low | ESLint error - unescaped `'` | mission-control/src/components/MemoryView.tsx:116 | ✅ FIXED - Escaped to `&apos;` |
+| Low | ESLint warning - unused useEffect | mission-control/src/components/ProjectsView.tsx:3 | ✅ FIXED - Removed unused import |
+| Low | Outdated dev dependencies | mission-control/package.json | Low priority - defer |
+
+### Comprehensive Mistake Log (March 29 Update)
+
+**11 Distinct Mistakes Documented (March 23-29):**
+
+| Date | Mistake | Category | Impact | Resolution |
+|------|--------|----------|--------|------------|
+| 2026-03-23 | Memory search broken | Tool/API | Lost conversation history | Installed Lossless Claw |
+| 2026-03-23 | Model M2.7 unavailable | Model | Fallback to M2.5 | Added GPT-4.1 fallback |
+| 2026-03-25 | Missing memory file | Auto-heal | No daily log | Auto-created |
+| 2026-03-26 | GitHub backup cron wrong TZ | Cron | 5hrs early | Fixed to America/Chicago |
+| 2026-03-26 | Car Drop cron wrong time | Cron | Wrong time | Fixed to 7AM Chicago |
+| 2026-03-26 | Inspection wrong time | Cron | Wrong time | Fixed to 10AM Chicago |
+| 2026-03-26 | Tesla Service wrong time | Cron | Wrong time | Fixed to 12:45PM Chicago |
+| 2026-03-26 | Morning Report wrong time | Cron | Wrong time | Fixed to 7AM Chicago |
+| 2026-03-27 | ESLint type errors | Code quality | Type safety issues | Modernized to ES modules |
+| 2026-03-27 | File permissions too open | Security | Security risk | Fixed to 600/700 |
+| 2026-03-29 | ESLint unescaped entity | Code quality | Lint error | ✅ FIXED - Escaped apostrophe |
+
+### Pattern Analysis Confirmed
+
+- **#1: Timezone Confusion (5+ occurrences)** - CRON recurring issue
+- **#2: Self-Healing Works** - Auto-creates missing files reliably
+- **#3: ESLint Drift** - Caught by Daily Quality Check
+
+### Verification Complete
+
+All daily quality checks passed - system stable.
+Self-healing confirmed working (auto-creates missing memory files).
+Timezone vigilance ongoing (America/Chicago explicitly specified in all cron jobs).
+ESLint fixes verified with `npm run lint` ✅
+
+---
+
+## March 29, 2026 - Comprehensive Memory Maintenance
+
+### Task Completed
+
+Reviewed all memory files from March 23-29, consolidated mistake logs, updated pattern analysis.
+
+### Comprehensive Mistake Log (11 Distinct Mistakes)
+
+| Date | Mistake | Category | Impact | Resolution |
+|------|--------|----------|--------|------------|
+| 2026-03-23 | Memory search broken | Tool/API | Couldn't search past conversations | Fixed with Lossless Claw installation |
+| 2026-03-23 | Model M2.7 not available | Model | Had to fallback to M2.5 | Added GPT-4.1 as fallback |
+| 2026-03-25 | Missing memory file | Auto-heal | No daily log | Auto-created by scan task |
+| 2026-03-26 | GitHub backup cron wrong timezone | Cron | Backup ran 5hrs early | Fixed to America/Chicago |
+| 2026-03-26 | Car Drop cron wrong time | Cron | Wrong time notification | Fixed to 7AM Chicago |
+| 2026-03-26 | Inspection wrong time | Cron | Wrong time notification | Fixed to 10AM Chicago |
+| 2026-03-26 | Tesla Service wrong time | Cron | Wrong time notification | Fixed to 12:45PM Chicago |
+| 2026-03-26 | Morning Report wrong time | Cron | Wrong time notification | Fixed to 7AM Chicago |
+| 2026-03-27 | ESLint type errors in API routes | Code quality | Type safety issues | Modernized to ES modules + interfaces |
+| 2026-03-27 | File permissions too open | Security | Security risk | Fixed .env (600), .ssh (700) |
+| 2026-03-29 | ESLint unescaped entity | Code quality | MemoryView.tsx:116 | Escape apostrophe |
+
+### Pattern Analysis Confirmed
+
+- **#1 Recurring: Timezone Confusion** (5+ occurrences) — Always use `TZ=America/Chicago` in cron specs
+- **#2 Auto-healing Works** — Verified 3+ times, reliably auto-creates missing files
+- **#3 ESLint Drift** — Daily Quality Check catches new issues automatically
+
+### Technical Debt (Low Severity)
+
+| Issue | Location | Action |
+|-------|----------|--------|
+| ESLint error - unescaped ' | MemoryView.tsx:116 | Escape the apostrophe |
+| ESLint warning - unused useEffect | ProjectsView.tsx:3 | Remove unused import |
+
+### Status
+
+✅ Memory maintenance complete - comprehensive review of all 7 days (March 23-29)
+✅ All mistakes logged with categories, impacts, resolutions
+✅ Pattern analysis current - timezone confusion #1 recurring issue
+✅ Technical debt tracked - 2 ESLint issues FIXED
+✅ Prevention guidance documented
+✅ ESLint fixes verified with `npm run lint` ✅
+
+---
+
+## Key Distilled Learnings (March 29)
+
+1. **Comprehensive memory maintenance works** - Regular reviews catch patterns before they become systemic
+2. **Timezone vigilance is critical** - 5+ recurring errors from same root cause
+3. **Self-healing proven reliable** - Auto-creates missing files verified across multiple cycles
+4. **ESLint drift is manageable** - Daily Quality Check catches issues automatically
+5. **ESLint issues are fixable** - MemoryView.tsx and ProjectsView.tsx fixed this session
+6. **IDENTITY.md pending** - Still awaiting "who am I?" conversation with Carlos
