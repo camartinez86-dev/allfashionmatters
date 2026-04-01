@@ -596,3 +596,31 @@ Reviewed all memory files from March 23-29, consolidated mistake logs, updated p
 - **ESLint drift:** API routes accumulate type errors without daily checks - Daily Quality Check catches these
 - **Pattern analysis:** Review past mistakes regularly to identify recurring issues — timezone confusion is #1 recurring problem (5+ occurrences), TypeScript drift is frequent
 - **Config file management:** Scripts can work without optional config files (non-blocking errors) - self-healing handles these gracefully
+
+## March 31, 2026 - OpenAI Billing Migration
+
+### Issue
+- OpenAI billing hard limit reached ($0 balance)
+- Impact: FYIFinds daily content cron failed - image generation blocked
+- Error: `Billing hard limit has been reached` on all OpenAI image API calls
+
+### Solution
+Switched from OpenAI (gpt-image-1.5) to Stability AI (sd3 model) for image generation.
+
+### Configuration
+- Added Stability API key to `/root/.openclaw/workspace/tiktok-marketing/.env`
+- Updated `generate-sunday-slides.js` - Primary: Stability AI, Fallback: OpenAI
+
+### Results
+- Generated 6/6 photorealistic slides successfully
+- Better natural/real look (not "AI stock" look)
+- Files: ~1.3-1.5MB each
+
+### Pricing Comparison
+- **Stability AI:** $0.01-0.02 per image (25 free credits on signup)
+- **OpenAI:** $0.04-0.10 per image
+- Decision: Stability AI is now primary (better photorealism + cheaper)
+
+### Lesson
+- Always have fallback API provider for critical image generation
+- Stability AI provides better photorealism for TikTok content at lower cost
