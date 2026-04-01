@@ -61,8 +61,8 @@
     ]
   },
   "imageGen": {
-    "provider": "openai",
-    "model": "gpt-image-1.5"
+    "provider": "stability",
+    "model": "sd3"
   },
   "postiz": {
     "integrationIds": {

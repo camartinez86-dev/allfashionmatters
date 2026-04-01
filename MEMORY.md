@@ -624,3 +624,54 @@ Switched from OpenAI (gpt-image-1.5) to Stability AI (sd3 model) for image gener
 ### Lesson
 - Always have fallback API provider for critical image generation
 - Stability AI provides better photorealism for TikTok content at lower cost
+
+---
+
+## April 1, 2026 - Mistake Review
+
+### 14 Distinct Mistakes Documented (March 23 - April 1)
+
+| Date | Mistake | Category | Impact | Resolution |
+|------|---------|----------|--------|------------|
+| 2026-03-23 | Memory search broken | Tool/API | Lost conversation history | Installed Lossless Claw |
+| 2026-03-23 | Model M2.7 unavailable | Model | Fallback to M2.5 | Added GPT-4.1 fallback |
+| 2026-03-25 | Missing memory file | Auto-heal | No daily log | Auto-created |
+| 2026-03-26 | GitHub backup cron wrong TZ | Cron | 5hrs early | Fixed to America/Chicago |
+| 2026-03-26 | Car Drop cron wrong time | Cron | Wrong time | Fixed to 7AM Chicago |
+| 2026-03-26 | Inspection wrong time | Cron | Wrong time | Fixed to 10AM Chicago |
+| 2026-03-26 | Tesla Service wrong time | Cron | Wrong time | Fixed to 12:45PM Chicago |
+| 2026-03-26 | Morning Report wrong time | Cron | Wrong time | Fixed to 7AM Chicago |
+| 2026-03-27 | ESLint type errors | Code quality | Type safety issues | Modernized to ES modules |
+| 2026-03-27 | File permissions too open | Security | Security risk | Fixed to 600/700 |
+| 2026-03-29 | ESLint unescaped entity | Code quality | MemoryView.tsx:116 | Escape apostrophe |
+| 2026-03-29 | ESLint unused import | Code quality | ProjectsView.tsx:3 | Removed import |
+| 2026-03-30 | fyifinds/config.json missing | Config | Non-blocking error | Scripts work without it |
+| 2026-04-01 | Edit tool failures (6x) | Tool/API | Memory updates failed | Use write instead of edit for safety |
+| 2026-04-01 | Gateway duplicate processes (7x) | Infrastructure | Requires watchdog killing | Investigate root cause - why gateway spawns duplicates |
+
+### Pattern Analysis (Updated April 1)
+
+1. **#1 Timezone Confusion (5+ occurrences)** — Cron recurring issue
+2. **#2 Gateway Duplicates (15+ occurrences)** — Gateway spawns duplicate processes requiring watchdog kill - systemd spawns duplicates while manual process runs, watchdog doesn't kill zombies. **ACTIVE FAILURE: April 1 18:30+ UTC - restart loop ongoing, needs gateway restart**
+3. **#3 Edit Tool Failures** — Subagents failing to match exact text - use write instead of edit
+4. **#4 ESLint Drift (3 occurrences)** — Daily Quality Check catches automatically
+5. **#5 Self-Healing Works** — Auto-creates missing files reliably
+
+### New Findings (April 1, 2026)
+
+**Gateway duplicate processes (15+ occurrences):**
+- March 30: 08:00, 10:00, 18:00, 22:00 UTC
+- March 31: 20:00 UTC
+- April 1: 04:00, 10:00 UTC, and throughout the day (systemd keeps restarting while manual process holds port)
+- **Impact:** Requires watchdog killing to resolve
+- **Behavior:** Systemd spawns duplicates while manual process already running; watchdog doesn't kill the zombie processes; requires manual gateway restart
+
+**Edit tool failures (6 occurrences):** Subagents attempting memory file updates failed because text doesn't match exactly (whitespace/newline differences). Solution: Use `write` tool for memory updates instead of `edit`.
+
+**Read offset error:** Attempted to read offset 50 on file with only 38 lines - should check file size first
+
+### System Status (April 1, 2026)
+- Gateway: Running ✅ (bind=lan, port 18789)
+- ESLint: Clean ✅
+- Self-healing: Working ✅
+- Lossless Claw: Active ✅

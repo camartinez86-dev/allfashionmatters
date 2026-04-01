@@ -1,0 +1,44 @@
+{
+  "date": "2026-04-01",
+  "theme": "Best Protein Powders 2026",
+  "slides": [
+    {
+      "slide": 1,
+      "type": "hook",
+      "text": "Wait... protein powder\ngot THIS good??",
+      "file": "slide-01-overlay.png"
+    },
+    {
+      "slide": 2,
+      "type": "value",
+      "text": "I tested 15 protein\npowders in 2026 —\nhere's what actually works:",
+      "file": "slide-02-overlay.png"
+    },
+    {
+      "slide": 3,
+      "type": "value",
+      "text": "🥇 WHEY GOLD: Optimum Nutrition — 24g protein, 5g BCAAs, dissolves perfectly",
+      "file": "slide-03-overlay.png"
+    },
+    {
+      "slide": 4,
+      "type": "product",
+      "text": "🥈 PLANT PICK: Ritual Essential — 20g pea & pea blend, gut-friendly, smooth texture",
+      "file": "slide-04-overlay.png"
+    },
+    {
+      "slide": 5,
+      "type": "product",
+      "text": "💰 BUDGET WIN: MuscleTech NitroTech — 24g protein, 4g creatine, under $35",
+      "file": "slide-05-overlay.png"
+    },
+    {
+      "slide": 6,
+      "type": "cta",
+      "text": "👇 Grab YOUR perfect\nprotein — link in bio!\n(eBay & Amazon deals)",
+      "file": "slide-06-overlay.png"
+    }
+  ],
+  "status": "ready",
+  "nextStep": "post-via-postiz"
+}
