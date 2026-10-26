@@ -29,3 +29,9 @@ Thumbs.db
 dist/
 build/
 .cache/
+
+# Archived duplicate/backup copies (removed from tracking)
+dashboard-new.html
+dashboard-backup.html
+docs/
+ebay-sales-2024.csv
