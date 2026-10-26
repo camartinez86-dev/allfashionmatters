@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json.bak
+
+# Test / screenshot artifacts
+test-artifacts/
+screenshots/
+*.playwright-artifacts/
+
+# Local secrets - never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# OS build output
+dist/
+build/
+.cache/
